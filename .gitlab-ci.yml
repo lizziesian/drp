@@ -3,9 +3,16 @@ default:
 
 stages:
     - test
+    - deploy
 
 tester:
     stage: test
     script:
         - python -m unittest discover
     allow_failure: false
+
+heroku_deployer:
+    stage: deploy
+    image: ceorcham/dpl-heroku
+    script: 
+        - dpl --provider=heroku --app=exercisingapp --api-key="$API_KEY"
