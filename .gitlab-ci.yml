@@ -3,13 +3,21 @@ default:
 
 stages:
     - test
-    - deploy
+    - vm_deploy
+    - heroku_deploy
 
 tester:
     stage: test
     script:
         - python -m unittest discover
     allow_failure: false
+
+vm_deployer:
+    stage: vm_deploy
+    script:
+        - | 
+            export PORT=5000
+            python exerciseapp/app.py </dev/null &>/dev/null &
 
 heroku_deployer:
     stage: deploy
