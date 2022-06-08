@@ -9,4 +9,6 @@ RUN pip install -r requirements.txt && rm requirements.txt
 
 COPY exerciseapp .
 
-CMD export FLASK_APP=app && flask run
+ENTRYPOINT [ "python" ]
+
+CMD [ "app.py" ]
