@@ -7,6 +7,5 @@ stages:
 tester:
     stage: test
     script:
-
-        - python -m unittest .\testsuite\test_app.py -v
+        - python -m unittest discover
     allow_failure: false
