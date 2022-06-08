@@ -1,0 +1,8 @@
+stages:
+    - test
+
+tester:
+    stage: test
+    script:
+        - python -m unittest .\testsuite\test_app.py -v
+    allow_failure: false
