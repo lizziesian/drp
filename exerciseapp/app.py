@@ -1,14 +1,12 @@
-import os
-
 #from venv import create
 from flask import Flask, render_template, request
 #import xml_lib
 
-from database import database
-from models.user import User
+from .database import database
+from .models.user import User
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://oyfkaceafqsvbl:bbb998beb163f638a08861c12867c08fed9e9faf24190e64be90c414b384c437@ec2-34-198-186-145.compute-1.amazonaws.com:5432/d4aj3b7m98g83a'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 database.init_app(app)
