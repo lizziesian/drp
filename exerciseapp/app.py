@@ -4,8 +4,8 @@ import os
 from flask import Flask, render_template, request
 #import xml_lib
 
-from .database import database
-from .models.user import User
+from database import database
+from models.user import User
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') 
