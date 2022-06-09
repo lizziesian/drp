@@ -2,8 +2,13 @@
 
 {% block content %}
 
-<form action="{{ url_for("exercise_video") }}" style="margin: auto;">
-    <button class="glow-button" type="submit">START MISSION</button>
-</form>
+<div style="width: 100%; text-align: center; padding: 20%;">
+    <h1> {{ user["name"] }}'s Level: {{ user["level"] }} </h1>
+
+    <form action="{{ url_for("exercise_video") }}">
+        <button class="glow-button" type="submit" style="text-align: center;">START MISSION</button>
+    </form>
+</div>
+
 
 {% endblock content %}
