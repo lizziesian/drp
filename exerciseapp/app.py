@@ -1,6 +1,5 @@
 #from venv import create
 from flask import Flask, render_template, request
-from flask_migrate import Migrate
 #import xml_lib
 
 from .database import database
@@ -11,7 +10,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///todo.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 database.init_app(app)
-migrate = Migrate(app, database)
 
 from .cli import create_all, drop_all, populate
 
