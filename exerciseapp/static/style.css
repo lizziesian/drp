@@ -1,0 +1,48 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color:#0d1b2c;
+    background-image:
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+        radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px; 
+    background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+    overflow: hidden;
+}
+h1 {
+    color: white
+}
+p {
+    color: white
+}
+.box-out {
+    position: relative;
+    border: solid 1px rgb(151, 151, 151);
+    float: left;
+    padding: 0px 10px;
+}
+
+.box-in {
+    position: absolute;
+    left: 0;
+    top: 0px;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.title-in {
+    position: absolute;
+    top: 240px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+}

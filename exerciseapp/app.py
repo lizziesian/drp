@@ -3,15 +3,16 @@ import xml_lib
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return '<h1>Hello World!</h1>'
+@app.route("/")
+@app.route("/mission_start")
+def mission_start():
+    return render_template("mission_start.html", title="Mission Start")
 
 @app.route('/movieList')
 def movie_list():
     movies = xml_lib.read_movies()
     movies.sort(key=lambda x: x['count'], reverse=True)
-    return render_template('movie_list.html', movies=movies)
+    return render_template('movie_list.html', title="Video Presentation", movies=movies)
 
 @app.route('/incrMovie')
 def incr_movie():
@@ -20,5 +21,5 @@ def incr_movie():
     return '1'
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.debug = True
     app.run()
