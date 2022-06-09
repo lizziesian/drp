@@ -2,6 +2,8 @@
 
 {% block content %}
 
-<h1>Start Mission</h1>
+<form action="{{ url_for("movie_list") }}">
+    <button class="glow-button" type="submit">START MISSION</button>
+</form>
 
 {% endblock content %}
