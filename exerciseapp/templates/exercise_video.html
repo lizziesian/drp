@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div style="margin: auto; width: 90%; height: auto;" >
+    <video id="exercise-video" controls style="text-align:center;">
+        <source src="static/movies/tetris.mp4" type="video/mp4">
+    </video>
+    <p></p>
+    <form action="{{ url_for("mission_complete") }}">        
+        <button id="complete-button" class="glow-button" style="display:none;" type="submit">Continue</button>
+    </form>
+</div>
+
+<script>
+    var video=document.getElementById("exercise-video");
+    var button=document.getElementById("complete-button");
+    video.onended = function() {
+        button.style.display = "block"
+    };
+</script>
+
+{% endblock content %}
