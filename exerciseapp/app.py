@@ -6,7 +6,7 @@ from .database import database
 from .models.user import User
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///todo.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///user.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 database.init_app(app)
