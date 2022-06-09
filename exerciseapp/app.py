@@ -1,26 +1,24 @@
 from flask import Flask, render_template, request
 import xml_lib
 
-web = Flask(__name__)
+app = Flask(__name__)
 
-
-@web.route('/')
+@app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return '<h1>Hello World!</h1>'
 
-
-@web.route('/movieList')
+@app.route('/movieList')
 def movie_list():
     movies = xml_lib.read_movies()
     movies.sort(key=lambda x: x['count'], reverse=True)
     return render_template('movie_list.html', movies=movies)
 
-
-@web.route('/incrMovie')
+@app.route('/incrMovie')
 def incr_movie():
     name = request.args.get('name')
     xml_lib.incr_movie(name)
     return '1'
 
 if __name__ == "__main__":
- web.run(debug=True)
+    app.run(debug=True)
+    app.run()
