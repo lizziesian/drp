@@ -9,7 +9,9 @@ stages:
 tester:
     stage: test
     script:
-        - python -m unittest discover
+        - | 
+            pip install -r requirements.txt
+            python -m unittest discover
     allow_failure: false
 
 vm_deployer:
