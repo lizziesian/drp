@@ -1,3 +1,4 @@
+import os
 #from venv import create
 from flask import Flask, render_template, request
 #import xml_lib
@@ -6,7 +7,7 @@ from .database import database
 from .models.user import User
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///user.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 database.init_app(app)

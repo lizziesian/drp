@@ -1,5 +1,7 @@
 click
 flask
-flask_sqlalchemy
+werkzeug==2.0.3
+sqlalchemy===1.3.23 
+flask_sqlalchemy==2.4.4
 flask_migrate
 gunicorn
