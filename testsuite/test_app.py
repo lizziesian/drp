@@ -6,9 +6,8 @@ import exerciseapp.app as app
 #Test exerciseapp.app
 class ExerciseAppTest(unittest.TestCase):
 
-        def test_HelloWorld(self): # test method names begin with 'test'
-            self.assertEqual(app.hello_world(), "<h1>Hello World!</h1>")
-
+        def test_add(self): # test method names begin with 'test'
+            self.assertEqual(1+2, 3)
 
 if __name__ == "__main__":
     unittest.main()
