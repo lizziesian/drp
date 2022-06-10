@@ -22,13 +22,14 @@ p {
 }
 
 video {
-    width: 90%;
-    height: auto;
+    margin: 0 auto;
+    height: 80%;
+    padding: 10%
 }
-/* hides seek bar */
+/* hides seek bar
 video::-webkit-media-controls-timeline {
     display: none;
-}
+} */
 
 /* License of glow button: */
 /* Copyright (c) 2022 by Leandro Simões (https://codepen.io/leandrosimoes/pen/VqZxaG)

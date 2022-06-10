@@ -2,12 +2,12 @@
 
 {% block content %}
 
-<div style="margin: auto; width: 90%; height: auto;" >
-    <video id="exercise-video" controls style="text-align:center;">
-        <source src="static/movies/tetris.mp4" type="video/mp4">
+<div style="height: 100vh; width: 100vh; display: flex; margin: auto; align-items: center;" >
+    <video id="exercise-video" controls>
+        <source src="static/movies/exercise-video.mp4" type="video/mp4">
     </video>
-    <p></p>
-    <form action="{{ url_for("mission_complete") }}">        
+    <br>
+    <form action="{{ url_for("mission_complete") }}" style="margin-block: auto">        
         <button id="complete-button" class="glow-button" style="display:none;" type="submit">Continue</button>
     </form>
 </div>
