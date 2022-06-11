@@ -4,6 +4,8 @@ from flask.cli import with_appcontext
 from .database import database
 from .models.user import User
 
+# Run these commands in heroku console to edit tables in the postgres database.
+
 @click.command(name="create_all", help="Create all tables in the app's database.")
 @with_appcontext
 def create_all():
