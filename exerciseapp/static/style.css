@@ -24,7 +24,6 @@ p {
 video {
     margin: 0 auto;
     height: 80%;
-    padding: 10%
 }
 /* hides seek bar
 video::-webkit-media-controls-timeline {

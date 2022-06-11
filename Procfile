@@ -1,1 +1,1 @@
-web: gunicorn --chdir exerciseapp app:app
+web: gunicorn wsgi:app

@@ -2,6 +2,6 @@
 <root>
 	<movie file="tetris.mp4" title="tetris" count="29"/>
 	<movie file="guess.mp4" title="guess" count="26"/>
-	<movie file="bfcontrol1.mp4" title="pygame1" count="10"/>
+	<movie file="bfcontrol1.mp4" title="pygame1" count="14"/>
 	<movie file="bfcontrol2.mp4" title="pygame2" count="13"/>
 </root>
