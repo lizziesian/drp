@@ -2,6 +2,7 @@ from flask import Blueprint, render_template
 
 from exerciseapp.database import database
 from exerciseapp.models.user import User
+from exerciseapp import xml_lib
 
 main = Blueprint("main", __name__)
 
@@ -23,3 +24,16 @@ def mission_complete():
         the_user.level += 1
         database.session.commit()
         return render_template("mission_complete.html", title="Mission Complete", user=the_user)
+
+# pages using xml
+@main.route('/movieList')
+def movie_list():
+    movies = xml_lib.read_movies()
+    movies.sort(key=lambda x: x['count'], reverse=True)
+    return render_template('movie_list.html', title="Video Presentation", movies=movies)
+
+@main.route('/incrMovie')
+def incr_movie():
+    name = request.args.get('name')
+    xml_lib.incr_movie(name)
+    return '1'

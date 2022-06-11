@@ -11,7 +11,7 @@ def create_app(config_file="settings.py"):
 
     database.init_app(app)
 
-    app.register_blueprint(main)    
+    app.register_blueprint(main)
     
     app.cli.add_command(create_all)
     app.cli.add_command(drop_all)
