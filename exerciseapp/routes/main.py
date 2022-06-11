@@ -1,8 +1,9 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
+from venv import create
+from exerciseapp import xml_lib
 from exerciseapp.database import database
 from exerciseapp.models.user import User
-from exerciseapp import xml_lib
 
 main = Blueprint("main", __name__)
 
