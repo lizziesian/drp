@@ -1,4 +1,4 @@
-from ..database import database as db
+from exerciseapp.database import database as db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
