@@ -1,5 +1,5 @@
 import unittest
-import exerciseapp.app as app
+import exerciseapp
 
 # Run all tests in class via command "python -m unittest .\testsuite\test_app.py -v"
 
