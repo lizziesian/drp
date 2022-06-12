@@ -2,7 +2,13 @@ import click
 from flask.cli import with_appcontext
 
 from .database import database
-from .models.user import User
+from .models.user_child import ChildUser
+from .models.user_parent import ParentUser
+from .models.mission import Mission
+from .models.missions_approved import ApprovedMission
+from .models.monster import Monster
+from .models.monsters_owned import MonsterOwned
+
 
 # Run these commands in heroku console to edit tables in the postgres database.
 
@@ -19,6 +25,18 @@ def drop_all():
 @click.command(name="populate", help="Populate database with test data.")
 @with_appcontext
 def populate():
-    test_user = User(id=0,name="John")
-    database.session.add(test_user)
+    # Test parent, child, mission and monster.
+    parentUser = ParentUser(id=0, name="Simon", password="abcd")
+    childUser = ChildUser(id=0, name="John", password="edfg", parent=parentUser.id)
+    testMission = Mission(id=0, name="Default Mission", video="exercise-video")
+    testMonster = Monster(id=0, name="Default Monster", level=0, image="monster-egg")
+    approved = ApprovedMission(child=childUser.id, mission=testMission.id)    
+    owned = MonsterOwned(child=childUser.id, monster=testMonster.id)
+
+    database.session.add(parentUser)
+    database.session.add(childUser)
+    database.session.add(testMission)
+    database.session.add(approved)
+    database.session.add(testMonster)
+    database.session.add(owned)
     database.session.commit()

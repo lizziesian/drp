@@ -3,14 +3,14 @@ from flask import Blueprint, render_template, request
 from venv import create
 from exerciseapp import xml_lib
 from exerciseapp.database import database
-from exerciseapp.models.user import User
+from exerciseapp.models.user_child import ChildUser
 
 main = Blueprint("main", __name__)
 
 @main.route("/")
 @main.route("/mission_start")
 def mission_start():
-    the_user = User.query.get_or_404(0, "User not found.")
+    the_user = ChildUser.query.get_or_404(0, "User not found.")
     if the_user:
         return render_template("mission_start.html", title="Mission Start", user=the_user)
 
@@ -20,7 +20,7 @@ def exercise_video():
 
 @main.route("/mission_complete")
 def mission_complete():
-    the_user = User.query.get_or_404(0, "User not found.")
+    the_user = ChildUser.query.get_or_404(0, "User not found.")
     if the_user:
         the_user.level += 1
         database.session.commit()
