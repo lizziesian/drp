@@ -4,15 +4,28 @@ from venv import create
 from exerciseapp import xml_lib
 from exerciseapp.database import database
 from exerciseapp.models.user_child import ChildUser
+from exerciseapp.models.monster import Monster
+from exerciseapp.models.mission import Mission
 
 main = Blueprint("main", __name__)
 
 @main.route("/")
+@main.route("/home")
+def child_home():
+    the_user = ChildUser.query.get_or_404(0, "User not found.")
+    the_monster = Monster.query.get_or_404(the_user.current_monster, "User has no current monster.")
+    the_mission = Mission.query.get_or_404(the_user.mission, "No current mission assigned to user.")
+    the_status = ""
+    if the_user.mission_status:
+        the_status = "Completed."
+    else:
+        the_status = "Pending."
+    if the_user:
+        return render_template("child_home.html", title="Home", user=the_user, monster=the_monster, mission=the_mission, status=the_status)
+
 @main.route("/mission_start")
 def mission_start():
-    the_user = ChildUser.query.get_or_404(0, "User not found.")
-    if the_user:
-        return render_template("mission_start.html", title="Mission Start", user=the_user)
+    return render_template("mission_start.html", title="Mission Start")
 
 @main.route("/exercise_video")
 def exercise_video():

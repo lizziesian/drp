@@ -9,6 +9,8 @@ class ChildUser(db.Model):
     level = db.Column(db.Integer, default=0)
     # Linked parent account.
     parent = db.Column(db.Integer, db.ForeignKey("parent_user.id"), nullable=False)
+    # Current ungrown monster
+    current_monster = db.Column(db.Integer, db.ForeignKey("monster.id"))
     # One child owns many monsters.
     monsters = db.relationship("MonsterOwned", backref="owner", lazy=True)
     # One child has many approved missions.

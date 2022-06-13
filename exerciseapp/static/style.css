@@ -1,6 +1,5 @@
 /* https://projects.verou.me/css3patterns/#starry-night */
 body {
-    display: flex;
     min-height: 100vh;
     background-color:#0d1b2c;
     background-image:
@@ -17,6 +16,10 @@ h1 {
     color: white
 }
 
+h2 {
+    color: white
+}
+
 p {
     color: white
 }
@@ -29,6 +32,15 @@ video {
 video::-webkit-media-controls-timeline {
     display: none;
 } */
+
+.center {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
 
 /* License of glow button: */
 /* Copyright (c) 2022 by Leandro Simões (https://codepen.io/leandrosimoes/pen/VqZxaG)

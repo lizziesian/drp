@@ -26,10 +26,12 @@ def drop_all():
 @with_appcontext
 def populate():
     # Test parent, child, mission and monster.
-    parentUser = ParentUser(id=0, name="Simon", password="abcd")
-    childUser = ChildUser(id=0, name="John", password="edfg", parent=parentUser.id)
     testMission = Mission(id=0, name="Default Mission", video="exercise-video")
     testMonster = Monster(id=0, name="Default Monster", level=0, image="monster-egg")
+
+    parentUser = ParentUser(id=0, name="Simon", password="abcd")
+    childUser = ChildUser(id=0, name="John", password="edfg", parent=parentUser.id, current_monster=testMonster.id)
+    
     approved = ApprovedMission(child=childUser.id, mission=testMission.id)    
     owned = MonsterOwned(child=childUser.id, monster=testMonster.id)
 
