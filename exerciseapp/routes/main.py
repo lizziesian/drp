@@ -1,7 +1,4 @@
-from flask import Blueprint, render_template, request
-
-from venv import create
-from exerciseapp import xml_lib
+from flask import Blueprint, render_template
 
 main = Blueprint("main", __name__)
 
@@ -9,16 +6,3 @@ main = Blueprint("main", __name__)
 @main.route("/home")
 def home():
     return render_template("select_account.html", title="Home")
-
-# movie examples page
-@main.route('/movieList')
-def movie_list():
-    movies = xml_lib.read_movies()
-    movies.sort(key=lambda x: x['count'], reverse=True)
-    return render_template('movie_list.html', title="Video Presentation", movies=movies)
-
-@main.route('/incrMovie')
-def incr_movie():
-    name = request.args.get('name')
-    xml_lib.incr_movie(name)
-    return '1'
