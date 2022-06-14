@@ -2,14 +2,14 @@
 
 {% block content %}
 
-<div class="center">
-    <h1> {{ user["name"] }}'s Level: {{ user["level"] }} </h1>
-    <h1 style="margin: auto">
-        Mission Complete!
-    </h1>
+<div class="center" style="margin: auto;">
+    <h1> Your monster has grown! </h1>
+    <img src="static/images/{{ monster['image'] }}" height="100vh" width="auto" class="shaking_img"> <!-- Change class -->
+
     <form action="{{ url_for("main.child_home") }}" style="margin-block: auto">
         <button id="home-page-button" class="glow-button" type="submit">Return to Home Page</button>
     </form>
 </div>
+
 
 {% endblock content %}
