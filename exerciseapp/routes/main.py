@@ -59,7 +59,7 @@ def mission_complete():
         database.session.commit()
         return render_template("mission_complete.html", title="Mission Complete", user=the_user)
 
-# pages using xml
+# movie examples page
 @main.route('/movieList')
 def movie_list():
     movies = xml_lib.read_movies()
