@@ -50,4 +50,5 @@ def populate():
     database.session.add(testMonster1)
     database.session.add(testMonster2)
     database.session.add(testMonster3)
+
     database.session.commit()
