@@ -26,7 +26,7 @@ def drop_all():
 @with_appcontext
 def populate():
     # Test mission
-    testMission = Mission(id=0, name="Default Mission", warm_up="exercise1.mp4", exercise="exercise2.mp4", cool_down="exercise3.mp4")
+    testMission = Mission(id=0, name="Default Mission", warm_up="exercise1", exercise="exercise2", cool_down="exercise3")
 
     # Test monster
     testMonster0 = Monster(id=0, name="Default Monster", level=0, image="monster-egg.png")

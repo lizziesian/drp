@@ -38,17 +38,23 @@ def planet_missions():
 
 @child.route("/exercise_warmup")
 def exercise_warmup():
-    name = "exercise1"
+    user = ChildUser.query.get_or_404(0, "User not found.")
+    mission = Mission.query.get_or_404(user.mission, "No current mission assigned to user.")
+    name = mission.warm_up
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
 
 @child.route("/exercise_mission")
 def exercise_mission():
-    name = "exercise2"
+    user = ChildUser.query.get_or_404(0, "User not found.")
+    mission = Mission.query.get_or_404(user.mission, "No current mission assigned to user.")
+    name = mission.exercise
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
 
 @child.route("/exercise_cooldown")
 def exercise_cooldown():
-    name = "exercise3"
+    user = ChildUser.query.get_or_404(0, "User not found.")
+    mission = Mission.query.get_or_404(user.mission, "No current mission assigned to user.")
+    name = mission.cool_down
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
 
 
