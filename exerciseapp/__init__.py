@@ -4,6 +4,7 @@ from .cli import create_all, drop_all, populate
 from .database import database
 from .routes.main import main
 from .routes.child import child
+from .routes.parent import parent
 
 def create_app(config_file="settings.py"):
     app = Flask(__name__, static_url_path="/exerciseapp/static")
@@ -14,6 +15,7 @@ def create_app(config_file="settings.py"):
 
     app.register_blueprint(main)
     app.register_blueprint(child)
+    app.register_blueprint(parent)
     
     app.cli.add_command(create_all)
     app.cli.add_command(drop_all)
