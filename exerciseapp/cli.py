@@ -28,6 +28,7 @@ def populate():
     # Test parent, child, mission and monster.
     testMission = Mission(id=0, name="Default Mission", video="exercise-video")
     testMonster = Monster(id=0, name="Default Monster", level=0, image="monster-egg.png")
+    testMonster1 = Monster(id=1, name="Default Monster", level=1, image="monster-child.png")
 
     parentUser = ParentUser(id=0, name="Simon", password="abcd")
     childUser = ChildUser(id=0, name="John", password="edfg", parent=parentUser.id, current_monster=testMonster.id)
@@ -40,5 +41,6 @@ def populate():
     database.session.add(testMission)
     database.session.add(approved)
     database.session.add(testMonster)
+    database.session.add(testMonster1)
     database.session.add(owned)
     database.session.commit()

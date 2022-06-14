@@ -26,6 +26,7 @@ def child_home():
 
 @main.route("/mission_start")
 def mission_start():
+    # update child's approved mission state to true
     return render_template("mission_start.html", title="Mission Start")
 
 
@@ -56,10 +57,22 @@ def mission_complete():
     the_user = ChildUser.query.get_or_404(0, "User not found.")
     if the_user:
         the_user.level += 1
+        the_user.mission_status = True
         database.session.commit()
         return render_template("mission_complete.html", title="Mission Complete", user=the_user)
 
 # movie examples page
+
+@main.route("/collect_monster")
+def collect_monster():
+    the_user = ChildUser.query.get_or_404(0,"User not found.")
+    the_user.current_monster += 1
+    database.session.commit()
+    the_monster = Monster.query.get_or_404(the_user.current_monster,"Monster id not found")
+    return render_template("collect_monster.html",monster=the_monster)
+
+
+# pages using xml
 @main.route('/movieList')
 def movie_list():
     movies = xml_lib.read_movies()
