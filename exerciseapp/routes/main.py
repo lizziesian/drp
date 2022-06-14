@@ -23,6 +23,7 @@ def child_home():
     if the_user:
         return render_template("child_home.html", title="Home", user=the_user, monster=the_monster, mission=the_mission, status=the_status)
 
+
 @main.route("/mission_start")
 def mission_start():
     return render_template("mission_start.html", title="Mission Start")
@@ -30,29 +31,22 @@ def mission_start():
 
 @main.route("/planet_missions")
 def planet_missions():
-     the_user = User.query.get_or_404(0, "User not found.")
-     exercises = xml_lib.read_exercises()
-     exercises.sort(key=lambda x: x['count'], reverse=True)
-     if the_user:
-       return render_template("missions.html", title="Planet Missions", user=the_user,exercise=exercises)
+    exercises = xml_lib.read_exercises()
+    exercises.sort(key=lambda x: x['count'], reverse=True)
+    return render_template("missions.html", title="Planet Missions",exercise=exercises)
 
-
-@main.route("/exercise_video1")
-def exercise_video1():
+@main.route("/exercise_warmup")
+def exercise_warmup():
     name = "exercise1"
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
 
-
-
-@main.route("/exercise_video2")
-def exercise_video2():
+@main.route("/exercise_mission")
+def exercise_mission():
     name = "exercise2"
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
 
-
-
-@main.route("/exercise_video3")
-def exercise_video3():
+@main.route("/exercise_cooldown")
+def exercise_cooldown():
     name = "exercise3"
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
 
