@@ -42,27 +42,7 @@
 
     <br>
 
-    <!--Collect Monster -->
-    {% if status == "Completed." %}
-        {% if collected_monster == False %}
-    <form action="{{ url_for("main.collect_monster") }}">
-        <button id="monster-button" class="glow-button" style="text-align: center;" type="submit">COLLECT MONSTER</button>
-    </form>
-            {% endif %}
-    {%  endif %}
 
 </div>
-
-    <!--
-<script>
-    var monster_button = document.getElementById("monster-button");
-    var state = document.getElementById("status").innerHTML
-    document.onload = function() {
-        if (state === "Completed.") {
-            monster_button.style.visibility = "visible"
-        }
-    };
-</script>
--->
 
 {% endblock content %}
