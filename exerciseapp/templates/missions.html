@@ -1,4 +1,4 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout_child.html" %} {% block content %}
 <html>
 
 <head>
@@ -124,7 +124,7 @@
         <div class='planet1Orbit'></div>
 
         
-        <form action=" {{ url_for( "main.exercise_warmup") }} ">
+        <form action=" {{ url_for( "child.exercise_warmup") }} ">
 
             <button id="one" class="planet1 " >1 Warm Up</button>
         </form>
@@ -132,14 +132,14 @@
         <div class='planet2Orbit'></div>
 
        
-        <form action=" {{ url_for( "main.exercise_mission") }} ">
+        <form action=" {{ url_for( "child.exercise_mission") }} ">
 
             <button id="two" class="planet2 ">2 Mission</button>
         </form>
 
         <div class='planet3Orbit'></div>
 
-        <form action=" {{ url_for( "main.exercise_cooldown") }} ">
+        <form action=" {{ url_for( "child.exercise_cooldown") }} ">
 
             <button id="three" class="planet3 " >3 Cool Down</button>
         </form>

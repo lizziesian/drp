@@ -1,18 +1,22 @@
-{% extends "layout.html" %}
+{% extends "layout_child.html" %}
 
 {% block content %}
 
 <div style="height: 100vh; width: 100vh; display: flex; margin: auto; align-items: center;" >
     <div id="name" style="display:none">{{name}}</div>
+    
+    {% set video = "videos/" + name + ".mp4" %}
     <video id="exercise-video" controls>
-        <source src="static/videos/{{name}}.mp4" type="video/mp4">
+        <source src="{{ url_for('static', filename=video) }}" type="video/mp4">
     </video>
+
     <br>
-    <form action="{{ url_for("main.mission_complete") }}" style="margin-block: auto">        
+    
+    <form action="{{ url_for("child.mission_complete") }}" style="margin-block: auto">        
         <button id="complete-button" class="glow-button" style="display:none;" type="submit">Continue</button>
     </form>
 
-    <form action="{{ url_for("main.planet_missions") }}" style="margin-block: auto">        
+    <form action="{{ url_for("child.planet_missions") }}" style="margin-block: auto">        
         <button id="back-button" class="glow-button" style="display:none;" type="submit">Back</button>
     </form>
 

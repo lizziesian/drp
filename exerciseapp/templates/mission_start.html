@@ -1,7 +1,7 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout_child.html" %} {% block content %}
 
 <div class="center" style="margin: auto;">
-    <form action="{{ url_for("main.planet_missions") }}">
+    <form action="{{ url_for("child.planet_missions") }}">
         <button class="glow-button" type="submit" style="text-align: center;">Are you ready?</button>
     </form>
 </div>

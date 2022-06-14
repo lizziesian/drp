@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout_child.html" %}
 
 {% block content %}
 
@@ -14,8 +14,11 @@
             <br>
             He is at level {{ monster["level"] }}.
         </h2>
-        <img src="static/images/{{ monster['image'] }}" height="100vh" width="auto" class="shaking_img">
-     </div>
+
+        {% set image = "images/" + monster['image'] %}
+        <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto" class="shaking_img">
+     
+    </div>
 
      <div>
         <!-- Daily mission -->
@@ -36,7 +39,7 @@
     </div>
 
     <!-- Mission Start -->
-    <form action="{{ url_for("main.mission_start") }}">
+    <form action="{{ url_for("child.mission_start") }}">
         <button class="glow-button" type="submit" style="text-align: center;">START MISSION</button>
     </form>
 

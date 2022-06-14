@@ -6,7 +6,7 @@
     <h1> Your monster has grown! </h1>
     <img src="static/images/{{ monster['image'] }}" height="100vh" width="auto" class="shaking_img"> <!-- Change class -->
 
-    <form action="{{ url_for("main.child_home") }}" style="margin-block: auto">
+    <form action="{{ url_for("child.home") }}" style="margin-block: auto">
         <button id="home-page-button" class="glow-button" type="submit">Return to Home Page</button>
     </form>
 </div>

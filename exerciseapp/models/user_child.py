@@ -5,7 +5,7 @@ class ChildUser(db.Model):
     name = db.Column(db.String, nullable=False)
     # Hashed password
     password = db.Column(db.String(100), nullable=False)
-    # Level starts at 0.
+    # Level starts at 0 (refers to number of missions completed).
     level = db.Column(db.Integer, default=0)
     # Linked parent account.
     parent = db.Column(db.Integer, db.ForeignKey("parent_user.id"), nullable=False)

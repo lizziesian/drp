@@ -1,16 +1,16 @@
-{% extends "layout.html" %}
+{% extends "layout_child.html" %}
 
 {% block content %}
 
 <div class="center">
     <h1> {{ user["name"] }}'s Level: {{ user["level"] }} </h1>
-    <h1 style="margin: auto">
-        Mission Complete!
-    </h1>
+    <h1 style="margin: auto"> Mission Complete!</h1>
     <h1> Your monster has grown! </h1>
-    <img src="static/images/{{ monster['image'] }}" height="100vh" width="auto" class="shaking_img"> 
+    
+    {% set image = "images/" + monster['image'] %}
+    <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto" class="shaking_img"> 
 
-    <form action="{{ url_for("main.child_home") }}" style="margin-block: auto">
+    <form action="{{ url_for("child.home") }}" style="margin-block: auto">
         <button id="home-page-button" class="glow-button" type="submit">Return to Home Page</button>
     </form>
 </div>
