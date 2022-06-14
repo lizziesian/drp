@@ -8,7 +8,7 @@ main = Blueprint("main", __name__)
 @main.route("/")
 @main.route("/home")
 def home():
-    return "<h1>Select child account or parent account.</h1>"
+    return render_template("select_account.html", title="Home")
 
 # movie examples page
 @main.route('/movieList')
