@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="center"> 
+
+    <!-- Welcome message -->
+    <h1> Welcome {{ user["name"] }}! </h1>
+
+     <!-- Current monster -->
+     <div> 
+        <h2>
+            Your current monster is {{ monster["name"] }}.
+            <br>
+            He is at level {{ monster["level"] }}.
+        </h2>
+        <img src="static/images/{{ monster['image'] }}" height="100vh" width="auto" class="shaking_img">
+     </div>
+
+     <div>
+        <!-- Daily mission -->
+        <div style="display: inline-block; margin-right:5%; margin-left: 5%;">
+            <h2>
+                Daily Mission: <br>
+                {{ mission["name"] }}
+            </h2>
+        </div>
+
+        <!-- Mission status -->
+        <div style="display: inline-block; margin-right: 5%; margin-left: 5%;">
+            <h2>
+                Mission Status: <br>
+                {{ status }}
+            </h2>
+        </div>
+    </div>
+
+    <!-- Mission Start -->
+    <form action="{{ url_for("main.mission_start") }}">
+        <button class="glow-button" type="submit" style="text-align: center;">START MISSION</button>
+    </form>
+
+</div>
+
+{% endblock content %}

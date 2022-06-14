@@ -1,10 +1,8 @@
 {% extends "layout.html" %} {% block content %}
 
-<div style="width: 100%; text-align: center; padding: 20%;">
-    <h1> {{ user["name"] }}'s Level: {{user["level"]}} </h1>
-
+<div class="center" style="margin: auto;">
     <form action="{{ url_for("main.planet_missions") }}">
-        <button class="glow-button" type="submit" style="text-align: center;">START MISSION</button>
+        <button class="glow-button" type="submit" style="text-align: center;">Are you ready?</button>
     </form>
 </div>
 
