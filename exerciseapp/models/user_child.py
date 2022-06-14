@@ -19,3 +19,5 @@ class ChildUser(db.Model):
     mission = db.Column(db.Integer, db.ForeignKey("mission.id"), default=0)
     # Status is reset everyday when daily mission is set.
     mission_status = db.Column(db.Boolean, default=False)
+    # Whether monster has been collected.
+    monster_collected = db.Column(db.Boolean, default=False)

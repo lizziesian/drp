@@ -31,7 +31,8 @@ def populate():
     testMonster1 = Monster(id=1, name="Default Monster", level=1, image="monster-child.png")
 
     parentUser = ParentUser(id=0, name="Simon", password="abcd")
-    childUser = ChildUser(id=0, name="John", password="edfg", parent=parentUser.id, current_monster=testMonster.id)
+    childUser = ChildUser(id=0, name="John", password="edfg", parent=parentUser.id, current_monster=testMonster.id,
+                          monster_collected=False)
     
     approved = ApprovedMission(child=childUser.id, mission=testMission.id)    
     owned = MonsterOwned(child=childUser.id, monster=testMonster.id)

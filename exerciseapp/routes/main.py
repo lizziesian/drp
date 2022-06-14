@@ -21,8 +21,8 @@ def child_home():
     else:
         the_status = "Pending."
     if the_user:
-        return render_template("child_home.html", title="Home", user=the_user, monster=the_monster, mission=the_mission, status=the_status)
-
+        return render_template("child_home.html", title="Home", user=the_user, monster=the_monster, mission=the_mission,
+                               status=the_status, collected_monster=the_user.monster_collected)
 
 @main.route("/mission_start")
 def mission_start():
@@ -67,6 +67,7 @@ def mission_complete():
 def collect_monster():
     the_user = ChildUser.query.get_or_404(0,"User not found.")
     the_user.current_monster += 1
+    the_user.monster_collected = True
     database.session.commit()
     the_monster = Monster.query.get_or_404(the_user.current_monster,"Monster id not found")
     return render_template("collect_monster.html",monster=the_monster)
