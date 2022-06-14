@@ -27,7 +27,7 @@ def drop_all():
 def populate():
     # Test parent, child, mission and monster.
     testMission = Mission(id=0, name="Default Mission", video="exercise-video")
-    testMonster = Monster(id=0, name="Default Monster", level=0, image="monster-egg")
+    testMonster = Monster(id=0, name="Default Monster", level=0, image="monster-egg.png")
 
     parentUser = ParentUser(id=0, name="Simon", password="abcd")
     childUser = ChildUser(id=0, name="John", password="edfg", parent=parentUser.id, current_monster=testMonster.id)
