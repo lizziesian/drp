@@ -3,8 +3,12 @@
 {% block content %}
 
 <div class="center">
-    <h1> {{ user["name"] }}'s Level: {{ user["level"] }} </h1>
-    <h1 style="margin: auto"> Mission Complete!</h1>
+    <h1> Congratulations {{ user["name"] }}, Mission Complete!</h1>
+    {% if user["level"] == 1 %}
+        <h2> You have now completed 1 mission. </h2>
+    {% else %}
+        <h2> You have now completed {{ user["level"] }} missions. </h2>
+    {% endif %}
     <h1> Your monster has grown! </h1>
     
     {% set image = "images/" + monster['image'] %}

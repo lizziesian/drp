@@ -25,23 +25,29 @@ def drop_all():
 @click.command(name="populate", help="Populate database with test data.")
 @with_appcontext
 def populate():
-    # Test parent, child, mission and monster.
-    testMission = Mission(id=0, name="Default Mission", video="exercise-video")
-    testMonster = Monster(id=0, name="Default Monster", level=0, image="monster-egg.png")
-    testMonster1 = Monster(id=1, name="Default Monster", level=1, image="monster-child.png")
+    # Test mission
+    testMission = Mission(id=0, name="Default Mission", warm_up="exercise1.mp4", exercise="exercise2.mp4", cool_down="exercise3.mp4")
 
+    # Test monster
+    testMonster0 = Monster(id=0, name="Default Monster", level=0, image="monster-egg.png")
+    testMonster1 = Monster(id=1, name="Default Monster", level=1, image="monster-baby.png")
+    testMonster2 = Monster(id=2, name="Default Monster", level=2, image="monster-child.png")
+    testMonster3 = Monster(id=3, name="Default Monster", level=3, image="monster-adult.png")
+
+    # Test parent and child accounts
     parentUser = ParentUser(id=0, name="Simon", password="abcd")
-    childUser = ChildUser(id=0, name="John", password="edfg", parent=parentUser.id, current_monster=testMonster.id,
-                          monster_collected=False)
+    childUser = ChildUser(id=0, name="John", password="edfg", parent=parentUser.id, current_monster=testMonster0.id, monster_collected=False)
     
     approved = ApprovedMission(child=childUser.id, mission=testMission.id)    
-    owned = MonsterOwned(child=childUser.id, monster=testMonster.id)
+    
+    # Monsters owned table is empty as only full-level monsters are added to this table.
 
     database.session.add(parentUser)
     database.session.add(childUser)
     database.session.add(testMission)
     database.session.add(approved)
-    database.session.add(testMonster)
+    database.session.add(testMonster0)
     database.session.add(testMonster1)
-    database.session.add(owned)
+    database.session.add(testMonster2)
+    database.session.add(testMonster3)
     database.session.commit()

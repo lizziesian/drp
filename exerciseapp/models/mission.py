@@ -5,4 +5,7 @@ from exerciseapp.database import database as db
 class Mission(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    video = db.Column(db.String(20), nullable=False) # String contains name of video in video folder.
+    # Strings containing names of warm-up, exercise, and cool-down videos in videos folder.
+    warm_up = db.Column(db.String(20), nullable=False)
+    exercise = db.Column(db.String(20), nullable=False)
+    cool_down = db.Column(db.String(20), nullable=False)
