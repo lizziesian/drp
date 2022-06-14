@@ -3,20 +3,38 @@
 {% block content %}
 
 <div style="height: 100vh; width: 100vh; display: flex; margin: auto; align-items: center;" >
+    <div id="name" style="display:none">{{name}}</div>
     <video id="exercise-video" controls>
-        <source src="static/videos/exercise-video.mp4" type="video/mp4">
+        <source src="static/videos/{{name}}.mp4" type="video/mp4">
     </video>
     <br>
     <form action="{{ url_for("main.mission_complete") }}" style="margin-block: auto">        
         <button id="complete-button" class="glow-button" style="display:none;" type="submit">Continue</button>
     </form>
+
+    <form action="{{ url_for("main.planet_missions") }}" style="margin-block: auto">        
+        <button id="back-button" class="glow-button" style="display:none;" type="submit">back</button>
+    </form>
+
 </div>
 
 <script>
     var video=document.getElementById("exercise-video");
-    var button=document.getElementById("complete-button");
+    var button_complete=document.getElementById("complete-button");
+    var button_back = document.getElementById("back-button");
+    var str=document.getElementById("name").innerHTML
     video.onended = function() {
-        button.style.display = "block"
+        if(str=="exercise3"){
+            button_complete.style.display = "block"
+            button_back.style.display = "block"
+   
+        }else{
+            button_back.style.display = "block"
+
+
+
+        }
+        
     };
 </script>
 

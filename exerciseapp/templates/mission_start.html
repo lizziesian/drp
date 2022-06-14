@@ -1,9 +1,7 @@
-{% extends "layout.html" %}
-
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 
 <div style="width: 100%; text-align: center; padding: 20%;">
-    <h1> {{ user["name"] }}'s Level: {{ user["level"] }} </h1>
+    <h1> {{ user["name"] }}'s Level: {{user["level"]}} </h1>
 
     <form action="{{ url_for("main.exercise_video") }}">
         <button class="glow-button" type="submit" style="text-align: center;">START MISSION</button>

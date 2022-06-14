@@ -1,0 +1,153 @@
+{% extends "layout.html" %} {% block content %}
+<html>
+
+<head>
+    <style>
+        .body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #0d1b2c;
+            background-image: radial-gradient(white, rgba(255, 255, 255, .2) 2px, transparent 40px), radial-gradient(white, rgba(255, 255, 255, .15) 1px, transparent 30px), radial-gradient(white, rgba(255, 255, 255, .1) 2px, transparent 40px), radial-gradient(rgba(255, 255, 255, .4), rgba(255, 255, 255, .1) 2px, transparent 30px);
+            background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+            background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+            overflow: hidden;
+        }
+        
+        .planet1 {
+            left: 566.5px;
+            top: 391px;
+            height: 100px;
+            width: 100px;
+            background-color: rgb(115, 114, 174);
+            border-radius: 50%;
+            position: absolute;
+            transform-origin: 134px 9px;
+            /* animation: rotate 6.25s infinite linear; */
+        }
+        
+        .planet1Orbit {
+            left: 575px;
+            top: 275px;
+            height: 250px;
+            width: 250px;
+            background-color: transparent;
+            border-radius: 50%;
+            border-style: dashed;
+            border-color: gray;
+            position: absolute;
+            border-width: 1px;
+            /*margin: 100px;*/
+            /*transform-origin: -75px -75px;*/
+            /*animation: rotate 4s infinite linear;*/
+            margin: 0px;
+            padding: 0px;
+        }
+
+        
+        .planet2 {
+            left: 900px;
+            /* left: 434px; */
+            top: 379px;
+            height: 80px;
+            width: 80px;
+            background-color: rgb(156, 164, 143);
+            border-radius: 50%;
+            position: absolute;
+            transform-origin: 266px 21px;
+            /* animation: rotate 12.04s infinite linear; */
+        }
+
+        
+        .planet2Orbit {
+            left: 455px;
+            top: 155px;
+            height: 490px;
+            width: 490px;
+            background-color: transparent;
+            border-radius: 50%;
+            border-style: dashed;
+            border-color: gray;
+            position: absolute;
+            border-width: 1px;
+            /*margin: 100px;*/
+            /*transform-origin: -75px -75px;*/
+            /*animation: rotate 4s infinite linear;*/
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        .planet3 {
+            left: 341.5px;
+            top: 186.5px;
+            /*top：386.5px*/
+            height: 120px;
+            width: 120px;
+            background-color: rgb(164, 192, 206);
+            border-radius: 50%;
+            position: absolute;
+            transform-origin: 358.5px 13.5px;
+            /* animation: rotate 17.46s infinite linear; */
+        }
+        
+        .planet3Orbit {
+            left: 355px;
+            top: 55px;
+            height: 690px;
+            width: 690px;
+            background-color: transparent;
+            border-radius: 50%;
+            border-style: dashed;
+            border-color: gray;
+            position: absolute;
+            border-width: 1px;
+            /*margin: 100px;*/
+            /*transform-origin: -75px -75px;*/
+            /*animation: rotate 4s infinite linear;*/
+            margin: 0px;
+            padding: 0px;
+        }
+        button, input{
+            z-index:10;
+        }
+        
+        @keyframes rotate {
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="body">
+        <div class='planet1Orbit'></div>
+
+        
+        <form action=" {{ url_for( "main.exercise_video1") }} ">
+
+            <button id="one" class="planet1 " >planet1</button>
+        </form>
+
+        <div class='planet2Orbit'></div>
+
+       
+        <form action=" {{ url_for( "main.exercise_video2") }} ">
+
+            <button id="two" class="planet2 ">planet2</button>
+        </form>
+
+        <div class='planet3Orbit'></div>
+
+        <form action=" {{ url_for( "main.exercise_video3") }} ">
+
+            <button id="three" class="planet3 " >planet3</button>
+        </form>
+
+
+    </div>
+</body>
+
+
+</html>
+{% endblock content %}

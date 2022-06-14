@@ -2,48 +2,48 @@ from xml.dom.minidom import parse
 import xml.dom.minidom
 import threading
 
-xml_file = 'exerciseapp/file/movies.xml'
+xml_file = 'exerciseapp/file/exercise.xml'
 
 lock = threading.RLock()
 
 
-def read_movies():
+def read_exercises():
     lock.acquire()
     DOMTree = xml.dom.minidom.parse(xml_file)
     lock.release()
     root = DOMTree.documentElement
-    movies = root.getElementsByTagName('movie')
+    exercises = root.getElementsByTagName('exercise')
 
-    movie_arr = []
-    for movie in movies:
-        movie_dic = {}
-        movie_dic['file'] = movie.getAttribute('file')
-        movie_dic['title'] = movie.getAttribute('title')
-        if movie.hasAttribute('count'):
-            movie_dic['count'] = int(movie.getAttribute('count'))
+    exercise_arr = []
+    for exercise in exercises:
+        exercise_dic = {}
+        exercise_dic['file'] = exercise.getAttribute('file')
+        exercise_dic['title'] = exercise.getAttribute('title')
+        if exercise.hasAttribute('count'):
+            exercise_dic['count'] = int(exercise.getAttribute('count'))
         else:
-            movie_dic['count'] = 0
-        movie_arr.append(movie_dic)
+            exercise_dic['count'] = 0
+        exercise_arr.append(exercise_dic)
 
-    return movie_arr
+    return exercise_arr
 
 
-def incr_movie(name):
-    movies = read_movies()
+def incr_exercise(name):
+    exercises = read_exercises()
     dom = xml.dom.minidom.Document()
     root_node = dom.createElement('root')
     dom.appendChild(root_node)
-    for movie_dic in movies:
-        movie_node = dom.createElement('movie')
-        filename = movie_dic['file']
-        movie_node.setAttribute('file', filename)
-        title = movie_dic['title']
-        movie_node.setAttribute('title', title)
-        count = movie_dic.get('count', 0)
+    for exercise_dic in exercises:
+        exercise_node = dom.createElement('exercise')
+        filename = exercise_dic['file']
+        exercise_node.setAttribute('file', filename)
+        title = exercise_dic['title']
+        exercise_node.setAttribute('title', title)
+        count = exercise_dic.get('count', 0)
         if filename == name:
             count += 1
-        movie_node.setAttribute('count', str(count))
-        root_node.appendChild(movie_node)
+        exercise_node.setAttribute('count', str(count))
+        root_node.appendChild(exercise_node)
 
     lock.acquire()
     with open(xml_file, 'w', encoding='utf-8') as fs:

@@ -14,9 +14,35 @@ def mission_start():
     if the_user:
         return render_template("mission_start.html", title="Mission Start", user=the_user)
 
-@main.route("/exercise_video")
-def exercise_video():
-    return render_template("exercise_video.html", title="Exercise Mission")
+
+@main.route("/planet_missions")
+def planet_missions():
+     the_user = User.query.get_or_404(0, "User not found.")
+     exercises = xml_lib.read_exercises()
+     exercises.sort(key=lambda x: x['count'], reverse=True)
+     if the_user:
+       return render_template("missions.html", title="Planet Missions", user=the_user,exercise=exercises)
+
+
+@main.route("/exercise_video1")
+def exercise_video1():
+    name = "exercise1"
+    return render_template("exercise_video.html",name=name,title="Exercise Mission")
+
+
+
+@main.route("/exercise_video2")
+def exercise_video2():
+    name = "exercise2"
+    return render_template("exercise_video.html",name=name,title="Exercise Mission")
+
+
+
+@main.route("/exercise_video3")
+def exercise_video3():
+    name = "exercise3"
+    return render_template("exercise_video.html",name=name,title="Exercise Mission")
+
 
 @main.route("/mission_complete")
 def mission_complete():
