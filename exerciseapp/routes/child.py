@@ -35,10 +35,6 @@ def planet_missions():
     status = user.mission_status
     return render_template("missions.html", title="Planet Missions",exercise=exercises, status=status)
 
-@child.route("/approval")
-def wait_for_approval():
-    user = ChildUser.query.get_or_404(0, "User not found.")
-    return render_template("wait_for_approval.html", title="Parental Approval", status=user.mission_status)
 
 @child.route("/exercise_warmup", methods=["GET", "POST"])
 def exercise_warmup():
@@ -81,6 +77,12 @@ def exercise_cooldown():
         return redirect(url_for("child.wait_for_approval"))
     
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
+
+
+@child.route("/approval")
+def wait_for_approval():
+    user = ChildUser.query.get_or_404(0, "User not found.")
+    return render_template("wait_for_approval.html", title="Awaiting Parental Approval", status=user.mission_status)
 
 
 @child.route("/mission_complete")
