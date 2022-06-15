@@ -86,6 +86,9 @@ def collect_monster():
 def space_garden():
     the_user = ChildUser.query.get_or_404(0, "User not found.")
 
+    # Current monster
+    current_monster = Monster.query.get_or_404(the_user.current_monster, "User has no current monster.")
+
     # Level 0 monsters
     monster_eggs = Monster.query.filter_by(level=0)
     
@@ -99,14 +102,14 @@ def space_garden():
         monsters_owned.append(monster)
         owned_names.append(monster.name)
     
+    monsters_owned.append(current_monster)
+    owned_names.append(current_monster.name)
+    
     # List of level 0 monsters not owned
     monsters_not_owned = []
     for monster in monster_eggs:
         if monster.name not in owned_names:
             monsters_not_owned.append(monster)
     
-    # Current monster
-    the_monster = Monster.query.get_or_404(the_user.current_monster, "User has no current monster.")
-
     if the_user:
-        return render_template("space_garden.html", title="Space Garden", user=the_user, current_monster=the_monster, adult_monsters=monsters_owned, future_monsters=monsters_not_owned)
+        return render_template("space_garden.html", title="Space Garden", user=the_user, owned_monsters=monsters_owned, future_monsters=monsters_not_owned)

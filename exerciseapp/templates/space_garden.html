@@ -14,16 +14,12 @@
 </div>
 
 <!-- Monsters owned -->
-{% for monster in adult_monsters %}
+{% for monster in owned_monsters %}
 
 {% set image = "images/" + monster['image'] %}
 <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto" class="shaking_img">
 
 {% endfor %}
-
-<!-- Current monster -->
-{% set image = "images/" + current_monster['image'] %}
-<img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto" class="shaking_img">
 
 <!-- Future monsters -->
 {% for monster in future_monsters %}
