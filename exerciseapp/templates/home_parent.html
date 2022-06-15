@@ -14,7 +14,7 @@
 </div>
 
 <!-- List of children -->
-{% for child in parent.children %}
+{% for (child, status) in children_statuses %}
 
     <div style="border-style: solid; border-color: white; border-width: medium; margin: 5%; overflow: auto;">
 
@@ -31,11 +31,7 @@
                 <p> Daily mission: {{ exercise.name }}</p>
 
                 <!-- Child's daily mission status -->
-                {% if child.mission_status %}
-                    <p> Mission status: Completed. </p>
-                {% else %}
-                    <p> Mission status: Pending. </p> 
-                {% endif %}
+                <p> Mission status: {{ status }} </p>
             </div>
 
             <!-- Edit daily mission -->

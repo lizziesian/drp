@@ -12,20 +12,20 @@
 
     <br>
     
-    <form action="{{ url_for("child.mission_complete") }}" style="margin-block: auto">        
+    <form method="POST" style="margin-block: auto">        
         <button id="complete-button" class="glow-button" style="display:none;" type="submit">Continue</button>
     </form>
 
-    <form action="{{ url_for("child.planet_missions") }}" style="margin-block: auto">        
-        <button id="back-button" class="glow-button" style="display:none;" type="submit">Back</button>
+    <form method="POST" style="margin-block: auto">        
+        <button id="back-button" class="glow-button" style="display:none;" type="submit">Next</button>
     </form>
 
 </div>
 
 <script>
-    var video=document.getElementById("exercise-video");
-    var button_complete=document.getElementById("complete-button");
-    var button_back = document.getElementById("back-button");
+    var video=document.getElementById("exercise-video")
+    var button_complete=document.getElementById("complete-button")
+    var button_back = document.getElementById("back-button")
     var str=document.getElementById("name").innerHTML
     video.onended = function() {
         if(str=="exercise3"){
@@ -33,7 +33,7 @@
         }else{
             button_back.style.display = "block"
         }
-    };
+    }
 </script>
 
 {% endblock content %}
