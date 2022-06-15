@@ -30,7 +30,9 @@ def mission_start():
 def planet_missions():
     exercises = xml_lib.read_exercises()
     exercises.sort(key=lambda x: x['count'], reverse=True)
-    return render_template("missions.html", title="Planet Missions",exercise=exercises)
+    user = ChildUser.query.get_or_404(0, "User not found.")
+    status = user.mission_status
+    return render_template("missions.html", title="Planet Missions",exercise=exercises, status=status)
 
 @child.route("/exercise_warmup", methods=["GET", "POST"])
 def exercise_warmup():
