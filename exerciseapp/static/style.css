@@ -29,8 +29,6 @@ video {
     margin: 0 auto;
     height: 80%;
 }
-
-
 /* hides seek bar
 video::-webkit-media-controls-timeline {
     display: none;
@@ -63,6 +61,16 @@ video::-webkit-media-controls-timeline {
     width: 100%;
     text-align: center;
     margin: auto;
+}
+
+.monster-container {
+    border-style: solid; 
+    border-color: white; 
+    border-width: medium; 
+    display: inline-block;
+    padding: 2%;
+    overflow: auto;
+    text-align: center;
 }
 
 /* License of glow button: */
