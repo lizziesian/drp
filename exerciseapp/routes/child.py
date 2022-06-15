@@ -50,7 +50,7 @@ def exercise_warmup():
     if request.method == "POST":
         user.mission_status = 1
         database.session.commit()
-        return redirect(url_for("child.wait_for_approval"))
+        return redirect(url_for("child.planet_missions"))
 
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
 
@@ -62,9 +62,9 @@ def exercise_mission():
 
     # Update mission status and redirect to planets page
     if request.method == "POST":
-        user.mission_status = 3
+        user.mission_status = 2
         database.session.commit()
-        return redirect(url_for("child.wait_for_approval"))
+        return redirect(url_for("child.planet_missions"))
 
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
 
@@ -76,7 +76,7 @@ def exercise_cooldown():
 
     # Update mission status and redirect to planets page
     if request.method == "POST":
-        user.mission_status = 5
+        user.mission_status = 3
         database.session.commit()
         return redirect(url_for("child.wait_for_approval"))
     
