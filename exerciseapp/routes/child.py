@@ -5,6 +5,7 @@ from exerciseapp import xml_lib
 from exerciseapp.database import database
 from exerciseapp.models.user_child import ChildUser
 from exerciseapp.models.monster import Monster
+from exerciseapp.models.monsters_owned import MonsterOwned
 from exerciseapp.models.mission import Mission
 
 child = Blueprint("child", __name__, url_prefix="/child")
@@ -68,12 +69,7 @@ def mission_complete():
         database.session.commit()
         the_monster = Monster.query.get_or_404(the_user.current_monster, "Monster id not found")
         return render_template("mission_complete.html", title="Mission Complete", user=the_user, monster=the_monster)
-        
-@child.route("/space_garden")
-def space_garden():
-    the_user = ChildUser.query.get_or_404(0, "User not found.")
-    if the_user:
-        return render_template("space_garden.html", title="Space Garden", user=the_user)
+
 
 @child.route("/collect_monster")
 def collect_monster():
@@ -83,3 +79,34 @@ def collect_monster():
     #database.session.commit()
     the_monster = Monster.query.get_or_404(the_user.current_monster,"Monster id not found")
     return render_template("collect_monster.html",monster=the_monster)
+
+
+# Monster/space garden
+@child.route("/space_garden")
+def space_garden():
+    the_user = ChildUser.query.get_or_404(0, "User not found.")
+
+    # Level 0 monsters
+    monster_eggs = Monster.query.filter_by(level=0)
+    
+    # List of monsters owned
+    monsters_owned = []
+    owned_names = []
+    owned = MonsterOwned.query.filter_by(child=the_user.id)
+    for owned_monster in owned:
+        monster_id = owned_monster.monster
+        monster = Monster.query.get_or_404(monster_id, "Monster not found.")
+        monsters_owned.append(monster)
+        owned_names.append(monster.name)
+    
+    # List of level 0 monsters not owned
+    monsters_not_owned = []
+    for monster in monster_eggs:
+        if monster.name not in owned_names:
+            monsters_not_owned.append(monster)
+    
+    # Current monster
+    the_monster = Monster.query.get_or_404(the_user.current_monster, "User has no current monster.")
+
+    if the_user:
+        return render_template("space_garden.html", title="Space Garden", user=the_user, current_monster=the_monster, adult_monsters=monsters_owned, future_monsters=monsters_not_owned)
