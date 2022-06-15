@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for, request
 
 from venv import create
 from exerciseapp import xml_lib
@@ -32,25 +32,46 @@ def planet_missions():
     exercises.sort(key=lambda x: x['count'], reverse=True)
     return render_template("missions.html", title="Planet Missions",exercise=exercises)
 
-@child.route("/exercise_warmup")
+@child.route("/exercise_warmup", methods=["GET", "POST"])
 def exercise_warmup():
     user = ChildUser.query.get_or_404(0, "User not found.")
     mission = Mission.query.get_or_404(user.mission, "No current mission assigned to user.")
     name = mission.warm_up
+
+    # Update mission status and redirect to planets page
+    if request.method == "POST":
+        user.mission_status = 1
+        database.session.commit()
+        return redirect(url_for("child.planet_missions"))
+
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
 
-@child.route("/exercise_mission")
+@child.route("/exercise_mission", methods=["GET", "POST"])
 def exercise_mission():
     user = ChildUser.query.get_or_404(0, "User not found.")
     mission = Mission.query.get_or_404(user.mission, "No current mission assigned to user.")
     name = mission.exercise
+
+    # Update mission status and redirect to planets page
+    if request.method == "POST":
+        user.mission_status = 2
+        database.session.commit()
+        return redirect(url_for("child.planet_missions"))
+
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
 
-@child.route("/exercise_cooldown")
+@child.route("/exercise_cooldown", methods=["GET", "POST"])
 def exercise_cooldown():
     user = ChildUser.query.get_or_404(0, "User not found.")
     mission = Mission.query.get_or_404(user.mission, "No current mission assigned to user.")
     name = mission.cool_down
+
+    # Update mission status and redirect to planets page
+    if request.method == "POST":
+        user.mission_status = 3
+        database.session.commit()
+        return redirect(url_for("child.mission_complete"))
+    
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
 
 
@@ -59,7 +80,6 @@ def mission_complete():
     the_user = ChildUser.query.get_or_404(0, "User not found.")
     if the_user:
         the_user.level += 1
-        the_user.mission_status = 3
         the_user.current_monster += 1
         database.session.commit()
         the_monster = Monster.query.get_or_404(the_user.current_monster, "Monster id not found")

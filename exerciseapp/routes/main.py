@@ -12,8 +12,8 @@ def status(status_id):
     if status_id == 0:
         return "Not Started."
     elif status_id == 1:
-        return "Warm Up Complete. Exercise Pending."
+        return "Warm Up Complete."
     elif status_id == 2:
-        return "Exercise Complete. Cool Down Pending."
+        return "Exercise Complete."
     else:
         return "Complete."

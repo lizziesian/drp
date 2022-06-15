@@ -12,12 +12,12 @@
 
     <br>
     
-    <form action="{{ url_for("child.mission_complete") }}" style="margin-block: auto">        
+    <form method="POST" style="margin-block: auto">        
         <button id="complete-button" class="glow-button" style="display:none;" type="submit">Continue</button>
     </form>
 
-    <form action="{{ url_for("child.planet_missions") }}" style="margin-block: auto">        
-        <button id="back-button" class="glow-button" style="display:none;" type="submit">Back</button>
+    <form method="POST" style="margin-block: auto">        
+        <button id="back-button" class="glow-button" style="display:none;" type="submit">Next</button>
     </form>
 
 </div>
