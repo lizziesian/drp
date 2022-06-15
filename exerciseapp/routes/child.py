@@ -6,6 +6,7 @@ from exerciseapp.database import database
 from exerciseapp.models.user_child import ChildUser
 from exerciseapp.models.monster import Monster
 from exerciseapp.models.mission import Mission
+from exerciseapp.routes.main import status
 
 child = Blueprint("child", __name__, url_prefix="/child")
 
@@ -15,14 +16,9 @@ def home():
     the_user = ChildUser.query.get_or_404(0, "User not found.")
     the_monster = Monster.query.get_or_404(the_user.current_monster, "User has no current monster.")
     the_mission = Mission.query.get_or_404(the_user.mission, "No current mission assigned to user.")
-    the_status = ""
-    if the_user.mission_status:
-        the_status = "Completed."
-    else:
-        the_status = "Pending."
+    the_status = status(the_user.mission_status)
     if the_user:
-        return render_template("home_child.html", title="Home", user=the_user, monster=the_monster, mission=the_mission,
-                               status=the_status, collected_monster=the_user.monster_collected)
+        return render_template("home_child.html", title="Home", user=the_user, monster=the_monster, mission=the_mission, status=the_status, collected_monster=the_user.monster_collected)
 
 @child.route("/mission_start")
 def mission_start():
@@ -63,7 +59,7 @@ def mission_complete():
     the_user = ChildUser.query.get_or_404(0, "User not found.")
     if the_user:
         the_user.level += 1
-        the_user.mission_status = True
+        the_user.mission_status = 3
         the_user.current_monster += 1
         database.session.commit()
         the_monster = Monster.query.get_or_404(the_user.current_monster, "Monster id not found")
