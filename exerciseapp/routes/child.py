@@ -69,6 +69,11 @@ def mission_complete():
         the_monster = Monster.query.get_or_404(the_user.current_monster, "Monster id not found")
         return render_template("mission_complete.html", title="Mission Complete", user=the_user, monster=the_monster)
         
+@child.route("/space_garden")
+def space_garden():
+    the_user = ChildUser.query.get_or_404(0, "User not found.")
+    if the_user:
+        return render_template("space_garden.html", title="Space Garden", user=the_user)
 
 @child.route("/collect_monster")
 def collect_monster():
