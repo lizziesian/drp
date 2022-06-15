@@ -35,6 +35,11 @@ def planet_missions():
     status = user.mission_status
     return render_template("missions.html", title="Planet Missions",exercise=exercises, status=status)
 
+@child.route("/approval")
+def wait_for_approval():
+    user = ChildUser.query.get_or_404(0, "User not found.")
+    return render_template("wait_for_approval.html", title="Parental Approval", status=user.mission_status)
+
 @child.route("/exercise_warmup", methods=["GET", "POST"])
 def exercise_warmup():
     user = ChildUser.query.get_or_404(0, "User not found.")
@@ -45,7 +50,7 @@ def exercise_warmup():
     if request.method == "POST":
         user.mission_status = 1
         database.session.commit()
-        return redirect(url_for("child.planet_missions"))
+        return redirect(url_for("child.wait_for_approval"))
 
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
 
@@ -57,9 +62,9 @@ def exercise_mission():
 
     # Update mission status and redirect to planets page
     if request.method == "POST":
-        user.mission_status = 2
+        user.mission_status = 3
         database.session.commit()
-        return redirect(url_for("child.planet_missions"))
+        return redirect(url_for("child.wait_for_approval"))
 
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
 
@@ -71,9 +76,9 @@ def exercise_cooldown():
 
     # Update mission status and redirect to planets page
     if request.method == "POST":
-        user.mission_status = 3
+        user.mission_status = 5
         database.session.commit()
-        return redirect(url_for("child.mission_complete"))
+        return redirect(url_for("child.wait_for_approval"))
     
     return render_template("exercise_video.html",name=name,title="Exercise Mission")
 

@@ -1,0 +1,15 @@
+{% extends "layout.html" %} 
+
+{% block content %}
+
+<div class="center" style="margin: auto;">
+
+    <h1>Please confirm {{ child.name }} has completed his {{ stage }}:</h1> 
+
+    <form method="POST">
+        <button class="glow-button" type="submit" style="text-align: center;">Confirm</button>
+    </form>
+</div>
+
+
+{% endblock content %}

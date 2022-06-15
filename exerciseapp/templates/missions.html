@@ -141,7 +141,7 @@
 
        <!-- Exercise Mission Button -->
         <form action=" {{ url_for( "child.exercise_mission") }} ">
-            {% if status == 1 %}
+            {% if status == 2 %}
             <button id="two" class="planet2 ">2 Mission</button>
             {% else %}
             <button id="two" class="planet2 " disabled>2 Mission</button>
@@ -152,7 +152,7 @@
 
         <!-- Cool Down Button -->
         <form action=" {{ url_for( "child.exercise_cooldown") }} ">
-            {% if status == 2 %}
+            {% if status == 4 %}
             <button id="three" class="planet3 ">3 Cool Down</button>
             {% else %}
             <button id="three" class="planet3 " disabled>3 Cool Down</button>

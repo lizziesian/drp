@@ -31,22 +31,32 @@
                 <p> Daily mission: {{ exercise.name }}</p>
 
                 <!-- Child's daily mission status -->
-                <p> Mission status: {{ status }} </p>
+                <p> Mission status: {{ status }}</p>
             </div>
 
             <!-- Edit daily mission -->
             <div style="display: inline-block; margin-left: 10%;">
                 <form action="{{ url_for("parent.home") }}">
-                    <button class="glow-button" type="submit" style="font-size: 14px; padding: 0.5rem">Edit daily mission for {{ child.name }}</button>
+                    <button class="glow-button" type="submit" style="font-size: 14px; padding: 0.5rem">Edit Daily Mission</button>
                 </form>
             </div>
 
             <div style="display: inline-block; margin-left: 10%;">
                 <!-- Edit approved mission list -->
                 <form action="{{ url_for("parent.home") }}">
-                    <button class="glow-button" type="submit" style="font-size: 14px; padding: 0.5rem">Edit approved mission list for {{ child.name }}</button>
+                    <button class="glow-button" type="submit" style="font-size: 14px; padding: 0.5rem">Edit Approved Mission List</button>
                 </form>
             </div>
+
+            <!-- Confirm mission stage -->
+            {% if child.mission_status in [1, 3, 5] %}
+            <div style="display: inline-block; margin-left: 10%;">
+                <!-- Edit approved mission list -->
+                <form action="{{ url_for("parent.confirm_mission", child_id=child["id"]) }}">
+                    <button class="glow-button" type="submit" style="font-size: 14px; padding: 0.5rem">Confirm Mission Completion</button>
+                </form>
+            </div>
+            {% endif %}
         
         </div>
 
