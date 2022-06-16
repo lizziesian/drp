@@ -36,21 +36,27 @@ def confirm_mission(child_id):
 
 @parent.route("/choose_warm_up/<child_id>/<int:missionId>", methods=('GET', 'POST'))
 def choose_warm_up(child_id,missionId):
+    the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
+    if the_child.level>=1 :
+        return redirect(url_for('parent.choose_exercise', missionId=missionId,child_id=child_id))
     all_missions = Mission.query.all()
     mission= all_missions[missionId]
-    exercises = xml_lib.read_exercises()
+    exercises = xml_lib.read_wexercises()
     exercises.sort(key=lambda x: x['count'], reverse=True)
     if request.method == 'POST':
           mission.warm_up=request.form["running"]
           database.session.commit()
           return redirect(url_for('parent.choose_exercise', missionId=missionId,child_id=child_id))
-    return render_template("choose_mission.html", exercise_type="warm_up exercise",exercises=exercises,missionId=id,child_id=child_id,title="Mission Choice")
+    return render_template("choose_mission.html", exercise_type="warm_up",exercises=exercises,missionId=id,child_id=child_id,title="Mission Choice")
 
 @parent.route("/choose_exercise/<child_id>/<int:missionId>", methods=('GET', 'POST'))
 def choose_exercise(child_id,missionId):
+    the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
+    if the_child.level>=2 :
+        return redirect(url_for('parent.choose_cool_down', missionId=missionId,child_id=child_id))
     all_missions = Mission.query.all()
     mission= all_missions[missionId]
-    exercises = xml_lib.read_exercises()
+    exercises = xml_lib.read_eexercises()
     exercises.sort(key=lambda x: x['count'], reverse=True)
     if request.method == 'POST':
           mission.exercise=request.form["running"]
@@ -62,13 +68,15 @@ def choose_exercise(child_id,missionId):
 @parent.route("/choose_cool_down/<child_id>/<int:missionId>", methods=('GET', 'POST'))
 def choose_cool_down(child_id,missionId):
     the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
+    if the_child.level==3 :
+            return redirect(url_for('parent.home'))
+    
     all_missions = Mission.query.all()
     mission= all_missions[missionId]
-    exercises = xml_lib.read_exercises()
+    exercises = xml_lib.read_cexercises()
     exercises.sort(key=lambda x: x['count'], reverse=True)
     if request.method == 'POST':
-          the_child.mission_status=False
           mission.cool_down=request.form["running"]
           database.session.commit()
           return redirect(url_for('parent.home'))
-    return render_template("choose_mission.html", exercise_type="cool_down exercise", exercises=exercises,missionId=missionId,child_id=child_id,title="Mission Choice")
+    return render_template("choose_mission.html", exercise_type="cool_down", exercises=exercises,missionId=missionId,child_id=child_id,title="Mission Choice")

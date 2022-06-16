@@ -15,18 +15,19 @@ xml_file = 'exerciseapp/file/exercise.xml'
 lock = threading.RLock()
 
 
-def read_exercises():
+def read_wexercises():
     lock.acquire()
     DOMTree = xml.dom.minidom.parse(xml_file)
     lock.release()
     root = DOMTree.documentElement
-    exercises = root.getElementsByTagName('exercise')
+    exercises = root.getElementsByTagName('wexercise')
 
     exercise_arr = []
     for exercise in exercises:
         exercise_dic = {}
         exercise_dic['file'] = exercise.getAttribute('file')
         exercise_dic['title'] = exercise.getAttribute('title')
+        exercise_dic['content'] = exercise.getAttribute('content')
         if exercise.hasAttribute('count'):
             exercise_dic['count'] = int(exercise.getAttribute('count'))
         else:
@@ -35,22 +36,49 @@ def read_exercises():
 
     return exercise_arr
 
-def edit_mission_warmUp(missionId,name):
-    all_missions = Mission.query.all()
-    id=(int)(missionId)
-    mission= all_missions[id]
-    mission.warm_up=name
+def read_eexercises():
+    lock.acquire()
+    DOMTree = xml.dom.minidom.parse(xml_file)
+    lock.release()
+    root = DOMTree.documentElement
+    exercises = root.getElementsByTagName('eexercise')
 
-def edit_mission_exercise(missionId,name):
-    all_missions = Mission.query.all()
-    id=(int)(missionId)
-    mission= all_missions[id]
-    mission.exercise=name
+    exercise_arr = []
+    for exercise in exercises:
+        exercise_dic = {}
+        exercise_dic['file'] = exercise.getAttribute('file')
+        exercise_dic['title'] = exercise.getAttribute('title')
+        exercise_dic['name'] = exercise.getAttribute('name')
+        exercise_dic['content'] = exercise.getAttribute('content')
+        if exercise.hasAttribute('count'):
+            exercise_dic['count'] = int(exercise.getAttribute('count'))
+        else:
+            exercise_dic['count'] = 0
+        exercise_arr.append(exercise_dic)
 
-def edit_mission_coolDown(missionId,name):
-    all_missions = Mission.query.all()
-    id=(int)(missionId)
-    mission= all_missions[id]
-    mission.cool_down=name
+    return exercise_arr
+
+def read_cexercises():
+    lock.acquire()
+    DOMTree = xml.dom.minidom.parse(xml_file)
+    lock.release()
+    root = DOMTree.documentElement
+    exercises = root.getElementsByTagName('cexercise')
+
+    exercise_arr = []
+    for exercise in exercises:
+        exercise_dic = {}
+        exercise_dic['file'] = exercise.getAttribute('file')
+        exercise_dic['title'] = exercise.getAttribute('title')
+        exercise_dic['content'] = exercise.getAttribute('content')
+        if exercise.hasAttribute('count'):
+            exercise_dic['count'] = int(exercise.getAttribute('count'))
+        else:
+            exercise_dic['count'] = 0
+        exercise_arr.append(exercise_dic)
+
+    return exercise_arr
+
+
 
 
