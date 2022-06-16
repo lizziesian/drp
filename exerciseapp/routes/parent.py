@@ -37,7 +37,7 @@ def confirm_mission(child_id):
 @parent.route("/choose_warm_up/<child_id>/<int:missionId>", methods=('GET', 'POST'))
 def choose_warm_up(child_id,missionId):
     the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
-    if the_child.level>=1 :
+    if the_child.mission_status >=1 :
         return redirect(url_for('parent.choose_exercise', missionId=missionId,child_id=child_id))
     all_missions = Mission.query.all()
     mission= all_missions[missionId]
@@ -52,7 +52,7 @@ def choose_warm_up(child_id,missionId):
 @parent.route("/choose_exercise/<child_id>/<int:missionId>", methods=('GET', 'POST'))
 def choose_exercise(child_id,missionId):
     the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
-    if the_child.level>=2 :
+    if the_child.mission_status >=2 :
         return redirect(url_for('parent.choose_cool_down', missionId=missionId,child_id=child_id))
     all_missions = Mission.query.all()
     mission= all_missions[missionId]
@@ -68,7 +68,7 @@ def choose_exercise(child_id,missionId):
 @parent.route("/choose_cool_down/<child_id>/<int:missionId>", methods=('GET', 'POST'))
 def choose_cool_down(child_id,missionId):
     the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
-    if the_child.level==3 :
+    if the_child.mission_status ==3 :
             return redirect(url_for('parent.home'))
     
     all_missions = Mission.query.all()
