@@ -37,15 +37,19 @@ def confirm_mission(child_id):
 @parent.route("/choose_warm_up/<child_id>/<int:missionId>", methods=('GET', 'POST'))
 def choose_warm_up(child_id,missionId):
     the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
+    if the_child.mission_status ==4 :
+        the_child.mission_status=0
     if the_child.mission_status >=1 :
-        return redirect(url_for('parent.choose_exercise', missionId=missionId,child_id=child_id))
+        if the_child.mission_status <=3 :
+          return redirect(url_for('parent.choose_exercise', missionId=missionId,child_id=child_id))
+  
     all_missions = Mission.query.all()
     mission= all_missions[missionId]
     exercises = xml_lib.read_wexercises()
     exercises.sort(key=lambda x: x['count'], reverse=True)
     if request.method == 'POST':
         video=request.form["running"]
-        mission.warm_up=video.removesuffix(".mp4")
+        mission.warm_up=video
         database.session.commit()
         return redirect(url_for('parent.choose_exercise', missionId=missionId,child_id=child_id))
     return render_template("choose_mission.html", exercise_type="warm up",exercises=exercises,missionId=id,child_id=child_id,title="Mission Choice")
