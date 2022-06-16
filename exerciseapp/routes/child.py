@@ -92,21 +92,11 @@ def wait_for_approval():
 def mission_complete():
     the_user = ChildUser.query.get_or_404(0, "User not found.")
     if the_user:
-        # the_user.level += 1
-        # the_user.current_monster += 1
-        # database.session.commit()
+        the_user.level += 1
+        the_user.current_monster += 1
+        database.session.commit()
         the_monster = Monster.query.get_or_404(the_user.current_monster, "Monster id not found")
         return render_template("mission_complete.html", title="Mission Complete", user=the_user, monster=the_monster)
-
-
-@child.route("/collect_monster")
-def collect_monster():
-    the_user = ChildUser.query.get_or_404(0, "User not found.")
-    the_user.current_monster += 1
-    the_user.monster_collected = True
-    database.session.commit()
-    the_monster = Monster.query.get_or_404(the_user.current_monster, "Monster id not found")
-    return render_template("collect_monster.html", monster=the_monster)
 
 
 # Monster/space garden
