@@ -27,6 +27,7 @@ def read_wexercises():
         exercise_dic = {}
         exercise_dic['file'] = exercise.getAttribute('file')
         exercise_dic['title'] = exercise.getAttribute('title')
+        exercise_dic['name'] = exercise.getAttribute('name')
         exercise_dic['content'] = exercise.getAttribute('content')
         if exercise.hasAttribute('count'):
             exercise_dic['count'] = int(exercise.getAttribute('count'))
@@ -70,6 +71,7 @@ def read_cexercises():
         exercise_dic = {}
         exercise_dic['file'] = exercise.getAttribute('file')
         exercise_dic['title'] = exercise.getAttribute('title')
+        exercise_dic['name'] = exercise.getAttribute('name')
         exercise_dic['content'] = exercise.getAttribute('content')
         if exercise.hasAttribute('count'):
             exercise_dic['count'] = int(exercise.getAttribute('count'))
