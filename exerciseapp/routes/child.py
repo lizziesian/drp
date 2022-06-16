@@ -34,7 +34,7 @@ def mission_start():
 def planet_missions():
     user = ChildUser.query.get_or_404(0, "User not found.")
     status = user.mission_status
-    return render_template("missions.html", title="Planet Missions", exercise=exercises, status=status)
+    return render_template("missions.html", title="Planet Missions", status=status)
 
 
 @child.route("/exercise_warmup", methods=["GET", "POST"])
