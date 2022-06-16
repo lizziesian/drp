@@ -28,6 +28,11 @@ def populate():
     # Test mission
     testMission = Mission(id=0, name="Default Mission", warm_up="exercise1", exercise="exercise2", cool_down="exercise3")
 
+    tmp1 = Mission(id=1, name="Temp Mission 1",warm_up="tmp1", exercise="tmp1", cool_down="tmp1")
+    tmp2 = Mission(id=2, name="Temp Mission 2",warm_up="tmp2", exercise="tmp2", cool_down="tmp2")
+    tmp3 = Mission(id=3, name="Temp Mission 3",warm_up="tmp3", exercise="tmp3", cool_down="tmp3")
+    tmp4 = Mission(id=4, name="Temp Mission 4",warm_up="tmp4", exercise="tmp4", cool_down="tmp4")
+
     # Test monsters
     testMonster0 = Monster(id=0, name="Default Monster", level=0, image="monster-egg.png")
     testMonster1 = Monster(id=1, name="Default Monster", level=1, image="monster-baby.png")
@@ -55,6 +60,10 @@ def populate():
     database.session.add(parentUser)
     database.session.add(childUser)
     database.session.add(testMission)
+    database.session.add(tmp1)
+    database.session.add(tmp2)
+    database.session.add(tmp3)
+    database.session.add(tmp4)
     database.session.add(approved)
     database.session.add(testMonster0)
     database.session.add(testMonster1)
