@@ -43,9 +43,9 @@
         {% for exercise in exercises %}
         <div id = "videos" class="box-out" style="height:320px;width:630px;">
             <ul>
-                <li style="height:250px;width:630px;">
+                <li style="height:400px;width:630px;">
                     {% set video = "videos/" + exercise['file'] %}
-                    <video class="exercise box-in" data-file="{{exercise['file']}}" width="400" height="200" controls>
+                    <video class="exercise box-in" data-file="{{exercise['file']}}" width="400" height="50%" controls>
                       <source src={{ url_for('static', filename=video) }} type="video/mp4" />
                     </video>
                     <input type="radio" name="running" style="height:100px;width:30px" value="{{exercise['file']}}" checked >
