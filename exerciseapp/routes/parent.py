@@ -44,7 +44,7 @@ def choose_warm_up(child_id,missionId):
           mission.warm_up=request.form["running"]
           database.session.commit()
           return redirect(url_for('parent.choose_exercise', missionId=missionId,child_id=child_id))
-    return render_template("choose_warm_up.html", exercises=exercises,missionId=id,child_id=child_id,title="Mission Choice")
+    return render_template("choose_mission.html", exercise_type="warm_up exercise",exercises=exercises,missionId=id,child_id=child_id,title="Mission Choice")
 
 @parent.route("/choose_exercise/<child_id>/<int:missionId>", methods=('GET', 'POST'))
 def choose_exercise(child_id,missionId):
@@ -56,7 +56,7 @@ def choose_exercise(child_id,missionId):
           mission.exercise=request.form["running"]
           database.session.commit()
           return redirect(url_for('parent.choose_cool_down', missionId=missionId,child_id=child_id))
-    return render_template("choose_exercise.html", exercises=exercises,missionId=id,child_id=child_id,title="Mission Choice")
+    return render_template("choose_mission.html",  exercise_type="exercise",exercises=exercises,missionId=id,child_id=child_id,title="Mission Choice")
 
 
 @parent.route("/choose_cool_down/<child_id>/<int:missionId>", methods=('GET', 'POST'))
@@ -71,4 +71,4 @@ def choose_cool_down(child_id,missionId):
           mission.cool_down=request.form["running"]
           database.session.commit()
           return redirect(url_for('parent.home'))
-    return render_template("choose_cool_down.html", exercises=exercises,missionId=missionId,child_id=child_id,title="Mission Choice")
+    return render_template("choose_mission.html", exercise_type="cool_down exercise", exercises=exercises,missionId=missionId,child_id=child_id,title="Mission Choice")
