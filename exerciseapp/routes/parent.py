@@ -49,7 +49,7 @@ def choose_warm_up(child_id,missionId):
     exercises.sort(key=lambda x: x['count'], reverse=True)
     if request.method == 'POST':
         video=request.form["running"]
-        mission.warm_up=video
+        mission.warm_up=video.removesuffix(".mp4")
         database.session.commit()
         return redirect(url_for('parent.choose_exercise', missionId=missionId,child_id=child_id))
     return render_template("choose_mission.html", exercise_type="warm up",exercises=exercises,missionId=id,child_id=child_id,title="Mission Choice")
