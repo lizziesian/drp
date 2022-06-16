@@ -21,3 +21,4 @@ class ChildUser(db.Model):
     mission_status = db.Column(db.Integer, default=0)
     # Whether monster has been collected.
     monster_collected = db.Column(db.Boolean, default=False)
+    
