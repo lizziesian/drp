@@ -40,6 +40,7 @@ def planet_missions():
 @child.route("/exercise_warmup", methods=["GET", "POST"])
 def exercise_warmup():
     user = ChildUser.query.get_or_404(0, "User not found.")
+    the_status = user.mission_status
     mission = Mission.query.get_or_404(user.mission, "No current mission assigned to user.")
     name = mission.warm_up
 
@@ -49,12 +50,13 @@ def exercise_warmup():
         database.session.commit()
         return redirect(url_for("child.planet_missions"))
 
-    return render_template("exercise_video.html", name=name, title="Exercise Mission")
+    return render_template("exercise_video.html", title="Exercise Mission", name=name, status=the_status)
 
 
 @child.route("/exercise_mission", methods=["GET", "POST"])
 def exercise_mission():
     user = ChildUser.query.get_or_404(0, "User not found.")
+    the_status = user.mission_status
     mission = Mission.query.get_or_404(user.mission, "No current mission assigned to user.")
     name = mission.exercise
 
@@ -64,12 +66,13 @@ def exercise_mission():
         database.session.commit()
         return redirect(url_for("child.planet_missions"))
 
-    return render_template("exercise_video.html", name=name, title="Exercise Mission")
+    return render_template("exercise_video.html", title="Exercise Mission", name=name, status=the_status)
 
 
 @child.route("/exercise_cooldown", methods=["GET", "POST"])
 def exercise_cooldown():
     user = ChildUser.query.get_or_404(0, "User not found.")
+    the_status = user.mission_status
     mission = Mission.query.get_or_404(user.mission, "No current mission assigned to user.")
     name = mission.cool_down
 
@@ -79,7 +82,7 @@ def exercise_cooldown():
         database.session.commit()
         return redirect(url_for("child.wait_for_approval"))
 
-    return render_template("exercise_video.html", name=name, title="Exercise Mission")
+    return render_template("exercise_video.html", title="Exercise Mission", name=name, status=the_status)
 
 
 @child.route("/approval")

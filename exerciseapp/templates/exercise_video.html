@@ -2,37 +2,36 @@
 
 {% block content %}
 
-<div style="height: 100vh; width: 100vh; display: flex; margin: auto; align-items: center;" >
-    <div id="name" style="display:none">{{name}}</div>
-    
+<div id="name" style="display:none">{{name}}</div>
+
+<div class="center" style="height: 100vh;"> 
     {% set video = "videos/" + name + ".mp4" %}
-    <video id="exercise-video" controls>
+    <video id="exercise-video" controls style="padding-top: 3%; padding-bottom: 2%;">
         <source src="{{ url_for('static', filename=video) }}" type="video/mp4">
     </video>
 
     <br>
     
-    <form method="POST" style="margin-block: auto">        
-        <button id="complete-button" class="glow-button" style="display:none;" type="submit">Continue</button>
-    </form>
-
-    <form method="POST" style="margin-block: auto">        
-        <button id="back-button" class="glow-button" style="display:none;" type="submit">Next</button>
-    </form>
+    <div style="width: 100vh; margin: 0 auto;"> 
+        <form method="POST">        
+            <button id="next-button" class="glow-button" style="visibility: hidden;" type="submit">
+                {% if status == 2 %}
+                Continue
+                {% else %}
+                Next
+                {% endif %}
+            </button>
+        </form>
+    </div>
 
 </div>
 
 <script>
     var video=document.getElementById("exercise-video")
-    var button_complete=document.getElementById("complete-button")
-    var button_back = document.getElementById("back-button")
+    var button_next=document.getElementById("next-button")
     var str=document.getElementById("name").innerHTML
     video.onended = function() {
-        if(str=="exercise3"){
-            button_complete.style.display = "block"
-        }else{
-            button_back.style.display = "block"
-        }
+        button_next.style.visibility = "visible"
     }
 </script>
 

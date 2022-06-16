@@ -44,9 +44,10 @@ def choose_warm_up(child_id,missionId):
     exercises = xml_lib.read_wexercises()
     exercises.sort(key=lambda x: x['count'], reverse=True)
     if request.method == 'POST':
-          mission.warm_up=request.form["running"]
-          database.session.commit()
-          return redirect(url_for('parent.choose_exercise', missionId=missionId,child_id=child_id))
+        video=request.form["running"]
+        mission.warm_up=video.removesuffix(".mp4")
+        database.session.commit()
+        return redirect(url_for('parent.choose_exercise', missionId=missionId,child_id=child_id))
     return render_template("choose_mission.html", exercise_type="warm up",exercises=exercises,missionId=id,child_id=child_id,title="Mission Choice")
 
 @parent.route("/choose_exercise/<child_id>/<int:missionId>", methods=('GET', 'POST'))
@@ -59,9 +60,10 @@ def choose_exercise(child_id,missionId):
     exercises = xml_lib.read_eexercises()
     exercises.sort(key=lambda x: x['count'], reverse=True)
     if request.method == 'POST':
-          mission.exercise=request.form["running"]
-          database.session.commit()
-          return redirect(url_for('parent.choose_cool_down', missionId=missionId,child_id=child_id))
+        video=request.form["running"]
+        mission.exercise=video.removesuffix(".mp4")
+        database.session.commit()
+        return redirect(url_for('parent.choose_cool_down', missionId=missionId,child_id=child_id))
     return render_template("choose_mission.html",  exercise_type="exercise",exercises=exercises,missionId=id,child_id=child_id,title="Mission Choice")
 
 
@@ -76,7 +78,8 @@ def choose_cool_down(child_id,missionId):
     exercises = xml_lib.read_cexercises()
     exercises.sort(key=lambda x: x['count'], reverse=True)
     if request.method == 'POST':
-          mission.cool_down=request.form["running"]
-          database.session.commit()
-          return redirect(url_for('parent.home'))
+        video=request.form["running"]
+        mission.cool_down=video.removesuffix(".mp4")
+        database.session.commit()
+        return redirect(url_for('parent.home'))
     return render_template("choose_mission.html", exercise_type="cool down", exercises=exercises,missionId=missionId,child_id=child_id,title="Mission Choice")
