@@ -7,7 +7,7 @@
     <title>Video Presentation</title>
     <style>
         .box-out {
-            position: relative;
+            position: auto;
             border: solid 1px #555;
             float: left;
             padding: 0px 10px;
@@ -41,14 +41,23 @@
         <h1>Please choose your wanted {{exercise_type}} </h1>
     
         {% for exercise in exercises %}
-        <div id = "videos" class="box-out" style="height:300px;width:600px;">
-            {% set video = "videos/" + exercise['file'] %}
-            <video class="exercise box-in" data-file="{{exercise['file']}}" width="400" height="400" controls>
-              <source src={{ url_for('static', filename=video) }} type="video/mp4" />
-            </video>
-            <input type="radio" name="running" style="height:100px;width:30px" value="{{exercise['title']}}" checked >
+        <div id = "videos" class="box-out" style="height:320px;width:630px;">
+            <ul>
+                <li style="height:400px;width:630px;">
+                    {% set video = "videos/" + exercise['file'] %}
+                    <video class="exercise box-in" data-file="{{exercise['file']}}" width="400" height="50%" controls>
+                      <source src={{ url_for('static', filename=video) }} type="video/mp4" />
+                    </video>
+                    <input type="radio" name="running" style="height:100px;width:30px" value="{{exercise['file']}}" checked >
+                    <p>{{exercise['name']}}</p>
+                 <p>About:{{exercise['content']}}</p>
 
-        <p>This video is called {{exercise['title']}}</p>
+                </li>>
+            </ul>
+
+        
+
+
       
         </div>
  

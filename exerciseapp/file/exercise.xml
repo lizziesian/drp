@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-	<exercise file="exercise1.mp4" title="exercise1" count="0"/>
-	<exercise file="exercise2.mp4" title="exercise2" count="1"/>
-	<exercise file="exercise3.mp4" title="exercise3" count="0"/>
+	<wexercise file="exercise1.mp4" title="exercise1"  name="Warmup 1: Miss the Meteor" count="0" content="Sets of marching, jumping, touching the floor and spinning around."/>
+	<eexercise file="exercise2.mp4" title="exercise2" name= "" count="1" content=""/>
+	<cexercise file="exercise3.mp4" title="exercise3" name= "" count="0" content=""/>
+	<wexercise file="tmp1.mp4" title="exercise7" name= "" count="0" content="Sets of marching, jumping, touching the floor and spinning around."/>
+	<eexercise file="tmp2.mp4" title="exercise4" name= "" count="1" content=""/>
+	<cexercise file="tmp3.mp4" title="exercise5" name= "" count="0" content=""/>
+	<cexercise file="tmp4.mp4" title="exercise6" name= ""  count="0" content=""/>
 </root>

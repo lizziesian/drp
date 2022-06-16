@@ -27,7 +27,7 @@ p {
 
 video {
     margin: 0 auto;
-    height: 80%;
+    height: 20%;
 }
 /* hides seek bar
 video::-webkit-media-controls-timeline {
@@ -159,7 +159,7 @@ The above copyright notice and this permission notice shall be included in all c
     left: 0;
     top: 0px;
     right: 0;
-    bottom: 0;
+    bottom: 60px;
     margin: auto;
 }
 
