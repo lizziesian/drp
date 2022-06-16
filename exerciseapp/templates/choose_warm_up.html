@@ -1,0 +1,111 @@
+ {% extends "layout.html" %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Video Presentation</title>
+    <style>
+        .box-out {
+            position: relative;
+            border: solid 1px #555;
+            float: left;
+            padding: 0px 10px;
+        }
+        
+        .box-in {
+            position: relative;
+            left: 0;
+            top: 0px;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        
+        .title-in {
+            position: absolute;
+            top: 240px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="container" method="post" >
+        <h1>Please choose your wanted warm_up exercise </h1>
+    
+        {% for exercise in exercises %}
+        <div id = "videos" class="box-out" style="height:300px;width:600px;">
+            {% set video = "videos/" + exercise['file'] %}
+            <video class="exercise box-in" data-file="{{exercise['file']}}" width="400" height="400" controls>
+              <source src={{ url_for('static', filename=video) }} type="video/mp4" />
+            </video>
+            <input type="radio" name="running" style="height:100px;width:30px" value="{{exercise['title']}}" checked >
+
+        <p>This video is called {{exercise['title']}}</p>
+      
+        </div>
+ 
+        {% endfor %}
+        <button id="back-button" name= "running" class="glow-button"type="submit" style="position: absolute; bottom: 10px; right: 10px;">Continue</button>
+
+     
+    
+    </form>
+ 
+    
+
+
+  
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>      
+   
+        // set the page to be in the middle
+        function resetContentPos() {
+            var div = document.getElementById("container"); // obtain the container
+            var allWidth = document.body.clientWidth; // calculate the width of the screen
+            var n = parseInt(allWidth / 420); // according to the width, calculate the amount of videoes we can have
+            var contentWidth = n * 420; // total width
+            div.style.marginLeft = (allWidth - contentWidth) / 2 + "px"; // the container right shift to the right and stay in the middle
+        }
+        (function() {
+            resetContentPos();
+
+            var exercise_items = document.getElementsByClassName('exercise'); // gain all videos
+            for (var i = 0; i < exercise_items.length; i++) { // iteration
+                exercise_items[i].addEventListener('play', function(t) {
+                    var filename = t.target.dataset.file; //obtain the information of the data file
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', 'incrMovie?name=' + filename);
+                    xhr.setRequestHeader('Content-Type', 'text/plain');
+
+
+                    xhr.onreadystatechange = function() {
+
+                            if (xhr.readyState == 4 && xhr.status == 200) {
+                                console.log(xhr.responseText);
+
+                            }
+                        }
+                        // sent to server
+                    xhr.send(null);
+
+                })
+            }
+        })();
+        window.onresize = function() {
+            resetContentPos();
+        }
+
+    </script>
+</body>
+
+</html>
+
+{% endblock content %}
