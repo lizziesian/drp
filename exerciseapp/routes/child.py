@@ -11,6 +11,7 @@ from exerciseapp.routes.main import status
 
 child = Blueprint("child", __name__, url_prefix="/child")
 
+
 @child.route("/")
 @child.route("/home")
 def home():
@@ -19,7 +20,9 @@ def home():
     the_mission = Mission.query.get_or_404(the_user.mission, "No current mission assigned to user.")
     the_status = status(the_user.mission_status)
     if the_user:
-        return render_template("home_child.html", title="Home", user=the_user, monster=the_monster, mission=the_mission, status=the_status, collected_monster=the_user.monster_collected)
+        return render_template("home_child.html", title="Home", user=the_user, monster=the_monster, mission=the_mission,
+                               status=the_status, collected_monster=the_user.monster_collected)
+
 
 @child.route("/mission_start")
 def mission_start():
@@ -31,7 +34,7 @@ def mission_start():
 def planet_missions():
     user = ChildUser.query.get_or_404(0, "User not found.")
     status = user.mission_status
-    return render_template("missions.html", title="Planet Missions",status=status)
+    return render_template("missions.html", title="Planet Missions", exercise=exercises, status=status)
 
 
 @child.route("/exercise_warmup", methods=["GET", "POST"])
@@ -46,7 +49,8 @@ def exercise_warmup():
         database.session.commit()
         return redirect(url_for("child.planet_missions"))
 
-    return render_template("exercise_video.html",name=name,title="Exercise Mission")
+    return render_template("exercise_video.html", name=name, title="Exercise Mission")
+
 
 @child.route("/exercise_mission", methods=["GET", "POST"])
 def exercise_mission():
@@ -60,7 +64,8 @@ def exercise_mission():
         database.session.commit()
         return redirect(url_for("child.planet_missions"))
 
-    return render_template("exercise_video.html",name=name,title="Exercise Mission")
+    return render_template("exercise_video.html", name=name, title="Exercise Mission")
+
 
 @child.route("/exercise_cooldown", methods=["GET", "POST"])
 def exercise_cooldown():
@@ -73,8 +78,8 @@ def exercise_cooldown():
         user.mission_status = 3
         database.session.commit()
         return redirect(url_for("child.wait_for_approval"))
-    
-    return render_template("exercise_video.html",name=name,title="Exercise Mission")
+
+    return render_template("exercise_video.html", name=name, title="Exercise Mission")
 
 
 @child.route("/approval")
@@ -87,21 +92,21 @@ def wait_for_approval():
 def mission_complete():
     the_user = ChildUser.query.get_or_404(0, "User not found.")
     if the_user:
-        the_user.level += 1
-        the_user.current_monster += 1
-        database.session.commit()
+        # the_user.level += 1
+        # the_user.current_monster += 1
+        # database.session.commit()
         the_monster = Monster.query.get_or_404(the_user.current_monster, "Monster id not found")
         return render_template("mission_complete.html", title="Mission Complete", user=the_user, monster=the_monster)
 
 
 @child.route("/collect_monster")
 def collect_monster():
-    the_user = ChildUser.query.get_or_404(0,"User not found.")
-    #the_user.current_monster += 1
-    #the_user.monster_collected = True
-    #database.session.commit()
-    the_monster = Monster.query.get_or_404(the_user.current_monster,"Monster id not found")
-    return render_template("collect_monster.html",monster=the_monster)
+    the_user = ChildUser.query.get_or_404(0, "User not found.")
+    the_user.current_monster += 1
+    the_user.monster_collected = True
+    database.session.commit()
+    the_monster = Monster.query.get_or_404(the_user.current_monster, "Monster id not found")
+    return render_template("collect_monster.html", monster=the_monster)
 
 
 # Monster/space garden
@@ -114,7 +119,7 @@ def space_garden():
 
     # Level 0 monsters
     monster_eggs = Monster.query.filter_by(level=0)
-    
+
     # List of monsters owned
     monsters_owned = []
     owned_names = []
@@ -124,15 +129,63 @@ def space_garden():
         monster = Monster.query.get_or_404(monster_id, "Monster not found.")
         monsters_owned.append(monster)
         owned_names.append(monster.name)
-    
+
     monsters_owned.append(current_monster)
     owned_names.append(current_monster.name)
-    
+
     # List of level 0 monsters not owned
     monsters_not_owned = []
     for monster in monster_eggs:
         if monster.name not in owned_names:
             monsters_not_owned.append(monster)
-    
+
     if the_user:
-        return render_template("space_garden.html", title="Space Garden", user=the_user, owned_monsters=monsters_owned, future_monsters=monsters_not_owned)
+        return render_template("space_garden.html", title="Space Garden", user=the_user, owned_monsters=monsters_owned,
+                               future_monsters=monsters_not_owned)
+
+
+@child.route("/monster_profiles")
+def monster_profiles():
+    the_user = ChildUser.query.get_or_404(0, "User not found.")
+
+    # Current monster
+    current_monster = Monster.query.get_or_404(the_user.current_monster, "User has no current monster.")
+
+    # Level 4 monsters
+    grown_monsters = Monster.query.filter_by(level=3)
+
+    # List of monsters owned
+    monsters_owned = []
+    owned_names = []
+    owned = MonsterOwned.query.filter_by(child=the_user.id)
+    for owned_monster in owned:
+        monster_id = owned_monster.monster
+        remainder = monster_id % 4
+        monster_grown_id = monster_id + remainder
+        monster = Monster.query.get_or_404(monster_grown_id, "Monster not found.")
+        monsters_owned.append(monster)
+        owned_names.append(monster.name)
+
+    monster_grown_id = round_to_multiple(current_monster.id, 4) - 1
+    monster = Monster.query.get_or_404(monster_grown_id, "Monster not found.")
+    monsters_owned.append(monster)
+    owned_names.append(current_monster.name)
+
+    # List of level 4 monsters not owned
+    monsters_not_owned = []
+    for monster in grown_monsters:
+        if monster.name not in owned_names:
+            monsters_not_owned.append(monster)
+
+    if the_user:
+        return render_template("monster_profiles.html", title="Space Garden", user=the_user,
+                               owned_monsters=monsters_owned, future_monsters=monsters_not_owned)
+
+
+def round_to_multiple(n, multiple):
+    if (n == 0):
+        return multiple
+    elif ((n % multiple) == 0):
+        return n
+    else:
+        return (n + (multiple - n % multiple))

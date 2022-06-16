@@ -38,6 +38,11 @@ def populate():
     purple_egg = Monster(id=6, name="Purple Monster", level=0, image="purple-egg.png")
     red_egg = Monster(id=7, name="Red Monster", level=0, image="red-egg.png")
     yellow_egg = Monster(id=8, name="Yellow Monster", level=0, image="yellow-egg.png")
+    blue_adult = Monster(id=9, name="Blue Monster", level=3, image="blue_adult.png")
+    pink_adult = Monster(id=10, name="Pink Monster", level=3, image="pink_adult.png")
+    purple_adult = Monster(id=11, name="Purple Monster", level=3, image="purple_adult.png")
+    red_adult = Monster(id=12, name="Red Monster", level=3, image="red_adult.jpg")
+    yellow_adult = Monster(id=13, name="Yellow Monster", level=3, image="yellow_adult.png")
 
     # Test parent and child accounts
     parentUser = ParentUser(id=0, name="Simon", password="abcd")
@@ -60,5 +65,10 @@ def populate():
     database.session.add(purple_egg)
     database.session.add(red_egg)
     database.session.add(yellow_egg)
+    database.session.add(blue_adult)
+    database.session.add(pink_adult)
+    database.session.add(purple_adult)
+    database.session.add(red_adult)
+    database.session.add(yellow_adult)
     
     database.session.commit()

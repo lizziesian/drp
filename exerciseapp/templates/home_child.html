@@ -63,12 +63,25 @@
         
         <br>
 
+        <!--Collect Monster -->
+        {% if status == "Complete." %}
+            {% if collected_monster == False %}
+                <form action="{{ url_for("child.collect_monster") }}">
+                    <button id="monster-button" class="glow-button" style="text-align: center;" type="submit">COLLECT MONSTER</button>
+                </form>
+            {%  endif %}
+        {% endif %}
+
+        <br>
+
         <!-- Monster Garden -->
         <form action="{{ url_for("child.space_garden") }}">
             <button class="glow-button" type="submit" style="text-align: center;">View Garden</button>
         </form>
         <br>
     </div>
+
+
 
     <!-- Back button -->
     <form action="{{ url_for("main.home") }}" style="float: right">        
