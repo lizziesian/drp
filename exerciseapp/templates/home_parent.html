@@ -29,6 +29,9 @@
                 <!-- Child's daily mission -->
                 {% set exercise = missions[child.mission] %}
                 <p> Daily mission: {{ exercise.name }}</p>
+                <p> Warm-up mission: {{ exercise.warm_up }}</p>
+                <p> Exercise mission: {{ exercise.exercise }}</p>
+                <p> Cool-down mission: {{ exercise.cool_down }}</p>
 
                 <!-- Child's daily mission status -->
                 {% if child.mission_status %}
@@ -40,7 +43,7 @@
 
             <!-- Edit daily mission -->
             <div style="display: inline-block; margin-left: 10%;">
-                <form action="{{ url_for("parent.home") }}">
+                <form action="{{ url_for('parent.choose_warm_up', missionId=child.mission,child_id=child["id"])}}">
                     <button class="glow-button" type="submit" style="font-size: 14px; padding: 0.5rem">Edit daily mission for {{ child.name }}</button>
                 </form>
             </div>

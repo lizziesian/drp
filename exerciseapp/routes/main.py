@@ -6,3 +6,5 @@ main = Blueprint("main", __name__)
 @main.route("/home")
 def home():
     return render_template("select_account.html", title="Home")
+
+    

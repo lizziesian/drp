@@ -2,6 +2,14 @@ from xml.dom.minidom import parse
 import xml.dom.minidom
 import threading
 
+from .database import database
+from .models.user_child import ChildUser
+from .models.user_parent import ParentUser
+from .models.mission import Mission
+from .models.missions_approved import ApprovedMission
+from .models.monster import Monster
+from .models.monsters_owned import MonsterOwned
+
 xml_file = 'exerciseapp/file/exercise.xml'
 
 lock = threading.RLock()
@@ -27,29 +35,22 @@ def read_exercises():
 
     return exercise_arr
 
+def edit_mission_warmUp(missionId,name):
+    all_missions = Mission.query.all()
+    id=(int)(missionId)
+    mission= all_missions[id]
+    mission.warm_up=name
 
-def incr_exercise(name):
-    exercises = read_exercises()
-    dom = xml.dom.minidom.Document()
-    root_node = dom.createElement('root')
-    dom.appendChild(root_node)
-    for exercise_dic in exercises:
-        exercise_node = dom.createElement('exercise')
-        filename = exercise_dic['file']
-        exercise_node.setAttribute('file', filename)
-        title = exercise_dic['title']
-        exercise_node.setAttribute('title', title)
-        count = exercise_dic.get('count', 0)
-        if filename == name:
-            count += 1
-        exercise_node.setAttribute('count', str(count))
-        root_node.appendChild(exercise_node)
+def edit_mission_exercise(missionId,name):
+    all_missions = Mission.query.all()
+    id=(int)(missionId)
+    mission= all_missions[id]
+    mission.exercise=name
 
-    lock.acquire()
-    with open(xml_file, 'w', encoding='utf-8') as fs:
-        dom.writexml(fs,
-                     indent='',
-                     addindent='\t',
-                     newl='\n',
-                     encoding='UTF-8')
-    lock.release()
+def edit_mission_coolDown(missionId,name):
+    all_missions = Mission.query.all()
+    id=(int)(missionId)
+    mission= all_missions[id]
+    mission.cool_down=name
+
+
