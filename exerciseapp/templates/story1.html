@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="center">
+    <h1> Welcome {{ user["name"] }}, you're an astronaut who has been accepted into a nearby space agency!</h1>
+    
+    {% set image = "images/" + monster['image'] %}
+    <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto" class="shaking_img"> 
+
+    <form action="{{ url_for("child.story2") }}" style="margin-block: auto">
+        <button id="next-story-page-button" class="glow-button" type="submit">=></button>
+    </form>
+</div>
+
+{% endblock content %}

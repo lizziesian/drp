@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="center">
+    <h1>You'll come across different monsters as you complete more missions.</h1>
+    
+    {% set image = "images/" + monster['image'] %}
+    <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto" class="shaking_img"> 
+
+    <h1>Each of these monsters starts off as an egg, it will hatch and grow overtime into a full monster as you complete missions!</h1>
+
+    <form action="{{ url_for("child.home") }}" style="margin-block: auto">
+        <button id="next-story-page-button" class="glow-button" type="submit">Click the button to start your first mission!</button>
+    </form>
+</div>
+
+{% endblock content %}

@@ -29,6 +29,26 @@ def mission_start():
     # update child's approved mission state to true
     return render_template("mission_start.html", title="Mission Start")
 
+@child.route("/story1")
+def story1():
+    # update child's approved mission state to true
+    return render_template("story1.html", title="Mission Story")
+
+@child.route("/story2")
+def story2():
+    # update child's approved mission state to true
+    return render_template("story2.html", title="Mission Story")
+
+@child.route("/story3")
+def story3():
+    # update child's approved mission state to true
+    return render_template("story3.html", title="Mission Story")
+
+@child.route("/story4")
+def story4():
+    # update child's approved mission state to true
+    return render_template("story4.html", title="Mission Story")
+
 
 @child.route("/planet_missions")
 def planet_missions():
