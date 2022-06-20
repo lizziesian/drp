@@ -5,7 +5,7 @@
 <div class="center">
     
     {% set image = "images/"  + "astronaut.png" %}
-    <img src="{{ url_for('static', filename=image) }}" height="10000vh" width="auto" class="shaking_img"> 
+    <img src="{{ url_for('static', filename=image) }}" height="500vh" width="auto" class="shaking_img"> 
 
     <form action="{{ url_for("child.story2") }}" style="margin-block: auto">
         <button id="next-story-page-button" class="glow-button" type="submit">=></button>
