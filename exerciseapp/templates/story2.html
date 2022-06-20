@@ -3,10 +3,9 @@
 {% block content %}
 
 <div class="center">
-    <h1>You'll be assigned missions by the space agency's mission generator, controlled by your parent/guardian!</h1>
     
     {% set image = "images/" + "astronaut2.png"  %}
-    <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto" class="shaking_img"> 
+    <img src="{{ url_for('static', filename=image) }}" height="10000vh" width="auto" class="shaking_img"> 
 
     <form action="{{ url_for("child.story3") }}" style="margin-block: auto">
         <button id="next-story-page-button" class="glow-button" type="submit">=></button>
