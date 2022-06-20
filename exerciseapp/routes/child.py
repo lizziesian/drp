@@ -31,24 +31,25 @@ def mission_start():
 
 @child.route("/story1")
 def story1():
-    # update child's approved mission state to true
-    return render_template("story1.html", title="Mission Story")
+    the_user = ChildUser.query.get_or_404(0, "User not found.")
+    the_monster = Monster.query.get_or_404(the_user.current_monster, "User has no current monster.")
+    return render_template("story1.html", title="Mission Story",user=the_user, monster=the_monster)
 
 @child.route("/story2")
 def story2():
-    # update child's approved mission state to true
-    return render_template("story2.html", title="Mission Story")
-
+    the_user = ChildUser.query.get_or_404(0, "User not found.")
+    the_monster = Monster.query.get_or_404(the_user.current_monster, "User has no current monster.")
+    return render_template("story2.html", title="Mission Story",user=the_user, monster=the_monster)
 @child.route("/story3")
 def story3():
-    # update child's approved mission state to true
-    return render_template("story3.html", title="Mission Story")
-
+    the_user = ChildUser.query.get_or_404(0, "User not found.")
+    the_monster = Monster.query.get_or_404(the_user.current_monster, "User has no current monster.")
+    return render_template("story3.html", title="Mission Story",user=the_user, monster=the_monster)
 @child.route("/story4")
 def story4():
-    # update child's approved mission state to true
-    return render_template("story4.html", title="Mission Story")
-
+    the_user = ChildUser.query.get_or_404(0, "User not found.")
+    the_monster = Monster.query.get_or_404(the_user.current_monster, "User has no current monster.")
+    return render_template("story4.html", title="Mission Story",user=the_user, monster=the_monster)
 
 @child.route("/planet_missions")
 def planet_missions():
