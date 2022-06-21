@@ -1,0 +1,45 @@
+{% extends "layout.html" %} 
+
+{% block content %}
+
+<div style="display:flex; justify-content:space-between;">
+
+
+    <h1>Please choose level of exercises for {{name}}: </h1>
+
+
+    <form action="{{ url_for("main.home") }}">        
+        <button id="back-button" class="glow-button" type="submit">Back</button>
+    </form>
+</div>
+
+
+
+<form name="level" method="post"  style="border-style: solid; border-color: white; border-width: medium; width: 80%; margin: 5%; display: inline-flex; justify-content:space-between;">
+
+    <div style="text-align: center;margin-left: 30%; "> 
+
+        <div style="margin:20%">
+            <button class="glow-button" name="level" value=1 type="submit" style="font-size: 50px; padding: 0.5rem; margin-top: 10%;">
+                    Easy
+            </button>
+
+        
+            <button class="glow-button" name="level" value=2 type="submit" style="font-size: 50px; padding: 0.5rem; margin-top: 10%;">
+                    Medium
+            </button>
+  
+
+            <button class="glow-button" name="level" value=3 type="submit" style="font-size: 50px; padding: 0.5rem; margin-top: 10%;">
+                    Hard
+            </button>
+        </div>
+        
+    </div>
+
+</form>
+
+    
+
+
+{% endblock content %}
