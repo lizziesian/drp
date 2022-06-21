@@ -2,68 +2,80 @@
 
 {% block content %}
 
-<div style="display:flex; justify-content:space-between;">
+<div style="display:flex; justify-content:space-between; margin: 2%;">
 
     <!-- Welcome message to parent -->
     <h1>Welcome {{ parent["name"] }}!</h1>
 
-    <!-- Back button -->
-    <form action="{{ url_for("main.home") }}">        
-        <button id="back-button" class="glow-button" type="submit">Back</button>
+    <!-- Logout button -->
+    <form action="{{ url_for("parent.logout") }}">        
+        <button id="logout-button" class="glow-button" type="submit">Logout</button>
     </form>
 </div>
 
 <!-- List of children -->
 <div style="text-align: center;">
-    {% for (child, status) in children_statuses %}
 
-    <div style="border-style: solid; border-color: white; border-width: medium; width: 80%; margin: 5%; display: inline-flex; justify-content:space-between;">
+    {% if child_num != 0 %}
 
-        <div style="margin-left: 5%; text-align: left;"> 
-            <h2>{{ child.name }}</h2>
-     
-            <!-- Child's daily mission -->
-            {% set exercise = missions[child.mission] %}
-            <p> Daily mission: {{ exercise.name }}</p>
-            <p> Warm-up mission: {{ exercise.warm_up }}</p>
-            <p> Exercise mission: {{ exercise.exercise }}</p>
-            <p> Cool-down mission: {{ exercise.cool_down }}</p>
+        {% for (child, status) in children_statuses %}
 
-            <!-- Child's daily mission status -->
-            <p> Mission status: {{ status }}</p>
-        </div>
+            <div style="border-style: solid; border-color: white; border-width: medium; width: 80%; margin: 5%; display: inline-flex; justify-content:space-between;">
 
-        <!-- Child information -->
-        <div style="text-align: center; margin-left: 5%;"> 
+                <div style="margin-left: 5%; text-align: left;"> 
+                    <h2 style="text-align: center">
+                        {{ child.name }}
+                    </h2>
+                    <hr>
+            
+                    <!-- Child's daily mission -->
+                    {% set exercise = missions[child.mission] %}
+                    <p> Daily mission: {{ exercise.name }}</p>
+                    <p> Warm-up mission: {{ exercise.warm_up }}</p>
+                    <p> Exercise mission: {{ exercise.exercise }}</p>
+                    <p> Cool-down mission: {{ exercise.cool_down }}</p>
 
-            <!-- Edit daily mission -->
-            <form action="{{ url_for('parent.choose_warm_up', missionId=child.mission,child_id=child["id"])}}" style="margin:5%">
-                <button class="glow-button" type="submit" style="font-size: 14px; padding: 0.5rem">
-                    Edit Daily Mission
-                </button>
-            </form>
+                    <!-- Child's daily mission status -->
+                    <p> Mission status: {{ status }}</p>
+                </div>
 
-            <!-- Edit approved mission list -->
-            <form action="{{ url_for("parent.home") }}" style="margin:5%">
-                <button class="glow-button" type="submit" style="font-size: 14px; padding: 0.5rem">
-                    Edit Approved Mission List
-                </button>
-            </form>
+                <!-- Child information -->
+                <div style="text-align: center; margin-left: 5%;"> 
 
-            <!-- Confirm mission stage -->
-            {% if child.mission_status == 3 %}
-            <form action="{{ url_for("parent.confirm_mission", child_id=child["id"]) }}" style="margin:5%">
-                <button class="glow-button" type="submit" style="font-size: 14px; padding: 0.5rem">
-                    Confirm Mission Completion
-                </button>
-            </form>
-            {% endif %}
+                    <!-- Edit daily mission -->
+                    <form action="{{ url_for('parent.choose_warm_up', missionId=child.mission,child_id=child["id"])}}" style="margin:5%">
+                        <button class="glow-button" type="submit" style="font-size: 14px; padding: 0.5rem">
+                            Edit Daily Mission
+                        </button>
+                    </form>
+
+                    <!-- Confirm mission stage -->
+                    {% if child.mission_status == 3 %}
+                    <form action="{{ url_for("parent.confirm_mission", child_id=child["id"]) }}" style="margin:5%">
+                        <button class="glow-button" type="submit" style="font-size: 14px; padding: 0.5rem">
+                            Confirm Mission Completion
+                        </button>
+                    </form>
+                    {% endif %}
+                
+                </div>
+
+            </div>
         
-        </div>
+        {% endfor %}
 
-    </div>
+    {% else %}
     
-    {% endfor %}
+        <br><br>
+        <h4> Your account has no children linked to it. </h4>
+
+    {% endif %}
+
+    <!-- Add child button -->
+    <form action="{{ url_for("parent.add_child") }}">        
+        <button id="add-button" class="glow-button" type="submit">Add child</button>
+    </form>
+
 </div>
 
 {% endblock content %}

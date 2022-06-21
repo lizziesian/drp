@@ -45,8 +45,8 @@ def populate():
     yellow_adult = Monster(id=13, name="Yellow Monster", level=3, image="yellow_adult.png")
 
     # Test parent and child accounts
-    parentUser = ParentUser(id=0, name="Simon", password="abcd")
-    childUser = ChildUser(id=0, name="John", password="edfg", parent=parentUser.id, current_monster=testMonster0.id, monster_collected=False)
+    parentUser = ParentUser(id=0, username="testParent", name="Simon", password="abcd")
+    childUser = ChildUser(id=0, username="testChild", name="John", password="edfg", parent=parentUser.id, current_monster=testMonster0.id, monster_collected=False)
     
     approved = ApprovedMission(child=childUser.id, mission=testMission.id)    
     

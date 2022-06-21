@@ -6,6 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
 
@@ -14,8 +18,21 @@
 </head>
 
 <body>
+    <!-- Flash messages -->
+    <div style="max-width: 400px; width: 80%; text-align: center; margin: auto;">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Page content -->
     {% block content %}
-    
     {% endblock content %}
 </body>
 </html>

@@ -21,6 +21,10 @@ h3 {
     color: white
 }
 
+h4 {
+    color: white
+}
+
 p {
     color: white
 }
@@ -33,6 +37,11 @@ video {
 video::-webkit-media-controls-timeline {
     display: none;
 } */
+
+/* Underline */
+hr {
+    background-color: white;
+}
 
 /* Image which shakes in place. */
 .shaking_img {
@@ -63,6 +72,16 @@ video::-webkit-media-controls-timeline {
     margin: auto;
 }
 
+.form-container {
+    max-width: 600px; 
+    width: 80%; 
+    text-align: center; 
+    margin: auto; 
+    margin-top: 5%; 
+    background: white; 
+    border-radius: 25px;
+}
+
 .monster-container {
     border-style: solid; 
     border-color: white; 
@@ -84,7 +103,7 @@ The above copyright notice and this permission notice shall be included in all c
 .glow-button {
     font-size: 28px;
     padding: 1.25rem;
-    border-radius: 15rem;
+    border-radius: 15px;
     border: none;
     outline: none;
     color: black;
@@ -108,7 +127,7 @@ The above copyright notice and this permission notice shall be included in all c
     animation: glowing 20s linear infinite;
     opacity: 0;
     transition: opacity .3s ease-in-out;
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 .glow-button:active {
@@ -132,7 +151,7 @@ The above copyright notice and this permission notice shall be included in all c
     background: white;
     left: 0;
     top: 0;
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 @keyframes glowing {
