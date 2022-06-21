@@ -7,4 +7,12 @@
 	<eexerciseHard file="tmp2.mp4" title="exercise4" name= "Tmp 2" count="1" content=""/>
 	<cexerciseMedium file="tmp3.mp4" title="exercise5" name= "Tmp 3" count="0" content=""/>
 	<cexerciseHard file="tmp4.mp4" title="exercise6" name= "Tmp 4"  count="0" content=""/>
+	<wexerciseEasy file="tmp6.mp4" title="exercise8"  name="Default Warmup - Miss the Meteor" count="0" content="Sets of marching, jumping, touching the floor and spinning around."/>
+	<wexerciseEasy file="tmp7.mp4" title="exercise9"  name="Default Warmup - Miss the Meteor" count="0" content="Sets of marching, jumping, touching the floor and spinning around."/>
+	<wexerciseEasy file="tmp8.mp4" title="exercise10"  name="Default Warmup - Miss the Meteor" count="0" content="Sets of marching, jumping, touching the floor and spinning around."/>
+	<wexerciseEasy file="tmp9.mp4" title="exercise11"  name="Default Warmup - Miss the Meteor" count="0" content="Sets of marching, jumping, touching the floor and spinning around."/>
+	<wexerciseEasy file="tmp10.mp4" title="exercise12"  name="Default Warmup - Miss the Meteor" count="0" content="Sets of marching, jumping, touching the floor and spinning around."/>
+	
+	
+	
 </root>

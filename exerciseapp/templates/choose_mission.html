@@ -36,12 +36,15 @@
     </style>
 </head>
 
-<body>
-    <form id="container" method="post" >
+<body style="overflow:scroll">
+    <form id="container" method="post" style="overflow:scroll">
+        <div style="display:flex; justify-content:space-between;">
         <h1>Please choose your wanted {{exercise_type}} </h1>
+        <button id="back-button" name= "running" class="glow-button"type="submit" stype="right:10px">Continue</button>
+        </div>>
     
         {% for exercise in exercises %}
-        <div id = "videos" class="box-out" style="height:320px;width:630px;">
+        <div id = "videos" class="box-out" style="height:320px;width:630px;overflow:scroll">
             <ul>
                 <li style="height:400px;width:630px;">
 
@@ -60,7 +63,9 @@
         </div>
  
         {% endfor %}
-        <button id="back-button" name= "running" class="glow-button"type="submit" style="position: absolute; bottom: 10px; right: 10px;">Continue</button>
+
+       
+     
 
      
     

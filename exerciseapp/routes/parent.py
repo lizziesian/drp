@@ -65,7 +65,6 @@ def choose_warm_up(child_id,missionId,level):
     if level =="3" :
         exercises = xml_lib.read_wexercisesHard()
 
-
     if request.method == 'POST':
         video=request.form["running"]
         if len(video)==0:
