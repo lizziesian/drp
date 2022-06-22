@@ -162,11 +162,11 @@ def choose_exercise(child_id, missionId, level):
         if the_child.mission_status >=2:
             return redirect(url_for('parent.choose_cool_down', missionId=missionId,child_id=child_id))
         mission = Mission.query.filter(Mission.id == the_child.mission).first()
-        if level == 1:
+        if level == "1":
             exercises = xml_lib.read_eexercisesEasy()
-        elif level == 2:
+        if level == "2":
             exercises = xml_lib.read_eexercisesMedium()
-        else :
+        if level == "3" :
             exercises = xml_lib.read_eexercisesHard()
 
         if request.method == 'POST':
@@ -188,11 +188,11 @@ def choose_cool_down(child_id, missionId, level):
     if current_user.type == "parent":
         the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
         mission = Mission.query.filter(Mission.id == the_child.mission).first()
-        if level ==1 :
+        if level =="1" :
             exercises = xml_lib.read_cexercisesEasy()
-        elif level ==2 :
+        if level =="2" :
             exercises = xml_lib.read_cexercisesMedium()
-        else :
+        if level=="3" :
             exercises = xml_lib.read_cexercisesHard()
 
         if request.method == 'POST':
