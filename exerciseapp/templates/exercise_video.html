@@ -28,11 +28,36 @@
 
 <script>
     var video=document.getElementById("exercise-video")
+    
+    // Enables buton on video end 
     var button_next=document.getElementById("next-button")
     var str=document.getElementById("name").innerHTML
     video.onended = function() {
         button_next.disabled = false
     }
+    
+    // Prevents seek
+    // currTime stores the expected timestamp of the video when no seeking occurs
+    var currTime = 0
+    video.addEventListener("timeupdate", function() {
+        if (!video.seeking) {
+            currTime = video.currentTime
+        }
+    })
+    // If user attempts to seek, the video current time is compared with the local
+    // currTime and currTime is set as the current video time.
+    video.addEventListener("seeking", function() {
+        var diff = video.currentTime - currTime
+        if (Math.abs(diff) > 0.01) {
+            video.currentTime = currTime
+        }
+    })
+    // Allows for rewatching of video
+    video.addEventListener("ended", function() {
+        currTime = 0
+    })
+    // Link to solution: https://stackoverflow.com/questions/11903545/how-to-disable-seeking-with-html5-video-tag#:~:text=You%20could%20use%20an%20HTML5%20video%20player%20like,Also%2C%20the%20event%20you%27re%20looking%20for%20is%20%27seeking%27.
+
 </script>
 
 {% endblock content %}
