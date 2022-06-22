@@ -100,11 +100,11 @@ def confirm_mission(child_id):
         # Update mission status for child
         if request.method == "POST":
             confirm = int(request.form["confirm"])
-            print(confirm)
             if confirm == 1:
                 the_child.mission_status = 4
             else:
                 the_child.mission_status = 0
+            the_child.status_confirmed = True
             database.session.commit()
             decided = True
 

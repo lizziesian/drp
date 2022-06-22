@@ -36,6 +36,8 @@ class ChildUser(User):
     mission_status = db.Column(db.Integer, default=0)
     # Boolean storing whether the tutorial has been watched or not.
     tutorial = db.Column(db.Boolean, default=False)
+    # Boolean storing whether parent has confirmed status
+    status_confirmed = db.Column(db.Boolean, default=False)
 
 # Parent account
 # There is also a one-to-many relationship between parents and children. 
