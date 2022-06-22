@@ -57,11 +57,15 @@ def logout():
 @login_required
 def home():
     if current_user.type == "child":
-        the_monster = Monster.query.get_or_404(current_user.current_monster, "User has no current monster.")
-        the_mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
-        the_status = status(current_user.mission_status)
-        return render_template("home_child.html", title="Home", user=current_user, monster=the_monster, mission=the_mission,
-                                status=the_status)
+        # Displays tutorial
+        if not current_user.tutorial:
+            return redirect(url_for("child.story1"))
+        else:
+            the_monster = Monster.query.get_or_404(current_user.current_monster, "User has no current monster.")
+            the_mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
+            the_status = status(current_user.mission_status)
+            return render_template("home_child.html", title="Home", user=current_user, monster=the_monster, mission=the_mission,
+                                    status=the_status)
     else:
         logout_user()
         return redirect(url_for("child.login"))
@@ -108,6 +112,8 @@ def story3():
 @login_required
 def story4():
     if current_user.type == "child":
+        current_user.tutorial = True
+        database.session.commit()
         return render_template("story4.html", title="Mission Story")
     else:
         logout_user()

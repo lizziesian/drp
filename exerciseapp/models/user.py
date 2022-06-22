@@ -34,6 +34,8 @@ class ChildUser(User):
     mission = db.Column(db.Integer, db.ForeignKey("mission.id"), default=0)
     # Status is reset everyday when daily mission is set.
     mission_status = db.Column(db.Integer, default=0)
+    # Boolean storing whether the tutorial has been watched or not.
+    tutorial = db.Column(db.Boolean, default=False)
 
 
 # Parent account
