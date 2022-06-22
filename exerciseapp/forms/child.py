@@ -6,7 +6,7 @@ from exerciseapp.models.user import User, ChildUser, ParentUser
 class RegistrationForm(FlaskForm):
     username = StringField("Username", validators = [DataRequired(), Length(min=2, max=20)])
     name = StringField("Name", validators = [DataRequired(), Length(min=2, max=20)])
-    parent_code = IntegerField("Parent Code", validators = [DataRequired()])
+    parent_code = IntegerField("Parent Invite Code", validators = [DataRequired()])
     password = PasswordField("Password", validators = [DataRequired()])
     confirm_password = PasswordField("Confirm Password", validators = [DataRequired(), EqualTo("password")])
     submit = SubmitField("Sign Up")

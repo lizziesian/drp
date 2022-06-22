@@ -21,11 +21,11 @@ class User(db.Model, UserMixin):
 
 # Child account. 
 class ChildUser(User):
-    child_id = db.Column(db.Integer, db.ForeignKey("user.id", ondelete='CASCADE'), primary_key=True)
+    child_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
     # Level starts at 0 (refers to number of missions completed).
     level = db.Column(db.Integer, default=0)
     # Linked parent account.
-    parent = db.Column(db.Integer, db.ForeignKey("parent_user.parent_id", ondelete='CASCADE'), nullable=False)
+    parent = db.Column(db.Integer, db.ForeignKey("parent_user.parent_id"), nullable=False)
     # Current ungrown monster
     current_monster = db.Column(db.Integer, db.ForeignKey("monster.id"), default=0)
     # One child owns many monsters.
@@ -37,13 +37,11 @@ class ChildUser(User):
     # Boolean storing whether the tutorial has been watched or not.
     tutorial = db.Column(db.Boolean, default=False)
 
-    approved_missions = db.relationship("ApprovedMission", backref="approved", lazy=True, passive_deletes=True)
-
-
 # Parent account
 # There is also a one-to-many relationship between parents and children. 
 # One parent can have many children.
 # One child can only have one parent, i.e. parents will share accounts.
 class ParentUser(User):
-    parent_id = db.Column(db.Integer, db.ForeignKey("user.id", ondelete='CASCADE'), primary_key=True)
-    children = db.relationship("ChildUser", backref="guardian", primaryjoin=parent_id==ChildUser.parent, lazy=True, passive_deletes=True)
+    parent_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+    children = db.relationship("ChildUser", backref="guardian", primaryjoin=parent_id==ChildUser.parent, lazy=True)
+    invite_code = db.Column(db.String(10), unique=True)
