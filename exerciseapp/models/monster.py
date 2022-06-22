@@ -6,3 +6,4 @@ class Monster(db.Model):
     name = db.Column(db.String, nullable=False)
     level = db.Column(db.Integer, default=0)
     image = db.Column(db.String(20), nullable=False) # String contains name of image in images folder.
+    full_level = db.Column(db.Boolean, default=False)

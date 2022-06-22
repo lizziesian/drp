@@ -14,7 +14,7 @@ parent = Blueprint("parent", __name__, url_prefix="/parent")
 
 @parent.route("/register", methods=["GET", "POST"])
 def register():
-    if current_user.is_authenticated:
+    if current_user.is_authenticated and current_user.type == "parent":
         return redirect(url_for("parent.home"))
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -29,7 +29,7 @@ def register():
 
 @parent.route("/login", methods=["GET", "POST"])
 def login():
-    if current_user.is_authenticated:
+    if current_user.is_authenticated and current_user.type == "parent":
         return redirect(url_for("parent.home"))
     form = LoginForm()
     if form.validate_on_submit():
@@ -57,13 +57,14 @@ def logout():
 @login_required
 def home():
     if current_user.type == "parent":
-        children = len(current_user.children)
-        all_missions = Mission.query.all()
+        num = len(current_user.children)
         all_statuses = []
+        all_missions = []
         for child in current_user.children:
             all_statuses.append(status(child.mission_status))
-        all_child_status = zip(current_user.children, all_statuses)
-        return render_template("home_parent.html", title="Home", parent=current_user, missions=all_missions, children_statuses=all_child_status, child_num=children)
+            all_missions.append(Mission.query.filter(Mission.id == child.mission).first())
+        children = zip(current_user.children, all_statuses, all_missions)
+        return render_template("home_parent.html", title="Home", parent=current_user, children=children, child_num=num)
     else:
         logout_user()
         return redirect(url_for("parent.login"))
@@ -104,8 +105,8 @@ def choose_level(child_id,missionId):
         the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
         if request.method == 'POST':
             level=request.form["level"]
-            return redirect(url_for('parent.choose_warm_up', missionId=missionId,child_id=child_id,level=level))
-        return render_template("choose_level.html", name=the_child.name,missionId=missionId,child_id=child_id)
+            return redirect(url_for('parent.choose_warm_up', missionId=missionId,child_id=child_id, level=level))
+        return render_template("choose_level.html", name=the_child.name, missionId=missionId,child_id=child_id)
     else:
         logout_user()
         return redirect(url_for("parent.login"))
@@ -120,8 +121,7 @@ def choose_warm_up(child_id, missionId, level):
             if the_child.mission_status <= 3:
                 return redirect(url_for('parent.choose_exercise', missionId=missionId, child_id=child_id, level=level))
     
-        all_missions = Mission.query.all()
-        mission= all_missions[missionId]
+        mission = Mission.query.filter(Mission.id == the_child.mission).first()
         exercises=[]
 
         if level =="1" :
@@ -154,8 +154,7 @@ def choose_exercise(child_id, missionId, level):
         the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
         if the_child.mission_status >=2:
             return redirect(url_for('parent.choose_cool_down', missionId=missionId,child_id=child_id))
-        all_missions = Mission.query.all()
-        mission= all_missions[missionId]
+        mission = Mission.query.filter(Mission.id == the_child.mission).first()
         if level == 1:
             exercises = xml_lib.read_eexercisesEasy()
         elif level == 2:
@@ -184,9 +183,7 @@ def choose_exercise(child_id, missionId, level):
 def choose_cool_down(child_id, missionId, level):
     if current_user.type == "parent":
         the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
-
-        all_missions = Mission.query.all()
-        mission = all_missions[missionId]
+        mission = Mission.query.filter(Mission.id == the_child.mission).first()
         if level ==1 :
             exercises = xml_lib.read_cexercisesEasy()
         elif level ==2 :

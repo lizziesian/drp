@@ -20,35 +20,50 @@ def drop_all():
 @click.command(name="populate", help="Populate database with test data.")
 @with_appcontext
 def populate():
-    # Monsters
-    testMonster0 = Monster(id=0, name="Grig the grass monster", level=0, image="monster-egg.png")
-    testMonster1 = Monster(id=1, name="Grig the grass monster", level=1, image="monster-baby.png")
-    testMonster2 = Monster(id=2, name="Grig the grass monster", level=2, image="monster-child.png")
-    testMonster3 = Monster(id=3, name="Grig the grass monster", level=3, image="monster-adult.png")
-    blue_egg = Monster(id=4, name="Aqua the water monster", level=0, image="blue-egg.png")
-    pink_egg = Monster(id=5, name="Bingo the blossom monster", level=0, image="pink-egg.png")
-    purple_egg = Monster(id=6, name="Mog the marsh monster", level=0, image="purple-egg.png")
-    red_egg = Monster(id=7, name="Fifi the fire monster", level=0, image="red-egg.png")
-    yellow_egg = Monster(id=8, name="Stella the star monster", level=0, image="yellow-egg.png")
-    blue_adult = Monster(id=9, name="Aqua the water monster", level=3, image="blue_adult.png")
-    pink_adult = Monster(id=10, name="Bingo the blossom monster", level=3, image="pink_adult.png")
-    purple_adult = Monster(id=11, name="Mog the marsh monster", level=3, image="purple_adult.png")
-    red_adult = Monster(id=12, name="Fifi the fire monster", level=3, image="red_adult.jpg")
-    yellow_adult = Monster(id=13, name="Stella the star monster", level=3, image="yellow_adult.png")
+    # Green Monster
+    green_monster = "Grig the Grass Monster"
+    monster0 = Monster(id=0, name=green_monster, level=0, image="monster-egg.png")
+    monster1 = Monster(id=1, name=green_monster, level=1, image="monster-baby.png")
+    monster2 = Monster(id=2, name=green_monster, level=2, image="monster-child.png")
+    monster3 = Monster(id=3, name=green_monster, level=3, image="monster-adult.png", full_level=True)
+    database.session.add(monster0)
+    database.session.add(monster1)
+    database.session.add(monster2)
+    database.session.add(monster3)
 
-    database.session.add(testMonster0)
-    database.session.add(testMonster1)
-    database.session.add(testMonster2)
-    database.session.add(testMonster3)
+    # Blue Monster
+    blue_monster = "Aqua the Water Monster"
+    blue_egg = Monster(id=4, name=blue_monster, level=0, image="blue-egg.png")
+    blue_adult = Monster(id=9, name=blue_monster, level=1, image="blue_adult.png", full_level=True)
     database.session.add(blue_egg)
-    database.session.add(pink_egg)
-    database.session.add(purple_egg)
-    database.session.add(red_egg)
-    database.session.add(yellow_egg)
     database.session.add(blue_adult)
+
+    # Pink Monster
+    pink_monster = "Bingo the Blossom Monster"
+    pink_egg = Monster(id=5, name=pink_monster, level=0, image="pink-egg.png")
+    pink_adult = Monster(id=10, name=pink_monster, level=1, image="pink_adult.png", full_level=True)
+    database.session.add(pink_egg)
     database.session.add(pink_adult)
+
+    # Purple Monster
+    purple_monster = "Mog the Marsh Monster"
+    purple_egg = Monster(id=6, name=purple_monster, level=0, image="purple-egg.png")
+    purple_adult = Monster(id=11, name=purple_monster, level=1, image="purple_adult.png", full_level=True)
+    database.session.add(purple_egg)
     database.session.add(purple_adult)
+
+    # Red Monster
+    red_monster = "Fifi the Fire Monster"
+    red_egg = Monster(id=7, name=red_monster, level=0, image="red-egg.png")
+    red_adult = Monster(id=12, name=red_monster, level=1, image="red_adult.jpg", full_level=True)
+    database.session.add(red_egg)
     database.session.add(red_adult)
+
+    # Yellow Monster
+    yellow_monster = "Stella the Star Monster"
+    yellow_egg = Monster(id=8, name=yellow_monster, level=0, image="yellow-egg.png")
+    yellow_adult = Monster(id=13, name=yellow_monster, level=1, image="yellow_adult.png", full_level=True)
+    database.session.add(yellow_egg)
     database.session.add(yellow_adult)
     
     database.session.commit()
