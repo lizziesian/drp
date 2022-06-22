@@ -6,7 +6,7 @@ from exerciseapp.models.user import User, ChildUser, ParentUser
 class RegistrationForm(FlaskForm):
     username = StringField("Username", validators = [DataRequired(), Length(min=2, max=20)])
     name = StringField("Name", validators = [DataRequired(), Length(min=2, max=20)])
-    parent_code = IntegerField("Parent Invite Code", validators = [DataRequired()])
+    parent_code = StringField("Parent Invite Code", validators = [DataRequired()])
     password = PasswordField("Password", validators = [DataRequired()])
     confirm_password = PasswordField("Confirm Password", validators = [DataRequired(), EqualTo("password")])
     submit = SubmitField("Sign Up")
@@ -17,9 +17,9 @@ class RegistrationForm(FlaskForm):
             raise ValidationError("That username is taken. Please choose a different one.")
 
     def validate_parent_code(self, parent_code):
-        parent = ParentUser.query.filter_by(id=parent_code.data).first()
+        parent = ParentUser.query.filter_by(invite_code=parent_code.data).first()
         if not parent:
-            raise ValidationError("Incorrect parent code. No parent account exists.")
+            raise ValidationError("Incorrect parent invite code. No parent account exists.")
 
 class LoginForm(FlaskForm):
     username = StringField("Username", validators = [DataRequired(), Length(min=2, max=20)])

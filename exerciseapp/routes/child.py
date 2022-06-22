@@ -3,7 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 from exerciseapp.database import database
 from exerciseapp.forms.child import RegistrationForm, LoginForm
-from exerciseapp.models.user import User, ChildUser
+from exerciseapp.models.user import User, ChildUser, ParentUser
 from exerciseapp.models.mission import Mission
 from exerciseapp.models.monster import Monster
 from exerciseapp.models.monsters_owned import MonsterOwned
@@ -23,8 +23,9 @@ def register():
         database.session.add(daily_mission)
         database.session.commit()
         # user
+        parent_id = ParentUser.query.filter_by(invite_code=form.parent_code.data).first().id
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
-        user = ChildUser(username=form.username.data, name=form.name.data.title(), password=hashed_password, type="child", parent=form.parent_code.data, mission=daily_mission.id)
+        user = ChildUser(username=form.username.data, name=form.name.data.title(), password=hashed_password, type="child", parent=parent_id, mission=daily_mission.id)
         database.session.add(user)
         # commit to database
         database.session.commit()

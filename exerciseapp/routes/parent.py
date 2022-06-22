@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
-import random
+import random, string
 
 from exerciseapp.database import database
 from exerciseapp.models.user import User, ParentUser, ChildUser
@@ -73,11 +73,21 @@ def home():
 @login_required
 def add_child():
     if current_user.type == "parent":
-        code = int(current_user.id)
+        code = generate_code()
+        while ParentUser.query.filter(ParentUser.invite_code == code).first():
+            code = generate_code()
+        current_user.invite_code = code
+        database.session.commit()
         return render_template("add_child.html", title="Add Child", code=code)
     else:
         logout_user()
         return redirect(url_for("parent.login"))
+
+def generate_code():
+    code = ""
+    for _ in range(10):
+        code += random.choice(string.ascii_letters + string.digits)
+    return code
 
 @parent.route("/mission_confirmation/<child_id>", methods=["GET", "POST"])
 @login_required
