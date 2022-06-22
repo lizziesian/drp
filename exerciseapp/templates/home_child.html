@@ -71,7 +71,10 @@
         <br>
     </div>
 
-
+    <!-- Info button -->
+    <form action="{{ url_for("child.story1") }}" style="float: left; margin: 2%">        
+        <button id="story-button" class="glow-button" type="submit">Story</button>
+    </form>
 
     <!-- Logout button -->
     <form action="{{ url_for("child.logout") }}" style="float: right; margin: 2%">        
