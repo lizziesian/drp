@@ -40,6 +40,7 @@
                 </h2>
             </div>
         </div>
+        <br>
 
         <!-- Mission Start -->
         {% if user.mission_status < 3 %}
@@ -72,9 +73,9 @@
 
 
 
-    <!-- Back button -->
-    <form action="{{ url_for("main.home") }}" style="float: right">        
-        <button id="back-button" class="glow-button" type="submit">Back</button>
+    <!-- Logout button -->
+    <form action="{{ url_for("child.logout") }}" style="float: right; margin: 2%">        
+        <button id="back-button" class="glow-button" type="submit">Logout</button>
     </form>
 
 </div>

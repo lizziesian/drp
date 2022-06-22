@@ -2,6 +2,14 @@
 
 {% block content %}
 
+<head>
+    <style>
+        .body {
+            overflow: scroll;
+        }
+    </style>
+</head>
+
 <div style="display:flex; justify-content:space-between; margin: 2%;">
 
     <!-- Welcome message to parent -->
@@ -14,13 +22,13 @@
 </div>
 
 <!-- List of children -->
-<div style="text-align: center;">
+<div style="text-align: center">
 
     {% if child_num != 0 %}
 
         {% for (child, status) in children_statuses %}
 
-            <div style="border-style: solid; border-color: white; border-width: medium; width: 80%; margin: 5%; display: inline-flex; justify-content:space-between;">
+            <div style="border-style: solid; border-color: white; border-width: medium; width: 80%; margin: 2%; display: inline-flex; justify-content:space-between;">
 
                 <div style="margin-left: 5%; text-align: left;"> 
                     <h2 style="text-align: center">

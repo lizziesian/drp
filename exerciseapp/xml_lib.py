@@ -3,10 +3,8 @@ import xml.dom.minidom
 import threading
 
 from .database import database
-from .models.user_child import ChildUser
-from .models.user_parent import ParentUser
+from .models.user import ChildUser, ParentUser
 from .models.mission import Mission
-from .models.missions_approved import ApprovedMission
 from .models.monster import Monster
 from .models.monsters_owned import MonsterOwned
 

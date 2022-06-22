@@ -1,4 +1,5 @@
 import os
+from xml.dom.minidom import Identified
 from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
@@ -16,11 +17,17 @@ app.config['SECRET_KEY'] = '0f2f74728b136a8c24df1ba7750c27f2'
 from .database import database
 database.init_app(app)
 
-# parent account
-parent_bcrypt = Bcrypt(app)
-parent_login_manager = LoginManager(app)
-parent_login_manager.login_view = "parent.login"
-parent_login_manager.login_message_category = "info"
+# encrypt account passwords
+bcrypt = Bcrypt(app)
+
+# Login Manager
+login_manager = LoginManager(app)
+login_manager.blueprint_login_views = {
+    "child": "/child/login",
+    "parent": "/parent/login",
+}
+login_manager.login_message_category = "info"
+
 
 # blueprints
 from .routes.main import main

@@ -5,5 +5,7 @@ from exerciseapp.database import database as db
 # One monster can be owned by many children.
 # Composite primary key made from two fields child_id and monster_id.
 class MonsterOwned(db.Model):
-    child = db.Column(db.Integer, db.ForeignKey("child_user.id"), nullable=False, primary_key=True)
+    child = db.Column(db.Integer, db.ForeignKey("child_user.child_id"), nullable=False, primary_key=True)
     monster = db.Column(db.Integer, db.ForeignKey("monster.id"), nullable=False, primary_key=True)
+
+ # Monsters owned table is initially empty as only full-level monsters are added to this table.

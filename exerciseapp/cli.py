@@ -2,13 +2,8 @@ import click
 from flask.cli import with_appcontext
 
 from .database import database
-from .models.user_child import ChildUser
-from .models.user_parent import ParentUser
 from .models.mission import Mission
-from .models.missions_approved import ApprovedMission
 from .models.monster import Monster
-from .models.monsters_owned import MonsterOwned
-
 
 # Run these commands in heroku console to edit tables in the postgres database.
 
@@ -44,18 +39,7 @@ def populate():
     red_adult = Monster(id=12, name="Red Monster", level=3, image="red_adult.jpg")
     yellow_adult = Monster(id=13, name="Yellow Monster", level=3, image="yellow_adult.png")
 
-    # Test parent and child accounts
-    parentUser = ParentUser(id=0, username="testParent", name="Simon", password="abcd")
-    childUser = ChildUser(id=0, username="testChild", name="John", password="edfg", parent=parentUser.id, current_monster=testMonster0.id, monster_collected=False)
-    
-    approved = ApprovedMission(child=childUser.id, mission=testMission.id)    
-    
-    # Monsters owned table is empty as only full-level monsters are added to this table.
-
-    database.session.add(parentUser)
-    database.session.add(childUser)
     database.session.add(testMission)
-    database.session.add(approved)
     database.session.add(testMonster0)
     database.session.add(testMonster1)
     database.session.add(testMonster2)
