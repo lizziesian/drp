@@ -13,12 +13,12 @@ xml_file = 'exerciseapp/file/exercise.xml'
 lock = threading.RLock()
 
 
-def read_wexercises():
+def read_wexercisesEasy():
     lock.acquire()
     DOMTree = xml.dom.minidom.parse(xml_file)
     lock.release()
     root = DOMTree.documentElement
-    exercises = root.getElementsByTagName('wexercise')
+    exercises = root.getElementsByTagName('wexerciseEasy')
 
     exercise_arr = []
     for exercise in exercises:
@@ -33,14 +33,16 @@ def read_wexercises():
             exercise_dic['count'] = 0
         exercise_arr.append(exercise_dic)
 
+    exercise_arr.sort(key=lambda x: x['count'], reverse=True)
     return exercise_arr
 
-def read_eexercises():
+
+def read_wexercisesMedium():
     lock.acquire()
     DOMTree = xml.dom.minidom.parse(xml_file)
     lock.release()
     root = DOMTree.documentElement
-    exercises = root.getElementsByTagName('eexercise')
+    exercises = root.getElementsByTagName('wexerciseMedium')
 
     exercise_arr = []
     for exercise in exercises:
@@ -55,14 +57,16 @@ def read_eexercises():
             exercise_dic['count'] = 0
         exercise_arr.append(exercise_dic)
 
+    exercise_arr.sort(key=lambda x: x['count'], reverse=True)
     return exercise_arr
 
-def read_cexercises():
+
+def read_wexercisesHard():
     lock.acquire()
     DOMTree = xml.dom.minidom.parse(xml_file)
     lock.release()
     root = DOMTree.documentElement
-    exercises = root.getElementsByTagName('cexercise')
+    exercises = root.getElementsByTagName('wexerciseHard')
 
     exercise_arr = []
     for exercise in exercises:
@@ -77,8 +81,147 @@ def read_cexercises():
             exercise_dic['count'] = 0
         exercise_arr.append(exercise_dic)
 
+    exercise_arr.sort(key=lambda x: x['count'], reverse=True)
     return exercise_arr
 
+def read_eexercisesEasy():
+    lock.acquire()
+    DOMTree = xml.dom.minidom.parse(xml_file)
+    lock.release()
+    root = DOMTree.documentElement
+    exercises = root.getElementsByTagName('eexerciseEasy')
+
+    exercise_arr = []
+    for exercise in exercises:
+        exercise_dic = {}
+        exercise_dic['file'] = exercise.getAttribute('file')
+        exercise_dic['title'] = exercise.getAttribute('title')
+        exercise_dic['name'] = exercise.getAttribute('name')
+        exercise_dic['content'] = exercise.getAttribute('content')
+        if exercise.hasAttribute('count'):
+            exercise_dic['count'] = int(exercise.getAttribute('count'))
+        else:
+            exercise_dic['count'] = 0
+        exercise_arr.append(exercise_dic)
+
+    exercise_arr.sort(key=lambda x: x['count'], reverse=True)
+    return exercise_arr
+
+def read_eexercisesMedium():
+    lock.acquire()
+    DOMTree = xml.dom.minidom.parse(xml_file)
+    lock.release()
+    root = DOMTree.documentElement
+    exercises = root.getElementsByTagName('eexerciseMedium')
+
+    exercise_arr = []
+    for exercise in exercises:
+        exercise_dic = {}
+        exercise_dic['file'] = exercise.getAttribute('file')
+        exercise_dic['title'] = exercise.getAttribute('title')
+        exercise_dic['name'] = exercise.getAttribute('name')
+        exercise_dic['content'] = exercise.getAttribute('content')
+        if exercise.hasAttribute('count'):
+            exercise_dic['count'] = int(exercise.getAttribute('count'))
+        else:
+            exercise_dic['count'] = 0
+        exercise_arr.append(exercise_dic)
+
+    exercise_arr.sort(key=lambda x: x['count'], reverse=True)
+    return exercise_arr
+
+
+def read_eexercisesHard():
+    lock.acquire()
+    DOMTree = xml.dom.minidom.parse(xml_file)
+    lock.release()
+    root = DOMTree.documentElement
+    exercises = root.getElementsByTagName('eexerciseHard')
+
+    exercise_arr = []
+    for exercise in exercises:
+        exercise_dic = {}
+        exercise_dic['file'] = exercise.getAttribute('file')
+        exercise_dic['title'] = exercise.getAttribute('title')
+        exercise_dic['name'] = exercise.getAttribute('name')
+        exercise_dic['content'] = exercise.getAttribute('content')
+        if exercise.hasAttribute('count'):
+            exercise_dic['count'] = int(exercise.getAttribute('count'))
+        else:
+            exercise_dic['count'] = 0
+        exercise_arr.append(exercise_dic)
+
+    exercise_arr.sort(key=lambda x: x['count'], reverse=True)
+    return exercise_arr
+
+def read_cexercisesEasy():
+    lock.acquire()
+    DOMTree = xml.dom.minidom.parse(xml_file)
+    lock.release()
+    root = DOMTree.documentElement
+    exercises = root.getElementsByTagName('cexerciseEasy')
+
+    exercise_arr = []
+    for exercise in exercises:
+        exercise_dic = {}
+        exercise_dic['file'] = exercise.getAttribute('file')
+        exercise_dic['title'] = exercise.getAttribute('title')
+        exercise_dic['name'] = exercise.getAttribute('name')
+        exercise_dic['content'] = exercise.getAttribute('content')
+        if exercise.hasAttribute('count'):
+            exercise_dic['count'] = int(exercise.getAttribute('count'))
+        else:
+            exercise_dic['count'] = 0
+        exercise_arr.append(exercise_dic)
+    exercise_arr.sort(key=lambda x: x['count'], reverse=True)
+    return exercise_arr
+
+def read_cexercisesMedium():
+    lock.acquire()
+    DOMTree = xml.dom.minidom.parse(xml_file)
+    lock.release()
+    root = DOMTree.documentElement
+    exercises = root.getElementsByTagName('cexerciseMedium')
+
+    exercise_arr = []
+    for exercise in exercises:
+        exercise_dic = {}
+        exercise_dic['file'] = exercise.getAttribute('file')
+        exercise_dic['title'] = exercise.getAttribute('title')
+        exercise_dic['name'] = exercise.getAttribute('name')
+        exercise_dic['content'] = exercise.getAttribute('content')
+        if exercise.hasAttribute('count'):
+            exercise_dic['count'] = int(exercise.getAttribute('count'))
+        else:
+            exercise_dic['count'] = 0
+        exercise_arr.append(exercise_dic)
+
+    exercise_arr.sort(key=lambda x: x['count'], reverse=True)
+    return exercise_arr
+
+
+def read_cexercisesHard():
+    lock.acquire()
+    DOMTree = xml.dom.minidom.parse(xml_file)
+    lock.release()
+    root = DOMTree.documentElement
+    exercises = root.getElementsByTagName('cexerciseHard')
+
+    exercise_arr = []
+    for exercise in exercises:
+        exercise_dic = {}
+        exercise_dic['file'] = exercise.getAttribute('file')
+        exercise_dic['title'] = exercise.getAttribute('title')
+        exercise_dic['name'] = exercise.getAttribute('name')
+        exercise_dic['content'] = exercise.getAttribute('content')
+        if exercise.hasAttribute('count'):
+            exercise_dic['count'] = int(exercise.getAttribute('count'))
+        else:
+            exercise_dic['count'] = 0
+        exercise_arr.append(exercise_dic)
+        
+    exercise_arr.sort(key=lambda x: x['count'], reverse=True)
+    return exercise_arr
 
 
 
