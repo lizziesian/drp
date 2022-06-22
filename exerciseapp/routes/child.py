@@ -44,12 +44,11 @@ def login():
         if child_user and bcrypt.check_password_hash(child_user.password, form.password.data):
             user = User.query.filter_by(username=form.username.data).first()
             login_user(user, remember=form.remember.data)
-            next_page = request.args.get("next")
             flash("You have been logged in!", "success")
-            if next_page:
-                return redirect(next_page)
-            else:
-                return redirect(url_for("child.home"))
+            if child_user.status_confirmed:
+                return redirect(url_for("child.wait_for_approval"))
+            next_page = request.args.get("next")            
+            return redirect(next_page) if next_page else redirect(url_for('child.home'))
         else:
             flash("Login Unsuccessful. Please check username and password", "danger")
     return render_template("login_child.html", title="Login", form=form)
@@ -204,6 +203,8 @@ def exercise_cooldown():
 @login_required
 def wait_for_approval():
     if current_user.type == "child":
+        current_user.status_confirmed = False
+        database.session.commit()
         return render_template("wait_for_approval.html", title="Awaiting Parental Approval", status=current_user.mission_status)
     else:
         logout_user()
