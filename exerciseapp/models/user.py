@@ -37,6 +37,8 @@ class ChildUser(User):
     # Boolean storing whether the tutorial has been watched or not.
     tutorial = db.Column(db.Boolean, default=False)
 
+    approved_missions = db.relationship("ApprovedMission", backref="approved", lazy=True, passive_deletes=True)
+
 
 # Parent account
 # There is also a one-to-many relationship between parents and children. 
