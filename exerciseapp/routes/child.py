@@ -19,7 +19,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         # daily mission
-        daily_mission = Mission(warm_up="warm_up", exercise="exercise", cool_down="cool_down")
+        daily_mission = Mission(warm_up="warm_up", exercise="exercise8", cool_down="exercise9")
         database.session.add(daily_mission)
         database.session.commit()
         # user
