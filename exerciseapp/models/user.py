@@ -31,7 +31,7 @@ class ChildUser(User):
     # One child owns many monsters.
     monsters = db.relationship("MonsterOwned", backref="owner", lazy=True)
     # Daily mission
-    mission = db.Column(db.Integer, db.ForeignKey("mission.id"), default=0)
+    mission = db.Column(db.Integer, db.ForeignKey("mission.id"), nullable=False)
     # Status is reset everyday when daily mission is set.
     mission_status = db.Column(db.Integer, default=0)
     # Boolean storing whether the tutorial has been watched or not.

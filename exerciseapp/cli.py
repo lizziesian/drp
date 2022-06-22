@@ -20,10 +20,7 @@ def drop_all():
 @click.command(name="populate", help="Populate database with test data.")
 @with_appcontext
 def populate():
-    # Test mission
-    testMission = Mission(id=0, name="Default Mission", warm_up="exercise1", exercise="exercise2", cool_down="exercise3")
-
-    # Test monsters
+    # Monsters
     testMonster0 = Monster(id=0, name="Grig the grass monster", level=0, image="monster-egg.png")
     testMonster1 = Monster(id=1, name="Grig the grass monster", level=1, image="monster-baby.png")
     testMonster2 = Monster(id=2, name="Grig the grass monster", level=2, image="monster-child.png")
@@ -39,7 +36,6 @@ def populate():
     red_adult = Monster(id=12, name="Fifi the fire monster", level=3, image="red_adult.jpg")
     yellow_adult = Monster(id=13, name="Stella the star monster", level=3, image="yellow_adult.png")
 
-    database.session.add(testMission)
     database.session.add(testMonster0)
     database.session.add(testMonster1)
     database.session.add(testMonster2)

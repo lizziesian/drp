@@ -2,11 +2,11 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_user, current_user, logout_user, login_required
 
 from exerciseapp.database import database
+from exerciseapp.forms.child import RegistrationForm, LoginForm
 from exerciseapp.models.user import User, ChildUser
+from exerciseapp.models.mission import Mission
 from exerciseapp.models.monster import Monster
 from exerciseapp.models.monsters_owned import MonsterOwned
-from exerciseapp.models.mission import Mission
-from exerciseapp.forms.child import RegistrationForm, LoginForm
 from exerciseapp.routes.main import status
 from exerciseapp import bcrypt
 
@@ -18,9 +18,15 @@ def register():
         return redirect(url_for("child.home"))
     form = RegistrationForm()
     if form.validate_on_submit():
+        # daily mission
+        daily_mission = Mission(warm_up="exercise1", exercise="exercise2", cool_down="exercise3")
+        database.session.add(daily_mission)
+        database.session.commit()
+        # user
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
-        user = ChildUser(username=form.username.data, name=form.name.data.title(), password=hashed_password, type="child", parent=form.parent_code.data)
+        user = ChildUser(username=form.username.data, name=form.name.data.title(), password=hashed_password, type="child", parent=form.parent_code.data, mission=daily_mission.id)
         database.session.add(user)
+        # commit to database
         database.session.commit()
         login_user(user, remember=False)
         flash("You have been successfully enrolled.", "success")
@@ -64,8 +70,8 @@ def home():
             the_monster = Monster.query.get_or_404(current_user.current_monster, "User has no current monster.")
             the_mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
             the_status = status(current_user.mission_status)
-            return render_template("home_child.html", title="Home", user=current_user, monster=the_monster, mission=the_mission,
-                                    status=the_status)
+            return render_template("home_child.html", title="Home", user=current_user, 
+            monster=the_monster, mission=the_mission, status=the_status)
     else:
         logout_user()
         return redirect(url_for("child.login"))
