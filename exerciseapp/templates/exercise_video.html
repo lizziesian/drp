@@ -14,7 +14,7 @@
     
     <div style="width: 100vh; margin: 0 auto;"> 
         <form method="POST">        
-            <button id="next-button" class="glow-button" style="visibility: hidden;" type="submit">
+            <button id="next-button" class="glow-button" disabled type="submit">
                 {% if status == 2 %}
                 Continue
                 {% else %}
@@ -31,7 +31,7 @@
     var button_next=document.getElementById("next-button")
     var str=document.getElementById("name").innerHTML
     video.onended = function() {
-        button_next.style.visibility = "visible"
+        button_next.disabled = false
     }
 </script>
 

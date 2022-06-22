@@ -33,10 +33,10 @@ video {
     max-height: 80%;
     max-width: 80%;
 }
-/* hides seek bar
+/* hides seek bar */
 video::-webkit-media-controls-timeline {
     display: none;
-} */
+} 
 
 /* Underline */
 hr {
@@ -112,8 +112,7 @@ The above copyright notice and this permission notice shall be included in all c
     position: relative;
     z-index: 0;
 }
-
-.glow-button:before {
+.glow-button:not([disabled]):before {
     content: '';
     background: linear-gradient(45deg, #ff0000, #ff00c8, #002bff, #7a00ff, #ff00c8, #ff0000);
     position: absolute;
@@ -129,20 +128,16 @@ The above copyright notice and this permission notice shall be included in all c
     transition: opacity .3s ease-in-out;
     border-radius: 15px;
 }
-
-.glow-button:active {
+.glow-button:not([disabled]):active {
     color: white
 }
-
-.glow-button:active:after {
+.glow-button:not([disabled]):active:after {
     background: transparent;
 }
-
-.glow-button:hover:before {
+.glow-button:not([disabled]):hover:before {
     opacity: 1;
 }
-
-.glow-button:after {
+.glow-button:not([disabled]):after {
     z-index: -1;
     content: '';
     position: absolute;
@@ -153,7 +148,11 @@ The above copyright notice and this permission notice shall be included in all c
     top: 0;
     border-radius: 15px;
 }
-
+.glow-button:disabled {
+    color: white;
+    background: rgb(102, 102, 107);
+    background-color: rgb(102, 102, 107);
+}
 @keyframes glowing {
     0% {
         background-position: 0 0;
