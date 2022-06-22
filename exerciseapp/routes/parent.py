@@ -143,10 +143,7 @@ def choose_warm_up(child_id, missionId, level):
 
         if request.method == 'POST':
             video=request.form["running"]
-            if len(video)==0:
-                mission.warm_up=""
-            else:
-                mission.warm_up=video.removesuffix(".mp4")
+            mission.warm_up=video.removesuffix(".mp4")
             database.session.commit()
             return redirect(url_for('parent.choose_exercise', missionId=missionId, child_id=child_id, level=level))
 
@@ -174,10 +171,7 @@ def choose_exercise(child_id, missionId, level):
 
         if request.method == 'POST':
             video=request.form["running"]
-            if len(video)==0:
-                mission.exercise=""
-            else:
-                mission.exercise=video.removesuffix(".mp4")
+            mission.exercise=video.removesuffix(".mp4")
             database.session.commit()
             return redirect(url_for('parent.choose_cool_down', missionId=missionId, child_id=child_id, level=level))
 
@@ -203,10 +197,7 @@ def choose_cool_down(child_id, missionId, level):
 
         if request.method == 'POST':
             video=request.form["running"]
-            if len(video)==0:
-                mission.cool_down=""
-            else:
-                mission.cool_down=video.removesuffix(".mp4")
+            mission.cool_down=video.removesuffix(".mp4")
             database.session.commit()
             return redirect(url_for('parent.home'))
 

@@ -38,11 +38,16 @@
 
 <body>
     <form id="container" method="post">
-        <div style="display:flex; justify-content:space-between; margin: 2%">
         <h1>Please choose a {{exercise_type}} </h1>
-        <button id="back-button" name= "running" class="glow-button"type="submit" stype="right:10px">Continue</button>
-        </div>>
-    
+        
+        {% if exercises|length ==0 %}
+        <div class="center" style="text-align:center; display:flexbox;height:320px; width:1270px; padding: 2%"> 
+        <h1>No video at the moment:) Please wait for update </h1>
+        </div>
+        >
+
+        {% else %}
+
         {% for exercise in exercises %}
         <div id = "videos" class="box-out" style="height:320px; width:630px; padding: 2%">
             <ul>
@@ -63,6 +68,10 @@
         </div>
  
         {% endfor %}
+        {% endif %}
+        <button id="back-button" name= "running" class="glow-button"type="submit" style="position:relative;marigin:10px">Continue</button>
+
+        
 
     </form>
  
