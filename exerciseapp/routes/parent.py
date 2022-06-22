@@ -94,16 +94,21 @@ def generate_code():
 def confirm_mission(child_id):
     if current_user.type == "parent":
         the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
-        page_name = the_child.name + "Confirm Mission Completion"
-        confirm = False
+        page_name = the_child.name + " Confirm Mission Completion"
+        decided = False
         
         # Update mission status for child
         if request.method == "POST":
-            the_child.mission_status = 4
+            confirm = int(request.form["confirm"])
+            if confirm == 1:
+                the_child.mission_status = 4
+            else:
+                the_child.mission_status = 0
+            the_child.status_confirmed = True
             database.session.commit()
-            confirm = True
+            decided = True
 
-        return render_template("confirm_mission.html", title=page_name, child=the_child, confirm=confirm)
+        return render_template("confirm_mission.html", title=page_name, child=the_child, decided=decided)
     else:
         logout_user()
         return redirect(url_for("parent.login"))
