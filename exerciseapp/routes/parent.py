@@ -94,7 +94,7 @@ def generate_code():
 def confirm_mission(child_id):
     if current_user.type == "parent":
         the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
-        page_name = the_child.name + "Confirm Mission Completion"
+        page_name = the_child.name + " Confirm Mission Completion"
         confirm = False
         
         # Update mission status for child
@@ -104,6 +104,22 @@ def confirm_mission(child_id):
             confirm = True
 
         return render_template("confirm_mission.html", title=page_name, child=the_child, confirm=confirm)
+    else:
+        logout_user()
+        return redirect(url_for("parent.login"))
+
+@parent.route("/reset_mission/<child_id>", methods=["GET", "POST"])
+@login_required
+def reset_mission(child_id):
+    if current_user.type == "parent":
+        child = ChildUser.query.get_or_404(child_id, "Child user not found.")
+        if request.method == "POST":
+            stage = request.form["stage"]
+            print(stage)
+            child.mission_status = stage
+            database.session.commit()
+            return redirect(url_for("parent.home"))
+        return render_template("reset_mission.html", title="Reset Mission", child=child)
     else:
         logout_user()
         return redirect(url_for("parent.login"))

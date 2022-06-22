@@ -2,17 +2,42 @@
 
 {% block content %}
 
-<div class="center" style="margin: auto;">
+<div class="center">
 
+    {% if not confirm %}
     <h1>Please confirm {{ child.name }} has completed his mission:</h1> 
 
-    <form method="POST">
-        <button class="glow-button" type="submit" style="text-align: center; margin: 1%">Confirm</button>
-    </form>
+    <div style="margin: 2%">
+        <div style="display: inline-block; margin-right: 5%; margin-left: 5%;">
+            <form method="POST">
+                <button class="glow-button" type="submit">
+                    Confirm
+                </button>
+            </form>
+        </div>
+
+        
+        <div style="display: inline-block; margin-right: 5%; margin-left: 5%;">
+            <form action="{{ url_for("parent.reset_mission", child_id=child["id"]) }}">
+                <button class="glow-button" type="submit">
+                    Deny
+                </button>
+            </form>
+        </div>
+    </div> 
+    {% endif %}
 
     {% if confirm %}
-        <form action="{{ url_for("child.home") }}">
-            <button class="glow-button" type="submit" style="text-align: center; margin: 1%">Go to Child Account</button>
+        <form action="{{ url_for("parent.home") }}" style="margin: 3%">
+            <button class="glow-button" type="submit">
+                Go to Parent Home Page
+            </button>
+        </form>
+
+        <form action="{{ url_for("child.home") }}" style="margin: 3%">
+            <button class="glow-button" type="submit">
+                Go to Child Account
+            </button>
         </form>
     {% endif %}
 </div>
