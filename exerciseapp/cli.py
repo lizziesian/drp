@@ -2,7 +2,6 @@ import click
 from flask.cli import with_appcontext
 
 from .database import database
-from .models.mission import Mission
 from .models.monster import Monster
 
 # Run these commands in heroku console to edit tables in the postgres database.
