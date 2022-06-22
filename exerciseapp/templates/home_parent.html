@@ -51,11 +51,13 @@
                 <div style="text-align: center; margin-left: 5%;"> 
 
                     <!-- Edit daily mission -->
+                    {% if child.mission_status < 3 %}
                     <form action="{{ url_for('parent.choose_warm_up', missionId=child.mission,child_id=child["id"])}}" style="margin:5%">
                         <button class="glow-button" type="submit" style="font-size: 14px; padding: 0.5rem">
                             Edit Daily Mission
                         </button>
                     </form>
+                    {% endif %}
 
                     <!-- Confirm mission stage -->
                     {% if child.mission_status == 3 %}
