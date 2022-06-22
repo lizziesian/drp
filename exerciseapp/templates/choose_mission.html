@@ -36,15 +36,15 @@
     </style>
 </head>
 
-<body style="overflow:scroll">
-    <form id="container" method="post" style="overflow:scroll">
-        <div style="display:flex; justify-content:space-between;">
-        <h1>Please choose your wanted {{exercise_type}} </h1>
+<body>
+    <form id="container" method="post">
+        <div style="display:flex; justify-content:space-between; margin: 2%">
+        <h1>Please choose a {{exercise_type}} </h1>
         <button id="back-button" name= "running" class="glow-button"type="submit" stype="right:10px">Continue</button>
         </div>>
     
         {% for exercise in exercises %}
-        <div id = "videos" class="box-out" style="height:320px;width:630px;overflow:scroll">
+        <div id = "videos" class="box-out" style="height:320px; width:630px; padding: 2%">
             <ul>
                 <li style="height:400px;width:630px;">
 
@@ -64,17 +64,9 @@
  
         {% endfor %}
 
-       
-     
-
-     
-    
     </form>
  
-    
 
-
-  
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>      
    

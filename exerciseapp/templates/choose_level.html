@@ -2,44 +2,39 @@
 
 {% block content %}
 
-<div style="display:flex; justify-content:space-between;">
-
-
-    <h1>Please choose level of exercises for {{name}}: </h1>
-
-
+<div>
     <form action="{{ url_for("main.home") }}">        
-        <button id="back-button" class="glow-button" type="submit">Back</button>
+        <button id="back-button" class="glow-button" type="submit" style="float: right; margin: 2%">
+            Back
+        </button>
     </form>
-</div>
 
 
+    <div class="center">
 
-<form name="level" method="post"  style="border-style: solid; border-color: white; border-width: medium; width: 80%; margin: 5%; display: inline-flex; justify-content:space-between;">
-
-    <div style="text-align: center;margin-left: 30%; "> 
-
-        <div style="margin:20%">
-            <button class="glow-button" name="level" value=1 type="submit" style="font-size: 50px; padding: 0.5rem; margin-top: 10%;">
-                    Easy
-            </button>
-
-        
-            <button class="glow-button" name="level" value=2 type="submit" style="font-size: 50px; padding: 0.5rem; margin-top: 10%;">
-                    Medium
-            </button>
-  
-
-            <button class="glow-button" name="level" value=3 type="submit" style="font-size: 50px; padding: 0.5rem; margin-top: 10%;">
-                    Hard
-            </button>
+        <div style="width: 80%; max-width: 600px; display:inline-block;">
+            <h1>Please choose the intensity level of {{name}}'s mission for today:</h1>
         </div>
+
+        <form name="level" method="post">
+            <div>
+                <button class="glow-button" name="level" value=1 type="submit" style="font-size: 50px; margin: 2%;">
+                    Easy
+                </button>
+                <br>
+            
+                <button class="glow-button" name="level" value=2 type="submit" style="font-size: 50px; margin: 2%;">
+                    Medium
+                </button>
+                <br>
         
+                <button class="glow-button" name="level" value=3 type="submit" style="font-size: 50px; margin: 2%;">
+                    Hard
+                </button>
+            </div>
+        </form
+
     </div>
-
-</form>
-
-    
-
+</div> 
 
 {% endblock content %}
