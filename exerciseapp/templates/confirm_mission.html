@@ -7,8 +7,14 @@
     <h1>Please confirm {{ child.name }} has completed his mission:</h1> 
 
     <form method="POST">
-        <button class="glow-button" type="submit" style="text-align: center;">Confirm</button>
+        <button class="glow-button" type="submit" style="text-align: center; margin: 1%">Confirm</button>
     </form>
+
+    {% if confirm %}
+        <form action="{{ url_for("child.home") }}">
+            <button class="glow-button" type="submit" style="text-align: center; margin: 1%">Go to Child Account</button>
+        </form>
+    {% endif %}
 </div>
 
 {% endblock content %}

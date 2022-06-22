@@ -84,14 +84,15 @@ def confirm_mission(child_id):
     if current_user.type == "parent":
         the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
         page_name = the_child.name + "Confirm Mission Completion"
+        confirm = False
         
         # Update mission status for child
         if request.method == "POST":
             the_child.mission_status = 4
             database.session.commit()
-            return redirect(url_for("parent.home"))
+            confirm = True
 
-        return render_template("confirm_mission.html", title=page_name, child=the_child)
+        return render_template("confirm_mission.html", title=page_name, child=the_child, confirm=confirm)
     else:
         logout_user()
         return redirect(url_for("parent.login"))
