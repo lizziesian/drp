@@ -45,11 +45,9 @@ def login():
             user = User.query.filter_by(username=form.username.data).first()
             login_user(user, remember=form.remember.data)
             next_page = request.args.get("next")
+            print(next_page)
             flash("You have been logged in!", "success")
-            if next_page:
-                return redirect(next_page)
-            else:
-                return redirect(url_for("child.home"))
+            return redirect(next_page) if next_page else redirect(url_for('child.home'))
         else:
             flash("Login Unsuccessful. Please check username and password", "danger")
     return render_template("login_child.html", title="Login", form=form)

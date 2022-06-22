@@ -4,41 +4,34 @@
 
 <div class="center">
 
-    {% if not confirm %}
-    <h1>Please confirm {{ child.name }} has completed his mission:</h1> 
+    {% if not decided %}
+    <h1>Please confirm if {{ child.name }} has completed his mission:</h1> 
 
-    <div style="margin: 2%">
-        <div style="display: inline-block; margin-right: 5%; margin-left: 5%;">
-            <form method="POST">
-                <button class="glow-button" type="submit">
-                    Confirm
-                </button>
-            </form>
-        </div>
+    <div>
+        <form name="confirm" method="POST">
+            <button class="glow-button" name="confirm" value=1 type="submit" style="margin: 3%; width: 250px; padding: 1rem">
+                Confirm Mission Completed
+            </button>
 
-        
-        <div style="display: inline-block; margin-right: 5%; margin-left: 5%;">
-            <form action="{{ url_for("parent.reset_mission", child_id=child["id"]) }}">
-                <button class="glow-button" type="submit">
-                    Deny
-                </button>
-            </form>
-        </div>
+            <button class="glow-button" name="confirm" value=0 type="submit" style="margin: 3%; width: 250px; padding: 1rem">
+                Deny & Reset Mission
+            </button>
+        </form>
     </div> 
     {% endif %}
 
-    {% if confirm %}
-        <form action="{{ url_for("parent.home") }}" style="margin: 3%">
+    {% if decided %}
+        <a href="{{ url_for('parent.home') }}" style="margin: 3%">
             <button class="glow-button" type="submit">
                 Go to Parent Home Page
             </button>
-        </form>
+        </a>
 
-        <form action="{{ url_for("child.home") }}" style="margin: 3%">
+        <a href="{{ url_for('child.wait_for_approval') }}" style="margin: 3%">
             <button class="glow-button" type="submit">
                 Go to Child Account
             </button>
-        </form>
+        </a>
     {% endif %}
 </div>
 
