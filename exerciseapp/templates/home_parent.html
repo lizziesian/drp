@@ -79,11 +79,21 @@
         <h4> Your account has no children linked to it. </h4>
 
     {% endif %}
+ <ul style="display:flex; justify-content:space-between; margin: 2%;">
+    <li style="margin-left:5%">
 
     <!-- Add child button -->
-    <form action="{{ url_for("parent.add_child") }}">        
-        <button id="add-button" class="glow-button" type="submit">Add child</button>
+    <form action="{{ url_for("parent.add_child") }}" >         
+        <button id="add-button" class="glow-button" type="submit" >Add child</button>
     </form>
+    </li>
+    <li style="margin-right:5%">
+
+    <form action="{{ url_for("parent.help_video") }}" >        
+        <button id="add-button" class="glow-button" >Help</button>
+    </form>
+</li>
+</ul>
 
 </div>
 

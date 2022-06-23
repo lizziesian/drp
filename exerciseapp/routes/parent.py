@@ -52,6 +52,10 @@ def logout():
     logout_user()
     return redirect(url_for("main.home"))
 
+@parent.route("/help_video")
+def help_video():
+    return render_template("help_video.html")
+
 @parent.route("/")
 @parent.route("/home")
 @login_required
