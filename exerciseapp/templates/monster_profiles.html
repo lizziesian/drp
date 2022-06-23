@@ -31,8 +31,8 @@
     <!-- Future monsters -->
     {% for monster in future_monsters %}
     <div class="monster-container">
-        {% set image = "images/" + "lock.png" %}
-        <p>Locked Monster</p>
+        {% set image = "images/" + "question_mark.png" %}
+        <p>{{ monster["name"] }}</p>
         <p>Locked Description</p>
         <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto">
     </div>
