@@ -32,36 +32,36 @@ def populate():
 
     # Blue Monster
     blue_monster = "Aqua the Water Monster"
-    blue_egg = Monster(id=4, name=blue_monster, level=0, image="blue-egg.png")
-    blue_adult = Monster(id=9, name=blue_monster, level=3, image="blue_adult.png", full_level=True)
+    blue_egg = Monster(id=5, name=blue_monster, level=0, image="blue-egg.png")
+    blue_adult = Monster(id=6, name=blue_monster, level=3, image="blue_adult.png", full_level=True)
     database.session.add(blue_egg)
     database.session.add(blue_adult)
 
     # Pink Monster
     pink_monster = "Bingo the Blossom Monster"
-    pink_egg = Monster(id=5, name=pink_monster, level=0, image="pink-egg.png")
-    pink_adult = Monster(id=10, name=pink_monster, level=3, image="pink_adult.png", full_level=True)
+    pink_egg = Monster(id=7, name=pink_monster, level=0, image="pink-egg.png")
+    pink_adult = Monster(id=8, name=pink_monster, level=3, image="pink_adult.png", full_level=True)
     database.session.add(pink_egg)
     database.session.add(pink_adult)
 
     # Purple Monster
     purple_monster = "Mog the Marsh Monster"
-    purple_egg = Monster(id=6, name=purple_monster, level=0, image="purple-egg.png")
-    purple_adult = Monster(id=11, name=purple_monster, level=3, image="purple_adult.png", full_level=True)
+    purple_egg = Monster(id=9, name=purple_monster, level=0, image="purple-egg.png")
+    purple_adult = Monster(id=10, name=purple_monster, level=3, image="purple_adult.png", full_level=True)
     database.session.add(purple_egg)
     database.session.add(purple_adult)
 
     # Red Monster
     red_monster = "Fifi the Fire Monster"
-    red_egg = Monster(id=7, name=red_monster, level=0, image="red-egg.png")
+    red_egg = Monster(id=11, name=red_monster, level=0, image="red-egg.png")
     red_adult = Monster(id=12, name=red_monster, level=3, image="red_adult.jpg", full_level=True)
     database.session.add(red_egg)
     database.session.add(red_adult)
 
     # Yellow Monster
     yellow_monster = "Stella the Star Monster"
-    yellow_egg = Monster(id=8, name=yellow_monster, level=0, image="yellow-egg.png")
-    yellow_adult = Monster(id=13, name=yellow_monster, level=3, image="yellow_adult.png", full_level=True)
+    yellow_egg = Monster(id=13, name=yellow_monster, level=0, image="yellow-egg.png")
+    yellow_adult = Monster(id=14, name=yellow_monster, level=3, image="yellow_adult.png", full_level=True)
     database.session.add(yellow_egg)
     database.session.add(yellow_adult)
     
