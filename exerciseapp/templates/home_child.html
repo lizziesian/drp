@@ -65,16 +65,22 @@
         <br>
 
         <!-- Monster Garden -->
+        <!-- Monster Garden only appears when mission completed. -->
+        {% if user.mission_status > 2 %}
         <form action="{{ url_for("child.space_garden") }}">
             <button class="glow-button" type="submit" style="text-align: center;">View Garden</button>
         </form>
         <br>
+        {% endif %}
     </div>
 
     <!-- Info button -->
+    <!-- Story only appears after mission completed. -->
+    {% if user.mission_status > 2 %}
     <form action="{{ url_for("child.story1") }}" style="float: left; margin: 2%">        
         <button id="story-button" class="glow-button" type="submit">Story</button>
     </form>
+    {% endif %}
 
     <!-- Logout button -->
     <form action="{{ url_for("child.logout") }}" style="float: right; margin: 2%">        
