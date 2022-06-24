@@ -23,7 +23,7 @@
     <div class="monster-container"> 
         {% set image = "images/" + monster['image'] %}
         <p>{{ monster["name"] }}</p>
-        <p>Description</p>
+        <p>Loves nature. Can grow magic plants which fight monsters. </p>
         <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto">
     </div>
     {% endfor %}
@@ -33,7 +33,7 @@
     <div class="monster-container">
         {% set image = "images/" + "question_mark.png" %}
         <p>{{ monster["name"] }}</p>
-        <p>Locked Description</p>
+        <p>You'll meet this monster soon!</p>
         <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto">
     </div>
     {% endfor %}
