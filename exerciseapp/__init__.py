@@ -46,3 +46,7 @@ from .cli import create_all, drop_all, populate
 app.cli.add_command(create_all)
 app.cli.add_command(drop_all)
 app.cli.add_command(populate)
+
+from .routes.websockets import (
+    messageReceived, handle_my_custom_event
+)
