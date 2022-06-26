@@ -1,4 +1,8 @@
+from distutils.log import debug
 from exerciseapp import app, socketio
+from exerciseapp.database import database
 
 if __name__ == '__main__':
-    socketio.run(app)
+    with app.app_context(): 
+        database.create_all()
+    socketio.run(app, use_reloader=False, debug=True)

@@ -5,9 +5,6 @@ To run locally on virtual enviroment (linux):
 * source venv/bin/activate
 * pip install --upgrade pip && pip install -r requirements.txt
 * python wsgi.py
-* flask create_all
-* flask populate
-* flask run
 
 To run locally on virtual enviroment (windows):
 * pip install virtualenv
@@ -17,6 +14,3 @@ To run locally on virtual enviroment (windows):
 * pip install --upgrade pip
 * pip install -r requirements.txt
 * python wsgi.py
-* flask create_all
-* flask populate
-* flask run

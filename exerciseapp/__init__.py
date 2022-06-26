@@ -1,5 +1,4 @@
 import os
-from xml.dom.minidom import Identified
 from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
@@ -8,7 +7,10 @@ from flask_socketio import SocketIO
 app = Flask(__name__, static_url_path="/exerciseapp/static")
 
 # sqlalchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+if os.environ.get('DATABASE_URL'):
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///user.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # random key used to encrypt cookies
