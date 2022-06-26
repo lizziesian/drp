@@ -14,6 +14,8 @@ To run locally on virtual enviroment (windows):
 * virtualenv venv
 * Set-ExecutionPolicy Unrestricted -Scope Process
 * . .\venv\Scripts\activate
+* pip install --upgrade pip
+* pip install -r requirements.txt
 * python wsgi.py
 * flask create_all
 * flask populate

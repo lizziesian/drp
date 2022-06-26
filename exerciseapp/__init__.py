@@ -3,6 +3,7 @@ from xml.dom.minidom import Identified
 from flask import Flask
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from flask_socketio import SocketIO
 
 app = Flask(__name__, static_url_path="/exerciseapp/static")
 
@@ -12,6 +13,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # random key used to encrypt cookies
 app.config['SECRET_KEY'] = '0f2f74728b136a8c24df1ba7750c27f2'
+
+# web socket
+socketio = SocketIO(app)
 
 # initialise database
 from .database import database
