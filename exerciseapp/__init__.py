@@ -50,5 +50,5 @@ app.cli.add_command(drop_all)
 app.cli.add_command(populate)
 
 from .routes.websockets import (
-    messageReceived, handle_my_custom_event
+    handle_parental_confirmation, handle_connection
 )

@@ -2,37 +2,77 @@
 
 {% block content %}
 
-<div class="center">
+<div class="status"></div>
 
-    {% if not decided %}
+<!-- Child id -->
+<div id="child_id" style="display:none">{{ child.id }}</div>
+
+
+<div id="choice" class="center">
+
     <h1>Please confirm if {{ child.name }} has completed his mission:</h1> 
 
     <div>
-        <form name="confirm" method="POST">
-            <button class="glow-button" name="confirm" value=1 type="submit" style="margin: 3%; width: 250px; padding: 1rem">
-                Confirm Mission Completed
-            </button>
+        <button class="glow-button" id="approve" onclick="decision_made()" style="margin: 3%; width: 250px; padding: 1rem">
+            Confirm Mission Completed
+        </button>
 
-            <button class="glow-button" name="confirm" value=0 type="submit" style="margin: 3%; width: 250px; padding: 1rem">
-                Deny & Reset Mission
-            </button>
-        </form>
+        <button class="glow-button" id="deny" onclick="decision_made()" style="margin: 3%; width: 250px; padding: 1rem">
+            Deny & Reset Mission
+        </button>
     </div> 
-    {% endif %}
-
-    {% if decided %}
-        <a href="{{ url_for('parent.home') }}" style="margin: 3%">
-            <button class="glow-button" type="submit">
-                Go to Parent Home Page
-            </button>
-        </a>
-
-        <a href="{{ url_for('child.wait_for_approval') }}" style="margin: 3%">
-            <button class="glow-button" type="submit">
-                Go to Child Account
-            </button>
-        </a>
-    {% endif %}
 </div>
+
+<div id="links" class="center" style="visibility: hidden;">
+    <a href="{{ url_for('parent.home') }}" style="margin: 3%">
+        <button class="glow-button" type="submit">
+            Go to Parent Home Page
+        </button>
+    </a>
+
+    <a href="{{ url_for('child.wait_for_approval') }}" style="margin: 3%">
+        <button class="glow-button" type="submit">
+            Go to Child Account
+        </button>
+    </a>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"></script>
+
+<script type="text/javascript">
+    var socket = io.connect('http://' + document.domain + ':' + location.port)
+
+    socket.on("connect", function() {
+        socket.emit('connected', {
+            data: 'Parent User Connected'
+        } )
+        $("#approve").on("click", function() {
+            let child_id = document.getElementById("child_id").innerHTML
+            socket.emit( "parental confirmation", {
+                child: child_id,
+                decision: "approved"
+            } )
+        } )
+        $("#deny").on("click", function() {
+            let child_id = document.getElementById("child_id").innerHTML
+            socket.emit( "parental confirmation", {
+                child : child_id,
+                decision: "denied"
+            } )
+        })
+    } )
+</script>
+
+<script>
+    var choice_buttons = document.getElementById("choice")
+    var link_buttons = document.getElementById("links")
+
+    function decision_made() {
+        choice_buttons.style.visibility = "hidden"
+        link_buttons.style.visibility = "visible"
+    }
+</script>
 
 {% endblock content %}

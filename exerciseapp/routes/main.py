@@ -7,11 +7,6 @@ main = Blueprint("main", __name__)
 def home():
     return render_template("select_account.html", title="Home")
 
-@main.route("/test")
-def test():
-    return render_template("test.html", title="Test")
-
-
 # Function to convert status number to string.
 def status(status_id):
     if status_id == 0:

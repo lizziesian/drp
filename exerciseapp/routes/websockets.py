@@ -1,10 +1,33 @@
-from exerciseapp import socketio
 from flask_socketio import send, emit
 
-def messageReceived(methods=['GET', 'POST']):
-    print('message was received!!!')
+from exerciseapp import socketio
+from exerciseapp.database import database
+from exerciseapp.models.user import ChildUser
 
-@socketio.on('my event')
-def handle_my_custom_event(json, methods=['GET', 'POST']):
-    print('received my event: ' + str(json))
-    socketio.emit('my response', json, callback=messageReceived)
+@socketio.on("connected")
+def handle_connection(json):
+    print("received my event: " + str(json))
+
+# Parental approval/denial
+@socketio.on("parental confirmation")
+def handle_parental_confirmation(json, methods=['GET', 'POST']):
+    print("received my event: " + str(json))
+    child_id = int(json['child'])
+    result = json['decision']
+    status = update_status(child_id, result)
+    new_json = {'child': child_id, 'status': status}
+    print("sent: " + str(new_json))
+    socketio.emit("status updated", new_json)
+
+# Update the child with id <child_id> based on the decision argument from the parental confirmation. 
+def update_status(child_id, decision):
+    child = ChildUser.query.get_or_404(child_id, "Child user not found.")
+    status = 3
+    if decision == "approved":
+        status = 4
+    if decision == "denied":
+        status = 0
+    child.mission_status = status
+    child.status_confirmed = True
+    database.session.commit()
+    return status

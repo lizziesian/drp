@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
+from flask_socketio import send, emit
 import random, string
 
 from exerciseapp.database import database
@@ -93,26 +94,13 @@ def generate_code():
         code += random.choice(string.ascii_letters + string.digits)
     return code
 
-@parent.route("/mission_confirmation/<child_id>", methods=["GET", "POST"])
+@parent.route("/mission_confirmation/<child_id>")
 @login_required
 def confirm_mission(child_id):
     if current_user.type == "parent":
         the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
         page_name = the_child.name + " Confirm Mission Completion"
-        decided = False
-        
-        # Update mission status for child
-        if request.method == "POST":
-            confirm = int(request.form["confirm"])
-            if confirm == 1:
-                the_child.mission_status = 4
-            else:
-                the_child.mission_status = 0
-            the_child.status_confirmed = True
-            database.session.commit()
-            decided = True
-
-        return render_template("confirm_mission.html", title=page_name, child=the_child, decided=decided)
+        return render_template("confirm_mission.html", title=page_name, child=the_child)
     else:
         logout_user()
         return redirect(url_for("parent.login"))

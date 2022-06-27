@@ -2,6 +2,10 @@
 
 {% block content %}
 
+<div id="id" style="display:none">{{ id }}</div>
+
+<div class="status"></div>
+
 <div class="center" style="margin: auto;">
 
     {% if status == 3 %}
@@ -37,5 +41,26 @@
 
     {% endif %}
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"></script>
+
+<script type="text/javascript">
+    var socket = io.connect('http://' + document.domain + ':' + location.port)
+
+    socket.on("connect", function() {
+        socket.emit('connected', {
+            data: 'Child User Connected'
+        } )
+    } )
+
+    socket.on("status updated", function( msg ) {
+        if (msg.child == document.getElementById("id").innerHTML) {
+            alert("updated")
+            $( "div.status" ).append("<h1> Status has changed "+msg.child+" child<\h1>")
+        }
+    } )
+</script>
 
 {% endblock content %}

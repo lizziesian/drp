@@ -205,7 +205,7 @@ def wait_for_approval():
     if current_user.type == "child":
         current_user.status_confirmed = False
         database.session.commit()
-        return render_template("wait_for_approval.html", title="Awaiting Parental Approval", status=current_user.mission_status)
+        return render_template("wait_for_approval.html", title="Awaiting Parental Approval", status=current_user.mission_status, id=current_user.id)
     else:
         logout_user()
         return redirect(url_for("child.login"))
