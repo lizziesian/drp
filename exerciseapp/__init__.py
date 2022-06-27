@@ -7,10 +7,7 @@ from flask_socketio import SocketIO
 app = Flask(__name__, static_url_path="/exerciseapp/static")
 
 # sqlalchemy
-if os.environ.get('DATABASE_URL'):
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///user.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # random key used to encrypt cookies
