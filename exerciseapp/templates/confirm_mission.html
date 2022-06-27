@@ -2,14 +2,11 @@
 
 {% block content %}
 
-<div class="status"></div>
-
-<!-- Child id -->
+<!-- child id -->
 <div id="child_id" style="display:none">{{ child.id }}</div>
 
-
+<!-- Section containing the approve and deny buttons -->
 <div id="choice" class="center">
-
     <h1>Please confirm if {{ child.name }} has completed his mission:</h1> 
 
     <div>
@@ -23,7 +20,9 @@
     </div> 
 </div>
 
+<!-- Section containing the links to parent home page and child wait for approval page -->
 <div id="links" class="center" style="visibility: hidden;">
+
     <a href="{{ url_for('parent.home') }}" style="margin: 3%">
         <button class="glow-button" type="submit">
             Go to Parent Home Page
@@ -38,7 +37,6 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
 <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"></script>
 
 <script type="text/javascript">
@@ -65,6 +63,7 @@
     } )
 </script>
 
+<!-- Javascript that controls which section is visible. -->
 <script>
     var choice_buttons = document.getElementById("choice")
     var link_buttons = document.getElementById("links")
