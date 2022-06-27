@@ -65,6 +65,7 @@ def home():
         all_statuses = []
         all_missions = []
         for child in current_user.children:
+            print(Mission.query.all())
             all_statuses.append(status(child.mission_status))
             all_missions.append(Mission.query.filter(Mission.id == child.mission).first())
         children = zip(current_user.children, all_statuses, all_missions)
@@ -138,8 +139,7 @@ def choose_level(child_id,missionId):
 def choose_exercise(child_id, missionId, level):
     if current_user.type == "parent":
         the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
-        if the_child.mission_status >=2:
-            return redirect(url_for('parent.choose_cool_down', missionId=missionId,child_id=child_id))
+      
         mission = Mission.query.filter(Mission.id == the_child.mission).first()
         if level == "1":
             exercises = xml_lib.readEasy()
@@ -150,11 +150,16 @@ def choose_exercise(child_id, missionId, level):
 
         if request.method == 'POST':
             mission.exercise=request.form["exerciseName"]
-            mission.warmup=request.form["warmup"]
-            mission.cooldown=request.form["cooldown"]
-            mission.warmupURL=request.form["warmupURL"]
-            mission.exerciseURL=request.form["exerciseURL"]
-            mission.cooldownURL=request.form["cooldownURL"]
+            for exercise in exercises:
+                if(exercise['exerciseName']==request.form["exerciseName"]):
+                    mission.cooldown=exercise['cooldownName']
+                    mission.warmup=exercise['warmupName']
+                    mission.warmupURL=exercise['warmup']
+                    mission.exerciseURL=exercise['exercise']
+                    mission.cooldownURL=exercise['cooldown']
+
+                
+
             database.session.commit()
             return redirect(url_for('parent.home'))
 

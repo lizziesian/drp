@@ -58,13 +58,7 @@
                     </iframe>
                     
                     <input type="radio" name="exerciseName" style="height:100px;width:30px;" value="{{exercise['exerciseName']}}" checked>
-                    <input type="radio" name="{{exercise['exerciseName']}}exerciseURL" style="display: none;" value="{{exercise['exerciseURL']}}" >
-                    <input type="radio" name="{{exercise['exerciseName']}}warmup" style="display: none;"value="{{exercise['warmup']}}">
-                    <input type="radio" name="{{exercise['exerciseName']}}warmupURL" style="display: none;" value="{{exercise['warmURL']}}" >
-                    <input type="radio" name="{{exercise['exerciseName']}}cooldown" style="display: none;" value="{{exercise['cooldown']}}" >
-                    <input type="radio" name="{{exercise['exerciseName']}}cooldownURL" style="display: none;" value="{{exercise['cooldownURL']}}" >
-                
-
+                    
                     <p>{{exercise['exerciseName']}}</p>
                     <p>About: {{exercise['exerciseContent']}}</p>
                     <p>Length: {{exercise['exerciseLength']}}</p>
@@ -74,13 +68,9 @@
         </div>
  
         {% endfor %}
-        <input type="text" name="exerciseURL" id="exerciseURL" style="display: none;" value="" >
-        <input type="text" name="warmup" id="warmup" style="display: none;"value="">
-        <input type="text" name="warmupURL" id="warmupURL" style="display: none;" value="" >
-        <input type="text" name="cooldown" id="cooldown" style="display: none;" value="" >
-        <input type="text" name="cooldownURL" id="cooldownURL" style="display: none;" value="" >
+
         {% endif %}
-        <button id="back-button" name= "running" class="glow-button"type="submit" style="position:relative;marigin:10px">Continue</button>
+        <button id="back-button" name= "running" class="glow-button"type="submit" style="position:relative;marigin:10px" onclick="onclick">Continue</button>
 
         
 
@@ -125,26 +115,7 @@
         window.onresize = function() {
             resetContentPos();
         }
-        window.onload = function(){
-            var input = document.getElementsByTagName('input');
-            var exerciseURL = document.getElementById("exerciseURL")
-            var warmup = document.getElementById("warmup")
-            var cooldown = document.getElementById("cooldown")
-            var warmupURL = document.getElementById("warmupURL")
-            var cooldownURL = document.getElementById("cooldownURL")
-            for (let i = 1; i < input.length; i++){
-                if(input[i].checked == true){
-                    name=input[i].value
-                    exercise=document.getElementsByName(name+"exerciseURL")[0]
-                    warmup=document.getElementsByName(name+"warmup")[0]
-                    cooldown=document.getElementsByName(name+"cooldown")[0]
-                    warmupURL=document.getElementsByName(name+"warmupURL")[0]
-                    cooldownURL=document.getElementsByName(name+"cooldownURL")[0]
 
-                }
-            }
-
-        }
 
     </script>
 </body>

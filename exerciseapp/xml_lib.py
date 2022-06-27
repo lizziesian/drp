@@ -25,16 +25,16 @@ def readEasy():
         exercise_dic = {}
         exercise_dic['warmup'] = exercise.getAttribute('warmup')
         exercise_dic['exercise'] = exercise.getAttribute('exercise')
-        exercise_dic['cooldown'] = exercise.getAttribute('ccooldown')
+        exercise_dic['cooldown'] = exercise.getAttribute('cooldown')
         exercise_dic['warmupName'] = exercise.getAttribute('warmupName')
         exercise_dic['exerciseName'] = exercise.getAttribute('exerciseName')
-        exercise_dic['cooldownName'] = exercise.getAttribute('ccooldownName')
+        exercise_dic['cooldownName'] = exercise.getAttribute('cooldownName')
         exercise_dic['warmupContent'] = exercise.getAttribute('warmupContent')
         exercise_dic['exerciseContent'] = exercise.getAttribute('exerciseContent')
         exercise_dic['cooldownContent'] = exercise.getAttribute('ccooldownContent')
         exercise_dic['warmupLength'] = exercise.getAttribute('warmupLength')
         exercise_dic['exerciseLength'] = exercise.getAttribute('exerciseLength')
-        exercise_dic['cooldownLength'] = exercise.getAttribute('ccooldownLength')
+        exercise_dic['cooldownLength'] = exercise.getAttribute('cooldownLength')
         exercise_arr.append(exercise_dic)
 
 
@@ -52,16 +52,16 @@ def readMedium():
         exercise_dic = {}
         exercise_dic['warmup'] = exercise.getAttribute('warmup')
         exercise_dic['exercise'] = exercise.getAttribute('exercise')
-        exercise_dic['cooldown'] = exercise.getAttribute('ccooldown')
+        exercise_dic['cooldown'] = exercise.getAttribute('cooldown')
         exercise_dic['warmupName'] = exercise.getAttribute('warmupName')
         exercise_dic['exerciseName'] = exercise.getAttribute('exerciseName')
-        exercise_dic['cooldownName'] = exercise.getAttribute('ccooldownName')
+        exercise_dic['cooldownName'] = exercise.getAttribute('cooldownName')
         exercise_dic['warmupContent'] = exercise.getAttribute('warmupContent')
         exercise_dic['exerciseContent'] = exercise.getAttribute('exerciseContent')
-        exercise_dic['cooldownContent'] = exercise.getAttribute('ccooldownContent')
+        exercise_dic['cooldownContent'] = exercise.getAttribute('cooldownContent')
         exercise_dic['warmupLength'] = exercise.getAttribute('warmupLength')
         exercise_dic['exerciseLength'] = exercise.getAttribute('exerciseLength')
-        exercise_dic['cooldownLength'] = exercise.getAttribute('ccooldownLength')
+        exercise_dic['cooldownLength'] = exercise.getAttribute('cooldownLength')
         exercise_arr.append(exercise_dic)
 
 
@@ -79,16 +79,16 @@ def readHard():
         exercise_dic = {}
         exercise_dic['warmup'] = exercise.getAttribute('warmup')
         exercise_dic['exercise'] = exercise.getAttribute('exercise')
-        exercise_dic['cooldown'] = exercise.getAttribute('ccooldown')
+        exercise_dic['cooldown'] = exercise.getAttribute('cooldown')
         exercise_dic['warmupName'] = exercise.getAttribute('warmupName')
         exercise_dic['exerciseName'] = exercise.getAttribute('exerciseName')
-        exercise_dic['cooldownName'] = exercise.getAttribute('ccooldownName')
+        exercise_dic['cooldownName'] = exercise.getAttribute('cooldownName')
         exercise_dic['warmupContent'] = exercise.getAttribute('warmupContent')
         exercise_dic['exerciseContent'] = exercise.getAttribute('exerciseContent')
-        exercise_dic['cooldownContent'] = exercise.getAttribute('ccooldownContent')
+        exercise_dic['cooldownContent'] = exercise.getAttribute('cooldownContent')
         exercise_dic['warmupLength'] = exercise.getAttribute('warmupLength')
         exercise_dic['exerciseLength'] = exercise.getAttribute('exerciseLength')
-        exercise_dic['cooldownLength'] = exercise.getAttribute('ccooldownLength')
+        exercise_dic['cooldownLength'] = exercise.getAttribute('cooldownLength')
         exercise_arr.append(exercise_dic)
 
 

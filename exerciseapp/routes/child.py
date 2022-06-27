@@ -19,7 +19,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         # daily mission
-        daily_mission = Mission(warm_up="warm_up", exercise="tmp6", cool_down="tmp7")
+        daily_mission = Mission(warmup="Quick Warmup - Miss The Meteor",warmupURL="https://www.youtube.com/embed/L9o56xLPmmk", exercise="Quick Exercise - Dodge The Meteors", exerciseURL="https://www.youtube.com/embed/BB1vvvBI1nQ ",cooldown="Quick CoolDown - Reach The Meteors",cooldownURL="https://www.youtube.com/embed/8aVjf8JUsjQ")
         database.session.add(daily_mission)
         database.session.commit()
         # user
@@ -142,7 +142,7 @@ def exercise_warmup():
     if current_user.type == "child":
         the_status = current_user.mission_status
         mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
-        name = mission.warm_up
+        name = mission.warmup
 
         # Update mission status and redirect to planets page
         if request.method == "POST":
@@ -150,7 +150,7 @@ def exercise_warmup():
             database.session.commit()
             return redirect(url_for("child.planet_missions"))
 
-        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=the_status)
+        return render_template("exercise_video.html", title="Exercise Mission", name=name, video=mission.warmupURL,status=the_status)
 
     else:
         logout_user()
@@ -171,7 +171,7 @@ def exercise_mission():
             database.session.commit()
             return redirect(url_for("child.planet_missions"))
 
-        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=the_status)
+        return render_template("exercise_video.html", title="Exercise Mission", name=name, video=mission.exerciseURL,status=the_status)
     
     else:
         logout_user()
@@ -184,7 +184,7 @@ def exercise_cooldown():
     if current_user.type == "child":
         the_status = current_user.mission_status
         mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
-        name = mission.cool_down
+        name = mission.cooldown
 
         # Update mission status and redirect to planets page
         if request.method == "POST":
@@ -192,7 +192,7 @@ def exercise_cooldown():
             database.session.commit()
             return redirect(url_for("child.wait_for_approval"))
 
-        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=the_status)
+        return render_template("exercise_video.html", title="Exercise Mission", name=name, video=mission.cooldownURL,status=the_status)
     
     else:
         logout_user()

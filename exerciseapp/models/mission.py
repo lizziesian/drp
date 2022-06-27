@@ -6,10 +6,10 @@ class Mission(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String, default="Miss the Meteor")
     # Strings containing names of warm-up, exercise, and cool-down videos in videos folder.
-    warmup = db.Column(db.String(20), nullable=True)
-    warmupURL = db.Column(db.String(20), nullable=True)
-    exercise = db.Column(db.String(20), nullable=True)
-    exerciseURL = db.Column(db.String(20), nullable=True)
-    cooldown = db.Column(db.String(20), nullable=True)
-    cooldownURL= db.Column(db.String(20), nullable=True)
+    warmup = db.Column(db.String, nullable=False)
+    warmupURL = db.Column(db.String, nullable=False)
+    exercise = db.Column(db.String, nullable=False)
+    exerciseURL = db.Column(db.String, nullable=False)
+    cooldown = db.Column(db.String, nullable=False)
+    cooldownURL= db.Column(db.String, nullable=False)
 
