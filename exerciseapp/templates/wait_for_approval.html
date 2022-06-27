@@ -3,39 +3,14 @@
 {% block content %}
 
 <div class="center" style="margin: auto;">
-
-    {% if status == 3 %}
-    
-        <h1>Awaiting Approval from Mission Control... </h1>
+        <h1>Waiting for Approval...</h1>
         <br>
 
-        <form action="{{ url_for("parent.home") }}">
-            <button class="glow-button" type="submit" style="text-align: center;">Go to Parent Account</button>
-        </form>
-
-    {% elif status == 4 %}
-
-        <h1>Mission Approved!</h1>
-        <br>
-
-        <form action="{{ url_for("child.mission_complete") }}">
-            <button class="glow-button" type="submit" style="text-align: center;">Continue</button>
-        </form>
-    
-    {% else %}
-
-        <h1> 
-            Error! <br>
-            Mission Failure!
-        </h1> <br>
-
-        <form action="{{ url_for("child.planet_missions") }}">
+        <form action="{{ url_for("child.home_mission_complete") }}">
             <button class="glow-button" type="submit" style="text-align: center;">
-                Let's Try Again!
+                Go to spaceship
             </button>
         </form>
-
-    {% endif %}
 </div>
 
 {% endblock content %}

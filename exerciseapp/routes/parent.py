@@ -107,7 +107,7 @@ def confirm_mission(child_id):
             if confirm == 1:
                 the_child.mission_status = 4
             else:
-                the_child.mission_status = 0
+                the_child.mission_status = 5
             the_child.status_confirmed = True
             database.session.commit()
             decided = True
