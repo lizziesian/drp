@@ -37,9 +37,9 @@
     </a>
 </div>
 
+<!-- Javascript that sends message stating that parent has confirmed mission. -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"></script>
-
 <script type="text/javascript">
     var socket = io.connect('http://' + document.domain + ':' + location.port)
 
@@ -58,8 +58,8 @@
             let parent_id = document.getElementById("parent_id").innerHTML
             socket.emit( "parental confirmation", {
                 child : child_id,
-                parent: parent_id,
-                decision: "denied"
+                parent : parent_id,
+                decision : "denied"
             } )
         })
     } )

@@ -140,18 +140,12 @@ def planet_missions():
 @login_required
 def exercise_warmup():
     if current_user.type == "child":
-        the_status = current_user.mission_status
         mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
         name = mission.warm_up
-
         # Update mission status and redirect to planets page
         if request.method == "POST":
-            current_user.mission_status = 1
-            database.session.commit()
             return redirect(url_for("child.planet_missions"))
-
-        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=the_status)
-
+        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=0, user=current_user, parent_id=current_user.parent)
     else:
         logout_user()
         return redirect(url_for("child.login"))
@@ -164,14 +158,10 @@ def exercise_mission():
         the_status = current_user.mission_status
         mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
         name = mission.exercise
-
         # Update mission status and redirect to planets page
         if request.method == "POST":
-            current_user.mission_status = 2
-            database.session.commit()
             return redirect(url_for("child.planet_missions"))
-
-        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=the_status)
+        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=1, user=current_user, parent_id=current_user.parent)
     
     else:
         logout_user()
@@ -185,15 +175,10 @@ def exercise_cooldown():
         the_status = current_user.mission_status
         mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
         name = mission.cool_down
-
         # Update mission status and redirect to planets page
         if request.method == "POST":
-            current_user.mission_status = 3
-            database.session.commit()
             return redirect(url_for("child.wait_for_approval"))
-
-        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=the_status)
-    
+        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=2, user=current_user, parent_id=current_user.parent)
     else:
         logout_user()
         return redirect(url_for("child.login"))

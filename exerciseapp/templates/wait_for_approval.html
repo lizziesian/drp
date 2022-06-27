@@ -9,10 +9,18 @@
 <div id="waiting" class="center" style="margin: auto; visibility: hidden;">
     <h1>Awaiting Approval from Mission Control... </h1>
     <br>
+    
+    <a href="{{ url_for('parent.home') }}" style="margin: 3%">
+        <button class="glow-button" type="submit">
+            Go to Parent Home Page
+        </button>
+    </a>
 
-    <form action="{{ url_for("parent.home") }}">
-        <button class="glow-button" type="submit" style="text-align: center;">Go to Parent Account</button>
-    </form>
+    <a href="{{ url_for('child.home') }}" style="margin: 3%">
+        <button class="glow-button" type="submit">
+            Go to Child Home Page
+        </button>
+    </a>
 </div>
 
 <!-- Section that appears after parent has confirmed mission complete. -->
@@ -79,6 +87,7 @@
         denied_section.style.visibility = "visible"
     }
 </script>
+
 <script>
     var status = document.getElementById("status").innerHTML
     window.onload = function() {

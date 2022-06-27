@@ -50,5 +50,5 @@ app.cli.add_command(drop_all)
 app.cli.add_command(populate)
 
 from .routes.websockets import (
-    handle_parental_confirmation, handle_connection
+    handle_parental_confirmation, handle_video_watched, handle_connection
 )
