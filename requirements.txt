@@ -12,5 +12,5 @@ flask-login
 flask-socketio==5.1.2
 python-engineio==4.3.2
 python-socketio==5.6.0
-eventlet
+eventlet==0.30.2
 gevent-websocket
