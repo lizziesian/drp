@@ -104,6 +104,11 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"></script>
 <script type="text/javascript">
     var socket = io.connect('http://' + document.domain + ':' + location.port)
+    socket.on("connect", function() {
+        socket.emit( "connected", {
+            data: "Child User Connected"
+        } )
+    } )
     socket.on("status updated", function( msg ) {
         if (msg.parent == document.getElementById("id").innerHTML) {
             location.reload()

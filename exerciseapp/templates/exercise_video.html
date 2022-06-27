@@ -72,6 +72,9 @@
     var socket = io.connect('http://' + document.domain + ':' + location.port)
 
     socket.on("connect", function() {
+        socket.emit( "connected", {
+            data: "Child User Connected"
+        } )
         $("#exercise-video").on("ended", function() {
             let child_id = document.getElementById("child_id").innerHTML
             let parent_id = document.getElementById("parent_id").innerHTML
