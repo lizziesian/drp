@@ -141,11 +141,11 @@ def planet_missions():
 def exercise_warmup():
     if current_user.type == "child":
         mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
-        name = mission.warm_up
+        name = mission.warmup
         # Update mission status and redirect to planets page
         if request.method == "POST":
             return redirect(url_for("child.planet_missions"))
-        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=0, user=current_user, parent_id=current_user.parent)
+        return render_template("exercise_video.html", title="Exercise Mission", video=mission.warmupURL,name=name, status=0, user=current_user, parent_id=current_user.parent)
     else:
         logout_user()
         return redirect(url_for("child.login"))
@@ -161,7 +161,7 @@ def exercise_mission():
         # Update mission status and redirect to planets page
         if request.method == "POST":
             return redirect(url_for("child.planet_missions"))
-        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=1, user=current_user, parent_id=current_user.parent)
+        return render_template("exercise_video.html", title="Exercise Mission", video=mission.exerciseURL,name=name, status=1, user=current_user, parent_id=current_user.parent)
     
     else:
         logout_user()
@@ -174,11 +174,11 @@ def exercise_cooldown():
     if current_user.type == "child":
         the_status = current_user.mission_status
         mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
-        name = mission.cool_down
+        name = mission.cooldown
         # Update mission status and redirect to planets page
         if request.method == "POST":
             return redirect(url_for("child.wait_for_approval"))
-        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=2, user=current_user, parent_id=current_user.parent)
+        return render_template("exercise_video.html", title="Exercise Mission", video=mission.cooldownURL,name=name, status=2, user=current_user, parent_id=current_user.parent)
     else:
         logout_user()
         return redirect(url_for("child.login"))

@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <wexerciseEasy file="warm_up.mp4" title="warm_up"  name="Default Warmup - Miss the Meteor" count="0" content="Sets of marching, jumping, touching the floor and spinning around."/>
-	<wexerciseMedium file="tmp1.mp4" title="exercise7" name= "Tmp 1" count="0" content="Sets of marching, jumping, touching the floor and spinning around."/>
-	<eexerciseHard file="tmp2.mp4" title="exercise4" name= "Tmp 2" count="1" content=""/>
-	<cexerciseMedium file="tmp3.mp4" title="exercise5" name= "Tmp 3" count="0" content=""/>
-	<cexerciseHard file="tmp4.mp4" title="exercise6" name= "Tmp 4"  count="0" content=""/>
-	<eexerciseEasy file="tmp6.mp4" title="exercise8"  name="Default Warmup - Miss the Meteor" count="0" content="Sets of marching, jumping, touching the floor and spinning around."/>
-	<cexerciseEasy file="tmp7.mp4" title="exercise9"  name="Default Warmup - Miss the Meteor" count="0" content="Sets of marching, jumping, touching the floor and spinning around."/>
-	<wexerciseEasy file="tmp8.mp4" title="exercise10"  name="Default Warmup - Miss the Meteor" count="0" content="Sets of marching, jumping, touching the floor and spinning around."/>
-	<wexerciseEasy file="tmp9.mp4" title="exercise11"  name="Default Warmup - Miss the Meteor" count="0" content="Sets of marching, jumping, touching the floor and spinning around."/>
-	<wexerciseEasy file="tmp10.mp4" title="exercise12"  name="Default Warmup - Miss the Meteor" count="0" content="Sets of marching, jumping, touching the floor and spinning around."/>
-	
+
+	<Easy warmup ="https://www.youtube.com/embed/L9o56xLPmmk" exercise="https://www.youtube.com/embed/BB1vvvBI1nQ " cooldown="https://www.youtube.com/embed/8aVjf8JUsjQ "
+	      warmupName="Quick Warmup - Miss The Meteor" exerciseName="Quick Exercise - Dodge The Meteors "  cooldownName="Quick CoolDown - Reach The Meteors"
+		  warmupContent="Sets of marching, jumping, touching the floor and spinning around."  exerciseContent="Sets of martching, circling running and hopping" cooldownContent="Sets of stretching and recovering breath"
+		  warmupLength="2:28" exerciseLength="1:37" cooldownLength="1:42"/>
+	<Medium warmup="https://www.youtube.com/embed/0chBROaweas " exercise="https://www.youtube.com/embed/y7eBR9c_iXk " cooldown="https://www.youtube.com/embed/yQ4rZa404Y0 "
+	      warmupName="WarmUp Mission" exerciseName="Exercise Mission"  cooldownName="CoolDown Mission"
+		  warmupContent="Sets of stretching,jogging,jumping,releasing muscle"   exerciseContent="Sets of martching,star jumps,running,hopping"  cooldownContent="Sets of walking on the spot,stretching, relaxing muscles, martching,recovering breaths" 
+		  warmupLength="5:30" exerciseLength="5:25" cooldownLength="3:24"/>
 	
 	
 </root>
