@@ -38,6 +38,8 @@ class ChildUser(User):
     tutorial = db.Column(db.Boolean, default=False)
     # Boolean storing whether parent has confirmed status
     status_confirmed = db.Column(db.Boolean, default=False)
+    # Boolean storing whether the child has read the status of mission (approved / denied)
+    status_read = db.Column(db.Boolean, default=False)
 
 # Parent account
 # There is also a one-to-many relationship between parents and children. 

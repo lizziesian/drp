@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    {% if status == 4 %}
+
+        <h1>Mission Approved!</h1>
+        <br>
+
+        <form action="{{ url_for("child.mission_complete") }}">
+            <button class="glow-button" type="submit" style="text-align: center;">Continue</button>
+        </form>
+
+    {% else %}
+
+        <h1>
+            Error! <br>
+            Mission Failure!
+        </h1> <br>
+
+        <form action="{{ url_for("child.mission_reset") }}">
+            <button class="glow-button" type="submit" style="text-align: center;">
+                Let's Try Again!
+            </button>
+        </form>
+
+    {% endif %}
+{% endblock content %}

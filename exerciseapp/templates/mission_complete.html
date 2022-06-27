@@ -4,17 +4,12 @@
 
 <div class="center">
     <h1> Congratulations {{ user["name"] }}, Mission Complete!</h1>
-    {% if user["level"] == 1 %}
-        <h2> You have now completed 1 mission. </h2>
-    {% else %}
-        <h2> You have now completed {{ user["level"] }} missions. </h2>
-    {% endif %}
-    <h1> Your monster has grown! </h1>
+    <h1> Your monster has grown and the spaceship has more fuel! </h1>
     
     {% set image = "images/" + monster['image'] %}
     <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto" class="shaking_img"> 
 
-    <form action="{{ url_for("child.home") }}" style="margin-block: auto">
+    <form action="{{ url_for("child.home_mission_complete") }}" style="margin-block: auto">
         <button id="home-page-button" class="glow-button" type="submit">Return to Home Page</button>
     </form>
 </div>

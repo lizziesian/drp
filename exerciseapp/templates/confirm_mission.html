@@ -5,6 +5,7 @@
 <!-- ids -->
 <div id="child_id" style="display:none">{{ child.id }}</div>
 <div id="parent_id" style="display:none">{{ parent.id }}</div>
+<div id="status" style="display:none">{{ child.mission_status }}</div>
 
 <!-- Section containing the approve and deny buttons -->
 <div id="choice" class="center">
@@ -69,6 +70,20 @@
 <script>
     var choice_buttons = document.getElementById("choice")
     var link_buttons = document.getElementById("links")
+
+    var status = document.getElementById("status").innerHTML
+    window.onload = function() {
+        if (status == 3) {
+            decision_to_be_made()
+        } else {
+            decision_made()
+        }
+    }
+
+    function decision_to_be_made() {
+        choice_buttons.style.visibility = "visible"
+        link_buttons.style.visibility = "hidden"
+    }
 
     function decision_made() {
         choice_buttons.style.visibility = "hidden"
