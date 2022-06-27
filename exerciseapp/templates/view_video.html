@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div id="name" style="display:none">Watch your chosen set of warmup,exercise and cooldown:</div>
+
+<div class="center" style="height: 100vh;"> 
+    <iframe id = "exercise-video" class="exercise" src={{warmup}} width="400" height="40%" controls>WarmUp</iframe>
+    <iframe id = "exercise-video" class="exercise" src={{exercise}} width="400" height="40%" controls>Exercise</iframe>
+    <iframe id = "exercise-video" class="exercise" src={{cooldown}} width="400" height="40%" controls>CoolDown</iframe>
+    <br>
+    
+    <div style="width: 100vh; margin: 0 auto;"> 
+        <form method="POST">        
+            <button id="next-button" class="glow-button" type="submit">
+                Back
+            </button>
+        </form>
+    </div>
+
+</div>
+
+
+
+{% endblock content %}

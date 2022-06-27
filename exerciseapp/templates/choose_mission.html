@@ -38,7 +38,7 @@
 
 <body>
     <form id="container" method="post">
-        <h1>Please choose a {{exercise_type}} </h1>
+        <h1>Please choose your preferred exercise </h1>
         
         {% if exercises|length ==0 %}
         <div class="center" style="text-align:center; display:flexbox;height:320px; width:1270px; padding: 2%"> 
@@ -49,25 +49,36 @@
         {% else %}
 
         {% for exercise in exercises %}
-        <div id = "videos" class="box-out" style="height:320px; width:630px; padding: 2%">
+        <div id = "videos" class="box-out" style="height:320px; width:630px; padding: 2%;overflow: scroll;">
             <ul>
-                <li style="height:400px;width:630px;">
+                <li style="height:400px;width:630px;overflow: scroll;">
 
-                    {% set video = "videos/" + exercise['file']  %}
-                    <video class="exercise box-in" data-file="{{exercise['file']}}" width="400" height="50%" controls>
-                        <source src={{ url_for('static', filename=video) }} type="video/mp4" />
-                    </video>
+
+                    <iframe class="exercise box-in" data-file=" url_for({{exercise['exercise']}})" src="{{exercise['exercise']}}" width="400" height="50%" controls>
+                    </iframe>
                     
-                    <input type="radio" name="running" style="height:100px;width:30px;" value="{{exercise['file']}}" checked>
+                    <input type="radio" name="exerciseName" style="height:100px;width:30px;" value="{{exercise['exerciseName']}}" checked>
+                    <input type="radio" name="{{exercise['exerciseName']}}exerciseURL" style="display: none;" value="{{exercise['exerciseURL']}}" >
+                    <input type="radio" name="{{exercise['exerciseName']}}warmup" style="display: none;"value="{{exercise['warmup']}}">
+                    <input type="radio" name="{{exercise['exerciseName']}}warmupURL" style="display: none;" value="{{exercise['warmURL']}}" >
+                    <input type="radio" name="{{exercise['exerciseName']}}cooldown" style="display: none;" value="{{exercise['cooldown']}}" >
+                    <input type="radio" name="{{exercise['exerciseName']}}cooldownURL" style="display: none;" value="{{exercise['cooldownURL']}}" >
+                
 
-                    <p>{{exercise['name']}}</p>
-                    <p>About: {{exercise['content']}}</p>
+                    <p>{{exercise['exerciseName']}}</p>
+                    <p>About: {{exercise['exerciseContent']}}</p>
+                    <p>Length: {{exercise['exerciseLength']}}</p>
 
                 </li>>
             </ul>
         </div>
  
         {% endfor %}
+        <input type="text" name="exerciseURL" id="exerciseURL" style="display: none;" value="" >
+        <input type="text" name="warmup" id="warmup" style="display: none;"value="">
+        <input type="text" name="warmupURL" id="warmupURL" style="display: none;" value="" >
+        <input type="text" name="cooldown" id="cooldown" style="display: none;" value="" >
+        <input type="text" name="cooldownURL" id="cooldownURL" style="display: none;" value="" >
         {% endif %}
         <button id="back-button" name= "running" class="glow-button"type="submit" style="position:relative;marigin:10px">Continue</button>
 
@@ -95,7 +106,6 @@
                 exercise_items[i].addEventListener('play', function(t) {
                     var filename = t.target.dataset.file; //obtain the information of the data file
                     var xhr = new XMLHttpRequest();
-                    xhr.open('GET', 'incrMovie?name=' + filename);
                     xhr.setRequestHeader('Content-Type', 'text/plain');
 
 
@@ -114,6 +124,26 @@
         })();
         window.onresize = function() {
             resetContentPos();
+        }
+        window.onload = function(){
+            var input = document.getElementsByTagName('input');
+            var exerciseURL = document.getElementById("exerciseURL")
+            var warmup = document.getElementById("warmup")
+            var cooldown = document.getElementById("cooldown")
+            var warmupURL = document.getElementById("warmupURL")
+            var cooldownURL = document.getElementById("cooldownURL")
+            for (let i = 1; i < input.length; i++){
+                if(input[i].checked == true){
+                    name=input[i].value
+                    exercise=document.getElementsByName(name+"exerciseURL")[0]
+                    warmup=document.getElementsByName(name+"warmup")[0]
+                    cooldown=document.getElementsByName(name+"cooldown")[0]
+                    warmupURL=document.getElementsByName(name+"warmupURL")[0]
+                    cooldownURL=document.getElementsByName(name+"cooldownURL")[0]
+
+                }
+            }
+
         }
 
     </script>

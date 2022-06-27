@@ -124,43 +124,13 @@ def choose_level(child_id,missionId):
         the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
         if request.method == 'POST':
             level=request.form["level"]
-            return redirect(url_for('parent.choose_warm_up', missionId=missionId,child_id=child_id, level=level))
+            return redirect(url_for('parent.choose_exercise', missionId=missionId,child_id=child_id, level=level))
         return render_template("choose_level.html", name=the_child.name, missionId=missionId,child_id=child_id)
     else:
         logout_user()
         return redirect(url_for("parent.login"))
 
 
-@parent.route("/choose_warm_up/<child_id>/<int:missionId>/<level>", methods=('GET', 'POST'))
-@login_required
-def choose_warm_up(child_id, missionId, level):
-    if current_user.type == "parent":
-        the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
-        if the_child.mission_status >= 1:
-            if the_child.mission_status <= 3:
-                return redirect(url_for('parent.choose_exercise', missionId=missionId, child_id=child_id, level=level))
-    
-        mission = Mission.query.filter(Mission.id == the_child.mission).first()
-        exercises=[]
-
-        if level =="1" :
-            exercises = xml_lib.read_wexercisesEasy()
-        if level =="2" :
-            exercises = xml_lib.read_wexercisesMedium()
-        if level =="3" :
-            exercises = xml_lib.read_wexercisesHard()
-
-        if request.method == 'POST':
-            video=request.form["running"]
-            mission.warm_up=video.removesuffix(".mp4")
-            database.session.commit()
-            return redirect(url_for('parent.choose_exercise', missionId=missionId, child_id=child_id, level=level))
-
-        return render_template("choose_mission.html", exercise_type="warm up", exercises=exercises, missionId=id, child_id=child_id, title="Warmup Choice")
-    
-    else:
-        logout_user()
-        return redirect(url_for("parent.login"))
 
 
 @parent.route("/choose_exercise/<child_id>/<int:missionId>/<level>", methods=('GET', 'POST'))
@@ -172,46 +142,28 @@ def choose_exercise(child_id, missionId, level):
             return redirect(url_for('parent.choose_cool_down', missionId=missionId,child_id=child_id))
         mission = Mission.query.filter(Mission.id == the_child.mission).first()
         if level == "1":
-            exercises = xml_lib.read_eexercisesEasy()
+            exercises = xml_lib.readEasy()
         if level == "2":
-            exercises = xml_lib.read_eexercisesMedium()
+            exercises = xml_lib.readMedium()
         if level == "3" :
-            exercises = xml_lib.read_eexercisesHard()
+            exercises = xml_lib.readHard()
 
         if request.method == 'POST':
-            video=request.form["running"]
-            mission.exercise=video.removesuffix(".mp4")
-            database.session.commit()
-            return redirect(url_for('parent.choose_cool_down', missionId=missionId, child_id=child_id, level=level))
-
-        return render_template("choose_mission.html",  exercise_type="exercise", exercises=exercises, missionId=id, child_id=child_id, title="Mission Choice")
-
-    else:
-        logout_user()
-        return redirect(url_for("parent.login"))
-
-
-@parent.route("/choose_cool_down/<child_id>/<int:missionId>/<level>", methods=('GET', 'POST'))
-@login_required
-def choose_cool_down(child_id, missionId, level):
-    if current_user.type == "parent":
-        the_child = ChildUser.query.get_or_404(child_id, "Child user not found.")
-        mission = Mission.query.filter(Mission.id == the_child.mission).first()
-        if level =="1" :
-            exercises = xml_lib.read_cexercisesEasy()
-        if level =="2" :
-            exercises = xml_lib.read_cexercisesMedium()
-        if level=="3" :
-            exercises = xml_lib.read_cexercisesHard()
-
-        if request.method == 'POST':
-            video=request.form["running"]
-            mission.cool_down=video.removesuffix(".mp4")
+            mission.exercise=request.form["exerciseName"]
+            mission.warmup=request.form["warmup"]
+            mission.cooldown=request.form["cooldown"]
+            mission.warmupURL=request.form["warmupURL"]
+            mission.exerciseURL=request.form["exerciseURL"]
+            mission.cooldownURL=request.form["cooldownURL"]
             database.session.commit()
             return redirect(url_for('parent.home'))
 
-        return render_template("choose_mission.html", exercise_type="cool down", exercises=exercises,missionId=missionId,child_id=child_id,title="Mission Choice")
+        return render_template("choose_mission.html",  exercises=exercises, missionId=id, child_id=child_id)
 
     else:
         logout_user()
         return redirect(url_for("parent.login"))
+
+
+
+
