@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<div id="id" style="display:none">{{ parent.id }}</div>
+
 <head>
     <style>
         .body {
@@ -96,5 +98,18 @@
 </ul>
 
 </div>
+
+<!-- Javascript that refreshes page upon receiving message from server. -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"></script>
+<script type="text/javascript">
+    var socket = io.connect('http://' + document.domain + ':' + location.port)
+    socket.on("status updated", function( msg ) {
+        if (msg.parent == document.getElementById("id").innerHTML) {
+            location.reload()
+        }
+    } )
+</script>
+
 
 {% endblock content %}

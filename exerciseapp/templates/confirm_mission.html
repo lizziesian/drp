@@ -2,8 +2,9 @@
 
 {% block content %}
 
-<!-- child id -->
+<!-- ids -->
 <div id="child_id" style="display:none">{{ child.id }}</div>
+<div id="parent_id" style="display:none">{{ parent.id }}</div>
 
 <!-- Section containing the approve and deny buttons -->
 <div id="choice" class="center">
@@ -43,20 +44,21 @@
     var socket = io.connect('http://' + document.domain + ':' + location.port)
 
     socket.on("connect", function() {
-        socket.emit('connected', {
-            data: 'Parent User Connected'
-        } )
         $("#approve").on("click", function() {
             let child_id = document.getElementById("child_id").innerHTML
+            let parent_id = document.getElementById("parent_id").innerHTML
             socket.emit( "parental confirmation", {
                 child: child_id,
+                parent: parent_id,
                 decision: "approved"
             } )
         } )
         $("#deny").on("click", function() {
             let child_id = document.getElementById("child_id").innerHTML
+            let parent_id = document.getElementById("parent_id").innerHTML
             socket.emit( "parental confirmation", {
                 child : child_id,
+                parent: parent_id,
                 decision: "denied"
             } )
         })

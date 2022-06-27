@@ -11,12 +11,11 @@ def handle_connection(json):
 # Parental approval/denial
 @socketio.on("parental confirmation")
 def handle_parental_confirmation(json, methods=['GET', 'POST']):
-    print("received my event: " + str(json))
     child_id = int(json['child'])
+    parent_id = int(json['parent'])
     result = json['decision']
     status = update_status(child_id, result)
-    new_json = {'child': child_id, 'status': status}
-    print("sent: " + str(new_json))
+    new_json = {'child': child_id, 'parent': parent_id, 'status': status}
     socketio.emit("status updated", new_json)
 
 # Update the child with id <child_id> based on the decision argument from the parental confirmation. 
