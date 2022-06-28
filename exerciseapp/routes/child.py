@@ -250,9 +250,83 @@ def story3():
         logout_user()
         return redirect(url_for("child.login"))
 
-@child.route("/story4", methods=["GET", "POST"])
+@child.route("/story4")
 @login_required
 def story4():
+    if current_user.type == "child":
+        return render_template("story4.html", title="Mission Story")
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+@child.route("/story5")
+@login_required
+def story5():
+    if current_user.type == "child":
+        return render_template("story5.html", title="Mission Story")
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+
+@child.route("/story6")
+@login_required
+def story6():
+    if current_user.type == "child":
+        return render_template("story6.html", title="Mission Story")
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+@child.route("/story7")
+@login_required
+def story7():
+    if current_user.type == "child":
+        return render_template("story7.html", title="Mission Story")
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+@child.route("/story8")
+@login_required
+def story8():
+    if current_user.type == "child":
+        return render_template("story8.html", title="Mission Story")
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+
+@child.route("/story9")
+@login_required
+def story9():
+    if current_user.type == "child":
+        return render_template("story9.html", title="Mission Story")
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+@child.route("/story10")
+@login_required
+def story10():
+    if current_user.type == "child":
+        return render_template("story10.html", title="Mission Story")
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+@child.route("/story11")
+@login_required
+def story11():
+    if current_user.type == "child":
+        return render_template("story11.html", title="Mission Story")
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+@child.route("/story12", methods=["GET", "POST"])
+@login_required
+def story12():
     if current_user.type == "child":
         not_first = current_user.tutorial
         if request.method == "POST":

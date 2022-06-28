@@ -3,12 +3,10 @@
 {% block content %}
 
 <div class="center">
-    <h1>These missions need to be completed to rescue monsters from the bog creature!</h1>
     
-    {% set image = "images/backstory/bog-monster.png" %}
+    {% set image = "images/backstory/alien3.png" %}
     <img src="{{ url_for('static', filename=image) }}" height="200vh" width="auto"> 
 
-    <h1>The bog creature loves to eat monsters!</h1>
 
     <form action="{{ url_for("child.story4") }}" style="margin-block: auto; margin: 2%">
         <button id="next-story-page-button" class="glow-button" type="submit">=></button>
