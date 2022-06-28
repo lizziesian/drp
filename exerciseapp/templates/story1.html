@@ -5,7 +5,7 @@
 <div class="center">
     <h1>Hi! Welcome to the Shooting Star Space Agency!</h1>
     {% set image = "images/backstory/alien1.png" %}
-    <img src="{{ url_for('static', filename=image) }}" height="300vh" width="auto"> 
+    <img src="{{ url_for('static', filename=image) }}" width="100%" height="auto" style="max-width: 600px"> 
 
     <form action="{{ url_for("child.story2") }}" style="margin-block: auto; margin: 2%">
         <button id="next-story-page-button" class="glow-button" type="submit">=></button>

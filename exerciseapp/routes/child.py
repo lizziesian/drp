@@ -46,6 +46,9 @@ def login():
             user = User.query.filter_by(username=form.username.data).first()
             login_user(user, remember=form.remember.data)
             flash("You have been logged in!", "success")
+            # If the child has not watched the tutorial, the user is directed to the Backstory.
+            if child_user.tutorial == False:
+                return redirect(url_for("child.story1"))
             # If the child has finished all the exercise videos, then user is directed to 
             # the Mission Complete Home Page.
             if child_user.mission_status >= 3:
