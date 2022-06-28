@@ -1,0 +1,29 @@
+{% extends "layout_space.html" %}
+
+<!-- Load images faster -->
+{% block preload_images %}
+    <link rel="preload" href="{{ url_for('static', filename='images/backstory/monsters.png') }}" as "image">
+{% endblock preload_images %}
+
+{% block images %}
+    <div>
+        <img src="{{ url_for('static', filename='images/backstory/monsters.png') }}" style="display:none"/>
+    </div>
+{% endblock images %}
+
+
+{% block content %}
+
+<div class="center">
+    <h1>Long ago, all the monsters lived happily!</h1>
+    
+    {% set image = "images/backstory/monsters.png" %}
+    <img src="{{ url_for('static', filename=image) }}" height="270vh" width="auto"> 
+
+    <form action="{{ url_for("child.story6") }}" style="margin-block: auto; margin: 2%">
+        <button id="next-story-page-button" class="glow-button" type="submit">=></button>
+    </form>
+
+</div>
+
+{% endblock content %}

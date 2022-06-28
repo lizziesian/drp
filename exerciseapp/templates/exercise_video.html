@@ -1,5 +1,4 @@
-
-{% extends "layout.html" %}
+{% extends "layout_space.html" %}
 
 {% block content %}
 
@@ -111,9 +110,6 @@ $(document).ready(function () {
     var socket = io.connect(window.location.protocol + '//' + document.domain + ':' + location.port)
 
     socket.on("connect", function() {
-        socket.emit( "connected", {
-            data: "Child User Connected"
-        } )
         $("#next-button").on("click", function() {
             let child_id = document.getElementById("child_id").innerHTML
             let parent_id = document.getElementById("parent_id").innerHTML

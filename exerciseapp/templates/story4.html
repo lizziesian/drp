@@ -1,18 +1,29 @@
-{% extends "layout.html" %}
+{% extends "layout_space.html" %}
+
+<!-- Load images faster -->
+{% block preload_images %}
+    <link rel="preload" href="{{ url_for('static', filename='images/backstory/alien4.png') }}" as "image">
+{% endblock preload_images %}
+
+{% block images %}
+    <div>
+        <img src="{{ url_for('static', filename='images/backstory/alien4.png') }}" style="display:none"/>
+    </div>
+{% endblock images %}
+
 
 {% block content %}
 
 <div class="center">
-    <h1>You'll come across different monsters as you complete more missions.</h1>
-    
-    {% set image = "images/evolution.png" %}
-    <img src="{{ url_for('static', filename=image) }}" height="270vh" width="auto"> 
+   
+    {% set image = "images/backstory/alien4.png" %}
+    <img src="{{ url_for('static', filename=image) }}" height="70%" width="auto" style="max-height: 500px"> 
 
-    <h1>Each of these monsters starts off as an egg, it will hatch and grow overtime into a full monster as you complete missions!</h1>
-
-    <form action="{{ url_for("child.home") }}" style="margin-block: auto; margin: 2%">
-        <button id="next-story-page-button" class="glow-button" type="submit">Click the button to start your first mission!</button>
+    <form action="{{ url_for("child.story5") }}" style="margin-block: auto; margin: 2%">
+        <button id="next-story-page-button" class="glow-button" type="submit">=></button>
     </form>
+   
+
 </div>
 
 {% endblock content %}

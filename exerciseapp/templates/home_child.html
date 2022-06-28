@@ -1,96 +1,110 @@
-{% extends "layout.html" %}
+{% extends "layout_spaceship.html" %}
 
 {% block content %}
 
 <div id="id" style="display:none">{{ user.id }}</div>
 <div id="status" style="display:none">{{ user.mission_status }}</div>
 
-<div>
-
-    <!-- Information -->
-    <div class="center"> 
-
-        <!-- Welcome message -->
-        <h1> Welcome {{ user["name"] }}! </h1>
-
-        <!-- Current monster -->
-        <div> 
-            <h2>
-                Your current monster is {{ monster["name"] }}.
-                <br>
-                He is at level {{ monster["level"] }}.
-            </h2>
-
-            {% set image = "images/" + monster['image'] %}
-            <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto" class="shaking_img">
-        
-        </div>
-
-        <div>
-            <!-- Daily mission -->
-            <div style="display: inline-block; margin-right:5%; margin-left: 5%;">
-                <h2>
-                    Daily Mission: <br>
-                    {{ mission["name"] }}
-                </h2>
-            </div>
-
-            <!-- Mission status -->
-            <div style="display: inline-block; margin-right: 5%; margin-left: 5%;">
-                <h2>
-                    Mission Status: <br>
-                    {{ status }}
-                </h2>
-            </div>
-        </div>
-        <br>
-
-        <!-- Mission Start -->
-        {% if user.mission_status < 3 %}
-        <form action="{{ url_for("child.mission_start") }}">
-            <button class="glow-button" type="submit" style="text-align: center;">
-                {% if user.mission_status == 0 %}
-                START MISSION
-                {% else %}
-                CONTINUE MISSION
-                {% endif %}
-            </button>
-        </form>
-        {% endif %}
-        {% if user.mission_status == 3 %}
-        <form action="{{ url_for("child.wait_for_approval") }}">
-            <button class="glow-button" type="submit" style="text-align: center;">
-                CONTINUE MISSION
-            </button>
-        </form>
-        {% endif %}
-
-        <br>
-
-        <!-- Monster Garden -->
-        <!-- Monster Garden only appears when mission completed. -->
-        {% if user.mission_status > 2 %}
-        <form action="{{ url_for("child.space_garden") }}">
-            <button class="glow-button" type="submit" style="text-align: center;">View Garden</button>
-        </form>
-        <br>
-        {% endif %}
-    </div>
-
-    <!-- Info button -->
+<!-- Backstory button on the left and logout button on the right. -->
+<div style="display:flex; justify-content:space-between; margin: 2%;">
     <!-- Story only appears after mission completed. -->
-    {% if user.mission_status > 2 %}
-    <form action="{{ url_for("child.story1") }}" style="float: left; margin: 2%">        
-        <button id="story-button" class="glow-button" type="submit">Story</button>
+    <form action="{{ url_for("child.story1") }}">        
+        <button id="story-button" class="glow-button" type="submit">
+            Backstory
+        </button>
     </form>
-    {% endif %}
 
     <!-- Logout button -->
-    <form action="{{ url_for("child.logout") }}" style="float: right; margin: 2%">        
+    <form action="{{ url_for("child.logout") }}">        
         <button id="back-button" class="glow-button" type="submit">Logout</button>
     </form>
-
 </div>
+<br>
+
+<!-- Information -->
+<div style="text-align: center; display:flex; justify-content: center;"> 
+
+    <div style="width:fit-content; background-color: #0070C0; padding: 2%; border-radius: 15px;">
+        
+        <!-- Message box -->
+        <div style="background-color: #5B9BD5; padding: 1%; border-radius: 15px;">
+            <!-- Welcome message -->
+            <h1 style="color: black"> Welcome {{ user["name"] }}! </h1>
+
+            <h3 style="color: black">
+                {% if user.mission_status == 3 %}
+                    Your daily mission is being processed...
+                {% elif user.mission_status == 6 %} 
+                    Mission succeeded!
+                {% elif (user.mission_status == 4) and (user.status_read == True) %}
+                    Mission succeeded!
+                {% elif (user.mission_status == 5) and (user.status_read == True) %} 
+                    Mission denied, let's try again!
+                {% elif user.mission_status >= 4 and (user.status_read == False) %}
+                    Alert! Mission Update!
+                {% else %}
+                    Your daily mission has not yet been completed.
+                {% endif %}
+            </h3>
+        </div>
+        <br>
+        
+        <!--Monster and Fuel Bar -->
+        <div style="display:flex; justify-content:space-between; margin: 2%;">
+
+            <!-- Current monster -->
+            <div style="margin-right: 1%"> 
+                <h4>
+                    Current Monster: <br>
+                    {{ monster["name"] }}
+                </h4>
+                {% set monster_image = "images/monsters/" + monster['image'] %}
+                <img src="{{ url_for('static', filename=monster_image) }}" height="100vh" width="auto" class="shaking_img">
+            </div>
+
+            <!-- Fuel bar -->
+            <div style="margin-left: 1%">
+                <h4>
+                    Spaceship Fuel Level:
+                </h4><br>
+                {% set fuel_image = "images/fuel/level" + fuel_level + ".jpg" %}
+                <img src="{{ url_for('static', filename=fuel_image) }}" height="100vh" width="auto">
+            </div>
+        </div> 
+    </div>
+</div>
+<br>
+
+<!-- Mission button and space garden button -->
+<div style="text-align: center;">
+    <!-- Mission Button -->
+    {% if user.mission_status < 3 %}
+    <form action="{{ url_for("child.start_mission") }}">
+        <button class="glow-button" type="submit" style="text-align: center;">
+            MISSION
+        </button>
+    </form><br>
+    {% endif %}
+
+    <!-- Review Result -->
+    {% if (user.status_read == False) 
+        and ((user.mission_status == 4) or (user.mission_status == 5)) %}
+    <form action="{{ url_for("child.mission_result") }}">
+        <button class="glow-button" type="submit" style="text-align: center;">
+            MISSION UPDATE
+        </button>
+    </form><br>
+    {% endif %}
+
+    <!-- Monster Garden -->
+    <form action="{{ url_for("child.space_garden") }}">
+        <button class="glow-button" type="submit" style="text-align: center;">
+            SPACE GARDEN
+        </button>
+    </form>
+</div>
+
+
 
 <!-- Javascript that refreshes page upon receiving message from server. -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>

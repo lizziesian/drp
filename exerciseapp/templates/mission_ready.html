@@ -1,0 +1,66 @@
+{% extends "layout_space.html" %} 
+
+<!-- Load images faster -->
+{% block preload_images %}
+    <link rel="preload" href="{{ url_for('static', filename='images/ready_items/water.png') }}" as "image">
+    <link rel="preload" href="{{ url_for('static', filename='images/ready_items/glasses.png') }}" as "image">
+    <link rel="preload" href="{{ url_for('static', filename='images/ready_items/stretch.png') }}" as "image">
+{% endblock preload_images %}
+
+{% block images %}
+    <div>
+        <img src="{{ url_for('static', filename='images/ready_items/water.png') }}" style="display:none"/>
+        <img src="{{ url_for('static', filename='images/ready_items/glasses.png') }}" style="display:none"/>
+        <img src="{{ url_for('static', filename='images/ready_items/stretch.png') }}" style="display:none"/>
+    </div>
+{% endblock images %}
+
+
+{% block content %}
+
+<div class="center" style="margin: auto;">
+
+    <!-- Water -->
+    <div>
+        <div style="display: inline-block;">
+            <img src="{{ url_for('static', filename='images/ready_items/water.png') }}" width="80%" height="auto" style="max-width: 300px">
+        </div>
+        <div style="display: inline-block; max-width: 300px">
+            <h2>
+                1. Grab your space juice! 
+            </h2>
+        </div>
+    </div>
+
+    <!-- Glasses -->
+    <div>
+        <div style="display: inline-block;">
+            <img src="{{ url_for('static', filename='images/ready_items/glasses.png') }}" width="80%" height="auto" style="max-width: 300px">
+        </div>
+        <div style="display: inline-block; max-width: 300px">
+            <h2>
+                2. Take off your space goggles if you can.
+            </h2>
+        </div>
+    </div>
+
+    <!-- Space -->
+    <div>
+        <div style="display: inline-block;">
+            <img src="{{ url_for('static', filename='images/ready_items/stretch.png') }}" width="80%" height="auto" style="max-width: 300px">
+        </div>
+        <div style="display: inline-block; max-width: 300px">
+            <h2>
+                3. Stretch your arms so you have enough space.
+            </h2>
+        </div>
+    </div>
+
+    <br>
+
+    <form action="{{ url_for("child.planet_missions") }}">
+        <button class="glow-button" type="submit" style="text-align: center;">Are you ready?</button>
+    </form>
+</div>
+
+{% endblock content %}

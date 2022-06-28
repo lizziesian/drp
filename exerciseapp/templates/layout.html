@@ -9,15 +9,38 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"/>
 
     <title>{{ title }}</title>
 
+    <!-- Background image-->
+    {% block background %}
+    <style>
+        body {
+            min-height: 100vh;
+            background-color: #0d1b2c;
+            background-image: radial-gradient(white, rgba(255, 255, 255, .2) 2px, transparent 40px), radial-gradient(white, rgba(255, 255, 255, .15) 1px, transparent 30px), radial-gradient(white, rgba(255, 255, 255, .1) 2px, transparent 40px), radial-gradient(rgba(255, 255, 255, .4), rgba(255, 255, 255, .1) 2px, transparent 30px);
+            background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+            background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+        }
+    </style>
+    {% endblock background %}
+
+    <!-- Preload images needed for page. -->
+    {% block preload_images %}
+    {% endblock preload_images %}
 </head>
 
 <body>
+    <!-- Background image -->
+    {% block background_image %} 
+    {% endblock background_image %}
+
+    <!-- Other large images -->
+    {% block images %}
+    {% endblock images %}
+
     <!-- Flash messages -->
     <div style="max-width: 400px; width: 80%; text-align: center; margin: auto;">
         {% with messages = get_flashed_messages(with_categories=true) %}

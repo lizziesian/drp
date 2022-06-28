@@ -1,21 +1,39 @@
-{% extends "layout.html" %}
+{% extends "layout_space.html" %}
 
 {% block content %}
 
 <div class="center">
-    <h1> Congratulations {{ user["name"] }}, Mission Complete!</h1>
-    {% if user["level"] == 1 %}
-        <h2> You have now completed 1 mission. </h2>
-    {% else %}
-        <h2> You have now completed {{ user["level"] }} missions. </h2>
-    {% endif %}
-    <h1> Your monster has grown! </h1>
-    
-    {% set image = "images/" + monster['image'] %}
-    <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto" class="shaking_img"> 
+    <h1>
+        Congratulations {{ user["name"] }}! <br> 
+        Mission Complete! 
+    </h1> <br>
+    <h3> Your monster has grown and the spaceship has more fuel! </h3>
+    <br>
+
+    <!--Monster and Fuel Bar -->
+    <div>
+        <!-- Current monster -->
+        <div style="display: inline-block; margin-right: 5%; margin-left: 5%;"> 
+            <h4 style="margin-right: 1%">
+                Current Monster: <br>
+                {{ monster["name"] }}
+            </h4>
+            {% set monster_image = "images/monsters/" + monster['image'] %}
+            <img src="{{ url_for('static', filename=monster_image) }}" height="100vh" width="auto" class="shaking_img">
+        </div>
+
+        <!-- Fuel bar -->
+        <div style="display: inline-block; margin-right: 5%; margin-left: 5%;">
+            <h4 style="margin-left: 1%">
+                Spaceship Fuel Level:
+            </h4><br>
+            {% set fuel_image = "images/fuel/level" + fuel_level + ".jpg" %}
+            <img src="{{ url_for('static', filename=fuel_image) }}" height="100vh" width="auto">
+        </div>
+    </div> 
 
     <form action="{{ url_for("child.home") }}" style="margin-block: auto">
-        <button id="home-page-button" class="glow-button" type="submit">Return to Home Page</button>
+        <button id="home-page-button" class="glow-button" type="submit">Go to Spaceship</button>
     </form>
 </div>
 

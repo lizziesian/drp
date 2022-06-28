@@ -1,4 +1,4 @@
-{% extends "layout.html" %} 
+{% extends "layout_space.html" %} 
 
 {% block content %}
 <div class="form-container">
@@ -10,7 +10,10 @@
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                 
-                <legend class=" border-bottom mb-4">Login to the Space Agency</legend>
+                <legend class=" border-bottom mb-4">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" width="40%" height="auto"><br>
+                    Login to the Space Agency
+                </legend>
                 
                 <!-- Username -->
                 <div class="form-group">

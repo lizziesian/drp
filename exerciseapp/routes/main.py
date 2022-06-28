@@ -9,7 +9,7 @@ def home():
 
 # Function to convert status number to string.
 def status(status_id):
-    if status_id == 0:
+    if status_id == 0 or status_id == 5:
         return "Not Started."
     elif status_id == 1:
         return "Warm Up Complete."
@@ -17,5 +17,5 @@ def status(status_id):
         return "Exercise Complete."
     elif status_id == 3:
         return "Pending Confirmation" # Confirmation of mission completion.
-    else:
+    else: # status_id == 4 or status_id == 6
         return "Complete."

@@ -1,9 +1,9 @@
-{% extends "layout.html" %} 
+{% extends "layout_space.html" %} 
 
 {% block content %}
 
 <div>
-    <form action="{{ url_for("main.home") }}">        
+    <form action="{{ url_for('parent.home') }}">        
         <button id="back-button" class="glow-button" type="submit" style="float: right; margin: 2%">
             Back
         </button>

@@ -1,4 +1,4 @@
-{% extends "layout.html" %} 
+{% extends "layout_space.html" %}
 
 {% block content %}
 
@@ -24,7 +24,7 @@
     <!-- Monsters owned -->
     {% for monster in owned_monsters %}
     <div class="monster-container"> 
-        {% set image = "images/" + monster['image'] %}
+        {% set image = "images/monsters/" + monster['image'] %}
         <p>{{ monster["name"] }}</p>
         <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto" class="shaking_img">
     </div>
@@ -33,7 +33,7 @@
     <!-- Future monsters -->
     {% for monster in future_monsters %}
     <div class="monster-container">
-        {% set image = "images/" + monster['image'] %}
+        {% set image = "images/monsters/" + monster['image'] %}
         <p>{{ monster["name"] }}</p>
         <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto" class="shaking_img">
     </div>

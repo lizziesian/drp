@@ -22,10 +22,10 @@ class User(db.Model, UserMixin):
 # Child account. 
 class ChildUser(User):
     child_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
-    # Level starts at 0 (refers to number of missions completed).
-    level = db.Column(db.Integer, default=0)
     # Linked parent account.
     parent = db.Column(db.Integer, db.ForeignKey("parent_user.parent_id"), nullable=False)
+    # Fuel bar level which starts at 0.
+    fuel = db.Column(db.Integer, default=1)
     # Current ungrown monster
     current_monster = db.Column(db.Integer, db.ForeignKey("monster.id"), default=0)
     # One child owns many monsters.
@@ -36,8 +36,8 @@ class ChildUser(User):
     mission_status = db.Column(db.Integer, default=0)
     # Boolean storing whether the tutorial has been watched or not.
     tutorial = db.Column(db.Boolean, default=False)
-    # Boolean storing whether parent has confirmed status
-    status_confirmed = db.Column(db.Boolean, default=False)
+    # Boolean storing whether the child has read the status of mission (approved / denied)
+    status_read = db.Column(db.Boolean, default=False)
 
 # Parent account
 # There is also a one-to-many relationship between parents and children. 
