@@ -9,11 +9,14 @@
 <div id="name" style="display:none">{{name}}</div>
 
 <div class="center" style="height: 100vh;"> 
-    <iframe id="exercise-video" width="1120" height="630" src="{{video}}" autoplay="0" frameborder="0" allow="aclipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
     <br>
+
+    <iframe id="exercise-video" width="80%" height="70%" src="{{video}}?controls=0&rel=0&showinfo=0" autoplay="0" frameborder="0" allow="aclipboard-write; encrypted-media; gyroscope; picture-in-picture; modestbranding" allowfullscreen></iframe>
+
+    <br><br>
     
-    <div style="width: 100vh; margin: 0 auto;"> 
+    <div style="margin: 0 auto;"> 
         <form method="POST">        
             <button name="next-button" id="next-button" class="glow-button" type="submit">
                 {% if status == 2 %}
@@ -24,7 +27,6 @@
             </button>
         </form>
     </div>
-
 </div>
 
 <!-- Javascript controlling video to prevent cheating, e.g. via fast-forwarding video. -->
