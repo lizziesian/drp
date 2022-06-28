@@ -19,7 +19,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         # daily mission
-        daily_mission = Mission(warmup="Quick Warmup - Miss The Meteor", warmupURL="https://www.youtube.com/embed/L9o56xLPmmk", exercise="Quick Exercise - Dodge The Meteors ", exerciseURL="https://www.youtube.com/embed/BB1vvvBI1nQ ", cooldown="Quick CoolDown - Reach The Meteors",cooldownURL="https://www.youtube.com/embed/8aVjf8JUsjQ ")
+        daily_mission = Mission(warmup="Quick Warmup - Miss The Meteor", warmupURL="https://www.youtube.com/embed/L9o56xLPmmk", exercise="Quick Exercise - Dodge The Meteors ", exerciseURL="https://www.youtube.com/embed/BB1vvvBI1nQ", cooldown="Quick CoolDown - Reach The Meteors",cooldownURL="https://www.youtube.com/embed/8aVjf8JUsjQ")
         database.session.add(daily_mission)
         database.session.commit()
         # user
