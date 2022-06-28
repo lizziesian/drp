@@ -1,10 +1,16 @@
-{% extends "layout.html" %} 
+{% extends "layout_space.html" %} 
 
 {% block content %}
 
 <div class="center" style="margin: auto;">
 
-    <h1> Are you a parent or a child? </h1>
+    <!-- Logo -->
+    <div>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" width="40%" height="auto" style="max-width: 500px;">
+    </div>
+    <br>
+
+    <h1> Are you a parent or a child? </h1><br>
 
     <form action="{{ url_for("parent.login") }}" style="display: inline-block; margin-right:5%; margin-left: 5%;">
         <button class="glow-button" type="submit" style="text-align: center;">Parent</button>
