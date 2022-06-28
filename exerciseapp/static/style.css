@@ -26,10 +26,10 @@ video {
     max-height: 80%;
     max-width: 80%;
 }
-/* hides seek bar */
+/* hides seek bar
 video::-webkit-media-controls-timeline {
     display: none;
-} 
+} */
 
 /* Underline */
 hr {
