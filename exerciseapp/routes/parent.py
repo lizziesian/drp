@@ -137,9 +137,12 @@ def choose_exercise(child_id, missionId, level):
             exercises = xml_lib.readHard()
 
         if request.method == 'POST':
-            mission.exercise=request.form["exerciseName"]
-            for exercise in exercises:
-                if(exercise['exerciseName']==request.form["exerciseName"]):
+            if len(exercises)==0:
+                database.session.commit()
+            else:
+                mission.exercise=request.form["exerciseName"]
+                for exercise in exercises:
+                  if(exercise['exerciseName']==request.form["exerciseName"]):
                     mission.cooldown=exercise['cooldownName']
                     mission.warmup=exercise['warmupName']
                     mission.warmupURL=exercise['warmup']
