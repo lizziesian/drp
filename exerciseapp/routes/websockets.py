@@ -22,13 +22,16 @@ def handle_parental_confirmation(json, methods=['GET', 'POST']):
 # Update the child with id <child_id> based on the decision argument from the parental confirmation. 
 def parent_update_status(child_id, decision):
     child = ChildUser.query.get_or_404(child_id, "Child user not found.")
+    # Determines result of parent choice
     status = 3
     if decision == "approved":
         status = 4
     if decision == "denied":
-        status = 0
+        status = 5
     child.mission_status = status
-    child.status_confirmed = True
+    # Status confirmed is False (child has not seen result of parental approval).
+    child.status_read = False
+    # Commit changes to child user.
     database.session.commit()
     return status
 

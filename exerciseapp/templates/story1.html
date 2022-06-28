@@ -1,10 +1,10 @@
-{% extends "layout.html" %}
+{% extends "layout_space.html" %}
 
 {% block content %}
 
 <div class="center">
     
-    {% set image = "images/"  + "astronaut.png" %}
+    {% set image = "images/backstory/astronaut.png" %}
     <img src="{{ url_for('static', filename=image) }}" height="500vh" width="auto"> 
 
     <form action="{{ url_for("child.story2") }}" style="margin-block: auto; margin: 2%">

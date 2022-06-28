@@ -1,0 +1,47 @@
+{% extends "layout_spaceship.html" %}
+
+{% block content %}
+
+<!-- Buttons at the top of page -->
+<div>
+    <!-- Logout button -->
+    <form action="{{ url_for("child.logout") }}" style="float: right; margin: 2%">        
+        <button id="back-button" class="glow-button" type="submit">Logout</button>
+    </form>
+</div>
+<br>
+
+<div class="center" style="padding-top: 5%">
+
+    <div style="display:flex; justify-content:space-between;">
+        <!-- Monster image and message -->
+        <div style="padding-left: 5%">
+            {% set image = "images/monster_messages/" + result + ".png" %}
+            <img src="{{ url_for('static', filename=image) }}"  width="70%" height="auto" style="min-width: 400px; max-width: 800px">
+        </div>
+
+         <!-- Next Button -->
+         <div style="padding-top: 20%; padding-right: 15%;">
+
+            <!-- Collect Reward Button -->
+            {% if status == 6 %}
+            <form action="{{ url_for("child.mission_complete") }}">
+                <button class="glow-button" type="submit" style="text-align: center;">
+                    Collect Reward
+                </button>
+            </form>
+
+            <!-- Go to Spaceship Button (resets mission) -->
+            {% else %}
+            <form action="{{ url_for("child.mission_reset") }}">
+                <button class="glow-button" type="submit" style="text-align: center;">
+                    Next
+                </button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

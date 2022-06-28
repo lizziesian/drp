@@ -16,24 +16,17 @@
     <div style="display:flex; justify-content:space-between;">
         <!-- Monster image and message -->
         <div style="padding-left: 5%">
-            <img src="{{ url_for('static', filename='images/monster_messages/reset.png') }}"  width="70%" height="auto" style="min-width: 400px; max-width: 800px">
+            <img src="{{ url_for('static', filename='images/monster_messages/wait_for_review.png') }}"  width="70%" height="auto" style="min-width: 400px; max-width: 800px">
         </div>
+
 
         <!-- Mission Start -->
         <div style="padding-top: 20%; padding-right: 15%;">
-
-            <form action="{{ url_for("child.mission_start") }}">
-                <button class="glow-button" type="submit" style="text-align: center; margin-bottom: 5%">
-                    START MISSION
-                </button>
-            </form>
-
             <form action="{{ url_for("child.home") }}">
-                <button class="glow-button" type="submit" style="text-align: center; margin-top: 5%">
-                    GO TO SPACESHIP
+                <button class="glow-button" type="submit" style="text-align: center;">
+                    Go to Spaceship
                 </button>
             </form>
-
         </div>
     </div>
 

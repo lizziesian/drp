@@ -1,0 +1,13 @@
+{% extends "layout.html" %} 
+
+{% block background %}
+<style>
+    body {
+        background-image: url("{{ url_for('static', filename='images/background/spaceship.jpg') }}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+    }
+</style>
+{% endblock %}

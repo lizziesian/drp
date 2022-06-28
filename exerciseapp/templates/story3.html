@@ -1,11 +1,11 @@
-{% extends "layout.html" %}
+{% extends "layout_space.html" %}
 
 {% block content %}
 
 <div class="center">
     <h1>These missions need to be completed to rescue monsters from the bog creature!</h1>
     
-    {% set image = "images/bog-monster.png" %}
+    {% set image = "images/backstory/bog-monster.png" %}
     <img src="{{ url_for('static', filename=image) }}" height="200vh" width="auto"> 
 
     <h1>The bog creature loves to eat monsters!</h1>

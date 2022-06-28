@@ -7,12 +7,11 @@ from exerciseapp.models.user import User, ChildUser, ParentUser
 from exerciseapp.models.mission import Mission
 from exerciseapp.models.monster import Monster
 from exerciseapp.models.monsters_owned import MonsterOwned
-from exerciseapp.routes.main import status
 from exerciseapp import bcrypt
 
 child = Blueprint("child", __name__, url_prefix="/child")
 
-
+# Page to register child user account.
 @child.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated and current_user.type == "child":
@@ -26,8 +25,8 @@ def register():
         # user
         parent_id = ParentUser.query.filter_by(invite_code=form.parent_code.data).first().id
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
-        user = ChildUser(username=form.username.data, name=form.name.data.title(), password=hashed_password,
-                         type="child", parent=parent_id, mission=daily_mission.id)
+        user = ChildUser(username=form.username.data, name=form.name.data.title(), 
+            password=hashed_password, type="child", parent=parent_id, mission=daily_mission.id)
         database.session.add(user)
         # commit to database
         database.session.commit()
@@ -36,12 +35,10 @@ def register():
         return redirect(url_for("child.home"))
     return render_template("register_child.html", title="Register", form=form)
 
-
+# Page to login child user account.
 @child.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated and current_user.type == "child":
-        # return redirect(url_for("child.home"))
-        # return redirect(url_for("child.home_child_after_mission"))
         return redirect(url_for("child.start_mission"))
     form = LoginForm()
     if form.validate_on_submit():
@@ -50,23 +47,25 @@ def login():
             user = User.query.filter_by(username=form.username.data).first()
             login_user(user, remember=form.remember.data)
             flash("You have been logged in!", "success")
+            # If the child has finished all the exercise videos, then user is directed to 
+            # the Mission Complete Home Page.
             if child_user.mission_status >= 3:
-                #return redirect(url_for("child.wait_for_approval"))
-                return redirect(url_for("child.home_mission_complete"))
+                return redirect(url_for("child.home"))
+            # If there is no specific next page, then user is directed to Start Mission page
             next_page = request.args.get("next")
-            # return redirect(next_page) if next_page else redirect(url_for('child.home'))
             return redirect(next_page) if next_page else redirect(url_for("child.start_mission"))
         else:
             flash("Login Unsuccessful. Please check username and password", "danger")
     return render_template("login_child.html", title="Login", form=form)
 
-
+# Logout child user. 
 @child.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for("main.home"))
 
-
+# Home Page containing welcome message, mission status message, current monster, fuel bar
+# status, mission button, space garden button, backstory button and logout button
 @child.route("/")
 @child.route("/home")
 @login_required
@@ -78,55 +77,152 @@ def home():
         else:
             the_monster = Monster.query.get_or_404(current_user.current_monster, "User has no current monster.")
             the_mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
-            the_status = status(current_user.mission_status)
             return render_template("home_child.html", title="Home", user=current_user,
-                                   monster=the_monster, mission=the_mission, status=the_status)
+                monster=the_monster, mission=the_mission, fuel_level=str(current_user.fuel))
     else:
         logout_user()
         return redirect(url_for("child.login"))
 
-
+# Mission Home Page containing mission message, start mission button and logout button
 @child.route("/start_mission")
 @login_required
 def start_mission():
-    return render_template("child_start_mission.html")
+    return render_template("mission_home.html", title="Start Mission")
 
-@child.route("/mission_status")
-@login_required
-def mission_status():
-    if current_user.type == "child":
-        current_user.status_read = True
-        database.session.commit()
-        return render_template("mission_status.html", status=current_user.mission_status)
-    else:
-        logout_user()
-        return redirect(url_for("child.login"))
-
-@child.route("/mission_reset")
-@login_required
-def mission_reset():
-    return render_template("mission_reset.html")
-
-@child.route("/home_mission_complete")
-@login_required
-def home_mission_complete():
-    the_monster = Monster.query.get_or_404(current_user.current_monster, "User has no current monster.")
-    return render_template("home_child_after_mission.html", user=current_user, monster=the_monster,
-                           status=current_user.mission_status, confirmed=current_user.status_confirmed,
-                           status_read=current_user.status_read)
-
-
-@child.route("/mission_start")
+# start of mission: "Are you ready?" message
+@child.route("/mission_ready")
 @login_required
 def mission_start():
     if current_user.type == "child":
-        # update child's approved mission state to true
-        return render_template("mission_start.html", title="Mission Start")
+        return render_template("mission_ready.html", title="Mission Start")
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+# Wait for review page.
+@child.route("/review")
+@login_required
+def mission_review():
+    if current_user.type == "child":
+        current_user.status_read = False
+        database.session.commit()
+        return render_template("mission_review.html", title="Awaiting Mission Review")
     else:
         logout_user()
         return redirect(url_for("child.login"))
 
 
+# Page containing parental confirmation result, i.e. approved or denied.
+@child.route("/mission_result")
+@login_required
+def mission_result():
+    if current_user.type == "child":
+        current_user.status_read = True
+        database.session.commit()
+        result = ""
+        if current_user.mission_status == 4:
+            result = "approved"
+            # Update database
+            current_user.mission_status = 6
+            current_user.fuel += 1
+            current_user.current_monster += 1
+            database.session.commit()
+        else:
+            result = "denied"
+        return render_template("mission_result.html", status=current_user.mission_status,   
+            result=result)
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+
+# Page after denied parental confirmation. States that mission has been reset and contains button
+# to START MISSION again.
+@child.route("/mission_reset")
+@login_required
+def mission_reset():
+    if current_user.type == "child":
+        if current_user.mission_status == 5:
+            current_user.mission_status = 0
+            database.session.commit()
+        return render_template("mission_reset.html")
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+
+# Mission complete page contains congratulations message and updated monster and fuel bar.
+@child.route("/mission_complete")
+@login_required
+def mission_complete():
+    if current_user.type == "child":
+        the_monster = Monster.query.get_or_404(current_user.current_monster, 
+            "Monster id not found")
+        return render_template("mission_complete.html", title="Mission Complete", 
+            user=current_user, monster=the_monster, fuel_level=str(current_user.fuel))
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+
+# Page containing the 3 planets for warmup, exercise and cooldown
+@child.route("/planet_missions")
+@login_required
+def planet_missions():
+    if current_user.type == "child":
+        status = current_user.mission_status
+        return render_template("missions.html", title="Planet Missions", status=status)
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+# Warmup video page
+@child.route("/exercise_warmup", methods=["GET", "POST"])
+@login_required
+def exercise_warmup():
+    if current_user.type == "child":
+        mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
+        name = mission.warm_up
+        # Update mission status and redirect to planets page
+        if request.method == "POST":
+            return redirect(url_for("child.planet_missions"))
+        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=0, user=current_user, parent_id=current_user.parent)
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+# Exercise video page
+@child.route("/exercise_mission", methods=["GET", "POST"])
+@login_required
+def exercise_mission():
+    if current_user.type == "child":
+        mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
+        name = mission.exercise
+        # Update mission status and redirect to planets page
+        if request.method == "POST":
+            return redirect(url_for("child.planet_missions"))
+        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=1, user=current_user, parent_id=current_user.parent)
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+# Cooldown video page
+@child.route("/exercise_cooldown", methods=["GET", "POST"])
+@login_required
+def exercise_cooldown():
+    if current_user.type == "child":
+        mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
+        name = mission.cool_down
+        # Update mission status and redirect to planets page
+        if request.method == "POST":
+            return redirect(url_for("child.mission_review"))
+        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=2, user=current_user, parent_id=current_user.parent)
+    else:
+        logout_user()
+        return redirect(url_for("child.login"))
+
+
+# backstory
 @child.route("/story1")
 @login_required
 def story1():
@@ -135,7 +231,6 @@ def story1():
     else:
         logout_user()
         return redirect(url_for("child.login"))
-
 
 @child.route("/story2")
 @login_required
@@ -156,98 +251,19 @@ def story3():
         logout_user()
         return redirect(url_for("child.login"))
 
-
-@child.route("/story4")
+@child.route("/story4", methods=["GET", "POST"])
 @login_required
 def story4():
     if current_user.type == "child":
-        current_user.tutorial = True
-        database.session.commit()
-        return render_template("story4.html", title="Mission Story")
-    else:
-        logout_user()
-        return redirect(url_for("child.login"))
-
-
-@child.route("/planet_missions")
-@login_required
-def planet_missions():
-    if current_user.type == "child":
-        status = current_user.mission_status
-        return render_template("missions.html", title="Planet Missions", status=status)
-    else:
-        logout_user()
-        return redirect(url_for("child.login"))
-
-
-@child.route("/exercise_warmup", methods=["GET", "POST"])
-@login_required
-def exercise_warmup():
-    if current_user.type == "child":
-        mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
-        name = mission.warm_up
-        # Update mission status and redirect to planets page
+        not_first = current_user.tutorial
         if request.method == "POST":
-            return redirect(url_for("child.planet_missions"))
-        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=0, user=current_user, parent_id=current_user.parent)
-    else:
-        logout_user()
-        return redirect(url_for("child.login"))
-
-
-@child.route("/exercise_mission", methods=["GET", "POST"])
-@login_required
-def exercise_mission():
-    if current_user.type == "child":
-        mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
-        name = mission.exercise
-        # Update mission status and redirect to planets page
-        if request.method == "POST":
-            return redirect(url_for("child.planet_missions"))
-        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=1, user=current_user, parent_id=current_user.parent)
-    
-    else:
-        logout_user()
-        return redirect(url_for("child.login"))
-
-
-@child.route("/exercise_cooldown", methods=["GET", "POST"])
-@login_required
-def exercise_cooldown():
-    if current_user.type == "child":
-        mission = Mission.query.get_or_404(current_user.mission, "No current mission assigned to user.")
-        name = mission.cool_down
-        # Update mission status and redirect to planets page
-        if request.method == "POST":
-            return redirect(url_for("child.wait_for_approval"))
-        return render_template("exercise_video.html", title="Exercise Mission", name=name, status=2, user=current_user, parent_id=current_user.parent)
-    else:
-        logout_user()
-        return redirect(url_for("child.login"))
-
-
-@child.route("/approval")
-@login_required
-def wait_for_approval():
-    if current_user.type == "child":
-        current_user.status_confirmed = False
-        database.session.commit()
-        return render_template("wait_for_approval.html", title="Awaiting Parental Approval")
-    else:
-        logout_user()
-        return redirect(url_for("child.login"))
-
-
-@child.route("/mission_complete")
-@login_required
-def mission_complete():
-    if current_user.type == "child":
-        current_user.level += 1
-        current_user.current_monster += 1
-        database.session.commit()
-        the_monster = Monster.query.get_or_404(current_user.current_monster, "Monster id not found")
-        return render_template("mission_complete.html", title="Mission Complete", user=current_user,
-                               monster=the_monster)
+            current_user.tutorial = True
+            database.session.commit()
+            if not_first:
+                return redirect(url_for("child.home"))
+            else:
+                return redirect(url_for("child.start_mission"))
+        return render_template("story4.html", title="Mission Story", tutorial=not_first)
     else:
         logout_user()
         return redirect(url_for("child.login"))
