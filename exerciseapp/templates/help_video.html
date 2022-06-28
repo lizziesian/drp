@@ -5,10 +5,13 @@
 <div id="name" style="display:none">{{name}}</div>
 
 <div class="center" style="height: 100vh;"> 
-    {% set video = "videos/" +"help_video.mp4" %}
-    <video id="exercise-video" controls controlsList="noplaybackrate nodownload" disablePictureInPicture=true; style="padding-top: 3%; padding-bottom: 2%;">
-        <source src="{{ url_for('static', filename=video) }}" type="video/mp4">
-    </video>
+
+    <div style="padding-top: 3%; padding-bottom: 2%;">
+        {% set video = "videos/" +"help_video.mp4" %}
+        <video id="exercise-video" controls controlsList="noplaybackrate nodownload" disablePictureInPicture=true; style=" border-style: solid; border-color: white; border-width: medium;">
+            <source src="{{ url_for('static', filename=video) }}" type="video/mp4">
+        </video>
+    </div>
 
     <br>
     
