@@ -37,27 +37,35 @@
 </head>
 
 <body>
+
+    <div style="display:flex; justify-content:space-between; margin: 2%;">
+        <h1>Please choose your preferred exercise mission </h1>
+
+        <form action="{{ url_for('parent.home') }}">        
+            <button id="back-button" class="glow-button" type="submit" style="float: right; margin: 2%">
+                Home
+            </button>
+        </form>
+    </div>
+
     <form id="container" method="post">
-        <h1>Please choose your preferred exercise </h1>
         
         {% if exercises|length ==0 %}
         <div class="center" style="text-align:center; display:flexbox;height:320px; width:1270px; padding: 2%"> 
-        <h1>No video at the moment:) Please wait for update </h1>
+            <h1>No video at the moment:) Please wait for update </h1>
         </div>
-        >
 
         {% else %}
 
         {% for exercise in exercises %}
-        <div id = "videos" class="box-out" style="height:320px; width:630px; padding: 2%;overflow: scroll;">
+        <div id = "videos" class="box-out" style="height:400px; width:630px; padding: 2%;">
             <ul>
-                <li style="height:400px;width:630px;overflow: scroll;">
+                <li style="height:400px;width:630px;">
 
-
-                    <iframe class="exercise box-in" data-file=" url_for({{exercise['exercise']}})" src="{{exercise['exercise']}}" width="400" height="50%" controls>
+                    <iframe class="exercise box-in" data-file=" url_for({{exercise['exercise']}})" src="{{exercise['exercise']}}" width="400" height="60%" controls>
                     </iframe>
                     
-                    <input type="radio" name="exerciseName" style="height:100px;width:30px;" value="{{exercise['exerciseName']}}" checked>
+                    <input type="radio" name="exerciseName" style="height:100px; width:30px; margin-left: 10%" value="{{exercise['exerciseName']}}" checked>
                     
                     <p>{{exercise['exerciseName']}}</p>
                     <p>About: {{exercise['exerciseContent']}}</p>
@@ -70,9 +78,8 @@
         {% endfor %}
 
         {% endif %}
-        <button id="back-button" name= "running" class="glow-button"type="submit" style="position:relative;marigin:10px" onclick="onclick">Continue</button>
-
         
+        <button id="back-button" name="running" class="glow-button" type="submit" style="position:relative; margin:10px" onclick="onclick">Continue</button>
 
     </form>
  
