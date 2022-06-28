@@ -336,7 +336,7 @@ def story12():
                 return redirect(url_for("child.home"))
             else:
                 return redirect(url_for("child.start_mission"))
-        return render_template("story4.html", title="Mission Story", tutorial=not_first)
+        return render_template("story12.html", title="Mission Story", tutorial=not_first)
     else:
         logout_user()
         return redirect(url_for("child.login"))
