@@ -1,8 +1,16 @@
 {% extends "layout_space.html" %}
 
+<!-- Load images faster -->
 {% block preload_images %}
-<link rel="preload" href="{{ url_for('static', filename='images/backstory/angry-monster.png') }}" as "image">
+    <link rel="preload" href="{{ url_for('static', filename='images/backstory/angry-monster.png') }}" as "image">
 {% endblock preload_images %}
+
+{% block images %}
+    <div>
+        <img src="{{ url_for('static', filename='images/backstory/angry-monster.png') }}" style="display:none"/>
+    </div>
+{% endblock images %}
+
 
 {% block content %}
 

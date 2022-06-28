@@ -1,9 +1,18 @@
 {% extends "layout_spaceship.html" %}
 
+<!-- Load images faster -->
 {% block preload_images %}
-<link rel="preload" href="{{ url_for('static', filename='images/monster_messages/approved.png') }}" as "image">
-<link rel="preload" href="{{ url_for('static', filename='images/monster_messages/denied.png') }}" as "image">
+    <link rel="preload" href="{{ url_for('static', filename='images/monster_messages/approved.png') }}" as "image">
+    <link rel="preload" href="{{ url_for('static', filename='images/monster_messages/denied.png') }}" as "image">
 {% endblock preload_images %}
+
+{% block images %}
+    <div>
+        <img src="{{ url_for('static', filename='images/monster_messages/approved.png') }}" style="display:none"/>
+        <img src="{{ url_for('static', filename='images/monster_messages/denied.png') }}" style="display:none"/>
+    </div>
+{% endblock images %}
+
 
 {% block content %}
 

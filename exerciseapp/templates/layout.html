@@ -14,6 +14,7 @@
 
     <title>{{ title }}</title>
 
+    <!-- Background image-->
     {% block background %}
     <style>
         body {
@@ -26,13 +27,19 @@
     </style>
     {% endblock background %}
 
+    <!-- Preload images needed for page. -->
     {% block preload_images %}
     {% endblock preload_images %}
 </head>
 
 <body>
-    {% block image %} 
-    {% endblock image %}
+    <!-- Background image -->
+    {% block background_image %} 
+    {% endblock background_image %}
+
+    <!-- Other large images -->
+    {% block images %}
+    {% endblock images %}
 
     <!-- Flash messages -->
     <div style="max-width: 400px; width: 80%; text-align: center; margin: auto;">
