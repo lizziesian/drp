@@ -3,11 +3,12 @@
 {% block content %}
 
 <div class="center">
-   
-    {% set image = "images/backstory/alien4.png" %}
+    <h1>They want the Moon Rocks out the way, so turned them into baby eggs!</h1>
+    
+    {% set image = "images/backstory/eggs.jpg" %}
     <img src="{{ url_for('static', filename=image) }}" height="270vh" width="auto"> 
 
-    <form action="{{ url_for("child.story5") }}" style="margin-block: auto; margin: 2%">
+    <form action="{{ url_for("child.story11") }}" style="margin-block: auto; margin: 2%">
         <button id="next-story-page-button" class="glow-button" type="submit">=></button>
     </form>
    

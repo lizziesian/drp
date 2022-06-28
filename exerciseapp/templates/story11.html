@@ -1,0 +1,20 @@
+{% extends "layout_space.html" %}
+
+{% block content %}
+
+<div class="center">
+    <h1>You've got to collect The Moon Rocks, fight The Bogglings and save us all!</h1>
+    
+    {% set image = "images/backstory/crazy-scientist.jpg" %}
+    <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto"> 
+
+    {% set image = "images/backstory/monster-teacher.jpg" %}
+    <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto"> 
+
+    <form action="{{ url_for("child.story12") }}" style="margin-block: auto; margin: 2%">
+        <button id="next-story-page-button" class="glow-button" type="submit">=></button>
+    </form>
+   
+</div>
+
+{% endblock content %}
