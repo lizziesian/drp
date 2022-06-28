@@ -2,13 +2,13 @@
 
 <!-- Load images faster -->
 {% block preload_images %}
-<link rel="preload" href="{{ url_for('static', filename='images/backstory/moon-rocks-and-bogglings.png') }}" as "image">
+    <link rel="preload" href="{{ url_for('static', filename='images/backstory/moon-rocks-and-bogglings.png') }}" as "image">
 {% endblock preload_images %}
 
 {% block images %}
-<div>
-    <img src="{{ url_for('static', filename='images/backstory//moon-rocks-and-bogglings.png') }}" style="display:none"/>
-</div>
+    <div>
+        <img src="{{ url_for('static', filename='images/backstory//moon-rocks-and-bogglings.png') }}" style="display:none"/>
+    </div>
 {% endblock images %}
 
 
