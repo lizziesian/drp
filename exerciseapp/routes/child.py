@@ -30,9 +30,8 @@ def register():
         database.session.add(user)
         # commit to database
         database.session.commit()
-        login_user(user, remember=False)
         flash("You have been successfully enrolled.", "success")
-        return redirect(url_for("child.home"))
+        return redirect(url_for("child.login"))
     return render_template("register_child.html", title="Register", form=form)
 
 # Page to login child user account.

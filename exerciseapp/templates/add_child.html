@@ -1,4 +1,6 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout_space.html" %}  
+
+{% block content %}
 
 <div style="margin: 2%; float: right">
 
@@ -21,8 +23,10 @@
         Copy Code
     </button>
 
-    <form action="{{ url_for('child.register') }}" style="margin: 1%">
-        <button class="glow-button" type="submit" style="text-align: center;">Create Child Account</button>
+    <form action="{{ url_for('child.register') }}" target="_blank" style="margin: 1%">
+        <button class="glow-button" type="submit" style="text-align: center;">
+            Create Child Account
+        </button>
     </form>
 
 </div>

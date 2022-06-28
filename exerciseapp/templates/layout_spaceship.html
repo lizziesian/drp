@@ -1,6 +1,8 @@
 {% extends "layout.html" %} 
 
 {% block background %}
+<link rel="preload" href="{{ url_for('static', filename='images/background/spaceship.jpg') }}" as "image">
+
 <style>
     body {
         background-image: url("{{ url_for('static', filename='images/background/spaceship.jpg') }}");
@@ -11,3 +13,9 @@
     }
 </style>
 {% endblock %}
+
+{% block image %} 
+    <div>
+        <img src="{{ url_for('static', filename='images/background/spaceship.jpg') }}" style="display:none"/>
+    </div>
+{% endblock image %}
