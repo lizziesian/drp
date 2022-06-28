@@ -1,5 +1,11 @@
 {% extends "layout_space.html" %} 
 
+{% block preload_images %}
+<link rel="preload" href="{{ url_for('static', filename='images/ready_items/water.png') }}" as "image">
+<link rel="preload" href="{{ url_for('static', filename='images/ready_items/glasses.png') }}" as "image">
+<link rel="preload" href="{{ url_for('static', filename='images/ready_items/stretch.png') }}" as "image">
+{% endblock preload_images %}
+
 {% block content %}
 
 <div class="center" style="margin: auto;">
