@@ -15,6 +15,11 @@
 {% block content %}
 <!-- Buttons at the top of page -->
 <div>
+
+    <!-- Sound effect -->
+    <audio src="{{ url_for('static', filename='audio/zapsplat_multimedia_alert_notification_bold_strong_musical_positive_success_002_61630.mp3') }}" controls controlsList="nodownload noplaybackrate" style="margin: 2%">
+    </audio>
+
     <!-- Logout button -->
     <form action="{{ url_for("child.logout") }}" style="float: right; margin: 2%">        
         <button id="back-button" class="glow-button" type="submit">Logout</button>
@@ -42,5 +47,14 @@
     </div>
 
 </div>
+
+<script>
+    const audio = document.querySelector("audio")
+
+    window.addEventListener("DOMContentLoaded", event => {
+        audio.volume = 0.7;
+        audio.play();
+    } )
+</script>
 
 {% endblock content %}
