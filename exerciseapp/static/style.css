@@ -22,14 +22,26 @@ p {
     color: white
 }
 
+audio {
+    width: 120px;
+}
+
+/* https://stackoverflow.com/questions/7638754/html-5-audio-tag-custom-controls */
+audio::-webkit-media-controls-timeline {
+    display: none !important;
+}
+/* Removes the time stamp */
+audio::-webkit-media-controls-current-time-display {
+display: none;
+}
+audio::-webkit-media-controls-time-remaining-display {
+display: none;
+}
+
 video {
     max-height: 80%;
     max-width: 80%;
 }
-/* hides seek bar
-video::-webkit-media-controls-timeline {
-    display: none;
-} */
 
 /* Underline */
 hr {
