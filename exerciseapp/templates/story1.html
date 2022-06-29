@@ -14,6 +14,11 @@
 
 {% block content %}
 
+<!-- Sound effect -->
+<audio controls controlsList="nodownload noplaybackrate" style="margin: 2%">
+    <source src="{{ url_for('static', filename='audio/story/1_hi_welcome.m4a') }}" type="audio/mp4" />
+</audio>
+
 <div class="center">
     <h1>Hi! Welcome to the Shooting Star Space Agency!</h1>
     {% set image = "images/backstory/alien1.png" %}
@@ -23,5 +28,14 @@
         <button id="next-story-page-button" class="glow-button" type="submit">=></button>
     </form>
 </div>
+
+<script>
+    const audio = document.querySelector("audio")
+
+    window.onload = function() {
+        audio.volume = 0.2
+        audio.play()
+    }
+</script>
 
 {% endblock content %}
