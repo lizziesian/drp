@@ -16,6 +16,10 @@
 
 {% block content %}
 
+<!-- Sound effect -->
+<audio src="{{ url_for('static', filename='audio/story/11_got_to_collect.m4a') }}" controls controlsList="nodownload noplaybackrate" style="margin: 2%">
+</audio>
+
 <div class="center">
     <h1>You've got to collect The Moon Rocks, fight The Bogglings and save us all!</h1>
     
@@ -30,5 +34,14 @@
     </form>
    
 </div>
+
+<script>
+    const audio = document.querySelector("audio")
+
+    window.addEventListener("DOMContentLoaded", event => {
+        audio.volume = 0.7;
+        audio.play();
+    } )
+</script>
 
 {% endblock content %}

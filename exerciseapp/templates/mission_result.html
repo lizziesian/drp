@@ -18,6 +18,15 @@
 
 <!-- Buttons at the top of page -->
 <div>
+
+    {% if result == "approved" %}
+        <audio src="{{ url_for('static', filename='audio/multimedia_game_musical_success_complete_orchestral_horns_001.mp3') }}" controls controlsList="nodownload noplaybackrate" style="margin: 2%">
+        </audio>
+    {% else %}
+        <audio src="{{ url_for('static', filename='audio/zapsplat_multimedia_game_sound_sci_fi_futuristic_failure_error_002_64994.mp3') }}" controls controlsList="nodownload noplaybackrate" style="margin: 2%">
+        </audio>
+    {% endif %}
+
     <!-- Logout button -->
     <form action="{{ url_for("child.logout") }}" style="float: right; margin: 2%">        
         <button id="back-button" class="glow-button" type="submit">Logout</button>
@@ -55,7 +64,16 @@
             {% endif %}
         </div>
     </div>
-
+    
 </div>
+
+<script>
+    const audio = document.querySelector("audio")
+
+    window.addEventListener("DOMContentLoaded", event => {
+        audio.volume = 0.7;
+        audio.play();
+    } )
+</script>
 
 {% endblock content %}

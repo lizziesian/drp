@@ -14,6 +14,10 @@
 
 {% block content %}
 
+<!-- Sound effect -->
+<audio src="{{ url_for('static', filename='audio/story/5_long_ago.m4a') }}" controls controlsList="nodownload noplaybackrate" style="margin: 2%">
+</audio>
+
 <div class="center">
     <h1>Long ago, all the monsters lived happily!</h1>
     
@@ -25,5 +29,14 @@
     </form>
 
 </div>
+
+<script>
+    const audio = document.querySelector("audio")
+
+    window.addEventListener("DOMContentLoaded", event => {
+        audio.volume = 0.7;
+        audio.play();
+    } )
+</script>
 
 {% endblock content %}
