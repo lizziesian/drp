@@ -9,16 +9,17 @@
 <div id="name" style="display:none">{{name}}</div>
 
 <div class="center" style="height: 100vh;"> 
+    <div id="video" style="display:none">{{ video}}</div>
 
     <br>
 
-    <iframe id="exercise-video" width="80%" height="70%" src="{{video}}?controls=0&rel=0&showinfo=0" autoplay="0" frameborder="0" allow="aclipboard-write; encrypted-media; gyroscope; picture-in-picture; modestbranding" allowfullscreen></iframe>
+    <div id="player" width="80%" height="70%" ></div>
 
     <br><br>
     
     <div style="margin: 0 auto;"> 
         <form method="POST">        
-            <button name="next-button" id="next-button" class="glow-button" type="submit">
+            <button name="next-button" id="next-button" class="glow-button" type="submit" disabled>
                 {% if status == 2 %}
                 Continue
                 {% else %}
@@ -31,76 +32,39 @@
 
 <!-- Javascript controlling video to prevent cheating, e.g. via fast-forwarding video. -->
 <script>
-    var player;
+      // 2. This code loads the IFrame Player API code asynchronously.
+      const tag = document.createElement("script");
+    tag.id = "iframe-demo";
+    tag.src = "https://www.youtube.com/iframe_api";
+    const [firstScriptTag] = document.getElementsByTagName("script");
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    let player;
 
-$(document).ready(function () {
-    onYouTubePlayerAPIReady();
-});
+    window.onPlayerReady = (event) => {
+    event.target.playVideo();
+    };
 
-
- function onYouTubePlayerAPIReady() {
-  player = new YT.Player('ytplayer', {
-    events: {
-        'onStateChange': getStatus
-       }
-    });
- }
-
- var tag = document.createElement('script');
- tag.src = "http://www.youtube.com/player_api";
- var firstScriptTag = document.getElementsByTagName('script')[0];
- firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    function getStatus() {
-
-    var sStatus;
-    sStatus = player.getPlayerState();
-
-      if (sStatus == -1) {}  //Video has not started yet
-
-      else if (sStatus == 0) {  
-
-      // video has stopped. This is the event that you want
-      document.getElementById("next-button").disabled=false
-
-     }
-     else if (sStatus == 1) { } //Video is playing
-     else if (sStatus == 2) {}  //Video is paused
-     else if (sStatus == 3) { } //video is buffering 
-     else if (sStatus == 5) { } //Video is cued.
-   }
-
-
-
-    var video=document.getElementById("exercise-video")
-    
-    // Enables buton on video end 
-    var button_next=document.getElementById("next-button")
-    var str=document.getElementById("name").innerHTML
-    video.onended = function() {
-        button_next.disabled = false
+    window.onPlayerStateChange = (event) => {
+    if (event.data === 0) {
+        document.getElementById("next-button").disabled=false
     }
-    
-    // Prevents seek
-    // currTime stores the expected timestamp of the video when no seeking occurs
-    var currTime = 0
-    video.addEventListener("timeupdate", function() {
-        if (!video.seeking) {
-            currTime = video.currentTime
-        }
-    })
-    // If user attempts to seek, the video current time is compared with the local
-    // currTime and currTime is set as the current video time.
-    video.addEventListener("seeking", function() {
-        var diff = video.currentTime - currTime
-        if (Math.abs(diff) > 0.01) {
-            video.currentTime = currTime
-        }
-    })
-    // Allows for rewatching of video
-    video.addEventListener("ended", function() {
-        currTime = 0
-    })
+    };
+    const video=document.getElementById("video").innerHTML
+    const videoid=video.replace("https://www.youtube.com/embed/","")
+
+    window.onYouTubeIframeAPIReady = () => {
+    player = new window.YT.Player("player", {
+    width: 900,
+    height:650,
+    videoId: videoid,
+    playerVars: { 'showinfo': 0,'rel':0, 'controls': 0 },
+
+    events: {
+      onReady: window.onPlayerReady,
+      onStateChange: window.onPlayerStateChange
+    }
+  });
+};
     // Link to solution: https://stackoverflow.com/questions/11903545/how-to-disable-seeking-with-html5-video-tag#:~:text=You%20could%20use%20an%20HTML5%20video%20player%20like,Also%2C%20the%20event%20you%27re%20looking%20for%20is%20%27seeking%27.
 </script>
 
