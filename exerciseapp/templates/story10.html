@@ -22,7 +22,7 @@
     <h1>They want the Moon Rocks out the way, so turned them into baby eggs!</h1>
     
     {% set image = "images/backstory/moon-rock-eggs.png" %}
-    <img src="{{ url_for('static', filename=image) }}" width="100%" height="auto" style="max-width: 400px"> 
+    <img src="{{ url_for('static', filename=image) }}" height="400vh" width="auto"> 
 
     <form action="{{ url_for("child.story11") }}" style="margin-block: auto; margin: 2%">
         <button id="next-story-page-button" class="glow-button" type="submit">=></button>
