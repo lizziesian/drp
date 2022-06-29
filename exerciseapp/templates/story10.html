@@ -2,12 +2,12 @@
 
 <!-- Load images faster -->
 {% block preload_images %}
-    <link rel="preload" href="{{ url_for('static', filename='images/backstory/eggs.png') }}" as "image">
+    <link rel="preload" href="{{ url_for('static', filename='images/backstory/moon-rock-eggs.png') }}" as "image">
 {% endblock preload_images %}
 
 {% block images %}
     <div>
-        <img src="{{ url_for('static', filename='images/backstory/eggs.png') }}" style="display:none"/>
+        <img src="{{ url_for('static', filename='images/backstory/moon-rock-eggs.png') }}" style="display:none"/>
     </div>
 {% endblock images %}
 
@@ -21,8 +21,8 @@
 <div class="center">
     <h1>They want the Moon Rocks out the way, so turned them into baby eggs!</h1>
     
-    {% set image = "images/backstory/eggs.png" %}
-    <img src="{{ url_for('static', filename=image) }}" width="100%" height="auto" style="max-width: 400px"> 
+    {% set image = "images/backstory/moon-rock-eggs.png" %}
+    <img src="{{ url_for('static', filename=image) }}" height="600vh" width="auto"> 
 
     <form action="{{ url_for("child.story11") }}" style="margin-block: auto; margin: 2%">
         <button id="next-story-page-button" class="glow-button" type="submit">=></button>

@@ -2,14 +2,16 @@
 
 <!-- Load images faster -->
 {% block preload_images %}
-    <link rel="preload" href="{{ url_for('static', filename='images/backstory/monsters.png') }}" as "image">
+    <link rel="preload" href="{{ url_for('static', filename='images/backstory/mission-generator.png') }}" as "image">
     <link rel="preload" href="{{ url_for('static', filename='images/backstory/spaceship.png') }}" as "image">
+    <link rel="preload" href="{{ url_for('static', filename='images/backstory/tv.png') }}" as "image">
 {% endblock preload_images %}
 
 {% block images %}
     <div>
-        <img src="{{ url_for('static', filename='images/backstory/monsters.png') }}" style="display:none"/>
+        <img src="{{ url_for('static', filename='images/backstory/mission-generator.png') }}" style="display:none"/>
         <img src="{{ url_for('static', filename='images/backstory/spaceship.png') }}" style="display:none"/>
+        <img src="{{ url_for('static', filename='images/backstory/tv.png') }}" style="display:none"/>
     </div>
 {% endblock images %}
 
@@ -23,18 +25,18 @@
 <div class="center">
     <h1>I'll try setting you 1 mission a day!</h1>
     
-    {% set image = "images/backstory/monsters.png" %}
-    <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto"> 
+    {% set image = "images/backstory/mission-generator.png" %}
+    <img src="{{ url_for('static', filename=image) }}" height="110vh" width="auto"> 
 
     <h1>Your spaceship is fuelled by exercise!</h1>
 
     {% set image = "images/backstory/spaceship.png" %}
-    <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto"> 
+    <img src="{{ url_for('static', filename=image) }}" height="110vh" width="auto"> 
 
     <h1>I'll use this to tell you important mission updates!</h1>
 
-    {% set image = "images/backstory/monsters.png" %}
-    <img src="{{ url_for('static', filename=image) }}" height="100vh" width="auto"> 
+    {% set image = "images/backstory/tv.png" %}
+    <img src="{{ url_for('static', filename=image) }}" height="110vh" width="auto"> 
 
     <form method="POST" style="margin-block: auto; margin: 2%">
         <button id="next-story-page-button" class="glow-button" type="submit">

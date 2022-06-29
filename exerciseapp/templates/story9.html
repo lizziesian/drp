@@ -2,12 +2,12 @@
 
 <!-- Load images faster -->
 {% block preload_images %}
-    <link rel="preload" href="{{ url_for('static', filename='images/backstory/bogglings-invading-earth.png') }}" as "image">
+    <link rel="preload" href="{{ url_for('static', filename='images/backstory/monsters-invading-earth.png') }}" as "image">
 {% endblock preload_images %}
 
 {% block images %}
     <div>
-        <img src="{{ url_for('static', filename='images/backstory/bogglings-invading-earth.png') }}" style="display:none"/>
+        <img src="{{ url_for('static', filename='images/backstory/monsters-invading-earth.png') }}" style="display:none"/>
     </div>
 {% endblock images %}
 
@@ -21,8 +21,8 @@
 <div class="center">
     <h1>Now The Bogglings want to invade Earth!</h1>
     
-    {% set image = "images/backstory/bogglings-invading-earth.png" %}
-    <img src="{{ url_for('static', filename=image) }}" height="270vh" width="auto"> 
+    {% set image = "images/backstory/monsters-invading-earth.png" %}
+    <img src="{{ url_for('static', filename=image) }}" height="500vh" width="auto"> 
 
     <form action="{{ url_for("child.story10") }}" style="margin-block: auto; margin: 2%">
         <button id="next-story-page-button" class="glow-button" type="submit">=></button>

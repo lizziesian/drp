@@ -21,7 +21,7 @@
 <div class="center">
     
     {% set image = "images/backstory/alien2.png"  %}
-    <img src="{{ url_for('static', filename=image) }}" width="100%" height="auto" style="max-width: 600px"> 
+    <img src="{{ url_for('static', filename=image) }}" width="100%" height="auto" style="max-width: 1000px"> 
 
     <form action="{{ url_for("child.story3") }}" style="margin-block: auto; margin: 2%">
         <button id="next-story-page-button" class="glow-button" type="submit">=></button>
