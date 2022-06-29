@@ -16,6 +16,10 @@
 
 {% block content %}
 
+<!-- Sound effect -->
+<audio src="{{ url_for('static', filename='audio/story/12_set_one_mission_a_day_v3.m4a') }}" controls controlsList="nodownload noplaybackrate" style="margin: 2%">
+</audio>
+
 <div class="center">
     <h1>I'll try setting you 1 mission a day!</h1>
     
@@ -43,5 +47,14 @@
     </form>
    
 </div>
+
+<script>
+    const audio = document.querySelector("audio")
+
+    window.addEventListener("DOMContentLoaded", event => {
+        audio.volume = 0.7;
+        audio.play();
+    } )
+</script>
 
 {% endblock content %}

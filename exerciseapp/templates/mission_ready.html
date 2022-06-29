@@ -18,6 +18,9 @@
 
 {% block content %}
 
+<audio src="{{ url_for('static', filename='audio/music_zapslat_disco_streets.mp3') }}"controls controlsList="nodownload noplaybackrate" style="margin: 2%">
+</audio>
+
 <div class="center" style="margin: auto;">
 
     <!-- Water -->
@@ -62,5 +65,18 @@
         <button class="glow-button" type="submit" style="text-align: center;">Are you ready?</button>
     </form>
 </div>
+
+<script>
+    const audio = document.querySelector("audio");
+    
+    window.addEventListener("DOMContentLoaded", event => {
+        audio.volume = 0.2;
+        audio.play();
+    });
+
+    audio.onended=function(){
+        audio.play();
+    }
+</script>
 
 {% endblock content %}
