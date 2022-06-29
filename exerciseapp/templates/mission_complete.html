@@ -2,6 +2,10 @@
 
 {% block content %}
 
+<!-- Sound effect -->
+<audio src="{{ url_for('static', filename='audio/story/zapsplat_multimedia_alert_notification_bold_strong_musical_positive_success_002_61630.mp3') }}" controls controlsList="nodownload noplaybackrate" style="margin: 2%">
+</audio>
+
 <div class="center">
     <h1>
         Congratulations {{ user["name"] }}! <br> 
@@ -36,5 +40,14 @@
         <button id="home-page-button" class="glow-button" type="submit">Go to Spaceship</button>
     </form>
 </div>
+
+<script>
+    const audio = document.querySelector("audio")
+
+    window.addEventListener("DOMContentLoaded", event => {
+        audio.volume = 0.7;
+        audio.play();
+    } )
+</script>
 
 {% endblock content %}
