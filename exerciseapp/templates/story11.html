@@ -2,14 +2,12 @@
 
 <!-- Load images faster -->
 {% block preload_images %}
-    <link rel="preload" href="{{ url_for('static', filename='images/backstory/crazy-scientist.png') }}" as "image">
-    <link rel="preload" href="{{ url_for('static', filename='images/backstory/monster-teacher.png') }}" as "image">
+    <link rel="preload" href="{{ url_for('static', filename='images/backstory/wave.png') }}" as "image">
 {% endblock preload_images %}
 
 {% block images %}
     <div>
-        <img src="{{ url_for('static', filename='images/backstory/crazy-scientist.png') }}" style="display:none"/>
-        <img src="{{ url_for('static', filename='images/backstory/monster-teacher.png') }}" style="display:none"/>
+        <img src="{{ url_for('static', filename='images/backstory/wave.png') }}" style="display:none"/>
     </div>
 {% endblock images %}
 
@@ -23,10 +21,8 @@
 <div class="center">
     <h1>You've got to collect The Moon Rocks, fight The Bogglings and save us all!</h1>
     
-    {% set image = "images/backstory/crazy-scientist.png" %}
-    <img src="{{ url_for('static', filename=image) }}" height="60%" width="auto" style="max-height: 300px"> 
 
-    {% set image = "images/backstory/monster-teacher.png" %}
+    {% set image = "images/backstory/wave.png" %}
     <img src="{{ url_for('static', filename=image) }}" height="40%" width="auto" style="max-height: 200px"> 
 
     <form action="{{ url_for("child.story12") }}" style="margin-block: auto; margin: 2%">
