@@ -15,8 +15,7 @@
 {% block content %}
 
 <!-- Sound effect -->
-<audio controls controlsList="nodownload noplaybackrate" style="margin: 2%">
-    <source src="{{ url_for('static', filename='audio/story/1_hi_welcome.m4a') }}" type="audio/mp4" />
+<audio src="{{ url_for('static', filename='audio/story/1_hi_welcome.m4a') }}" controls controlsList="nodownload noplaybackrate" style="margin: 2%">
 </audio>
 
 <div class="center">
@@ -32,10 +31,10 @@
 <script>
     const audio = document.querySelector("audio")
 
-    window.onload = function() {
-        audio.volume = 0.2
-        audio.play()
-    }
+    window.addEventListener("DOMContentLoaded", event => {
+        audio.volume = 0.7;
+        audio.play();
+    } )
 </script>
 
 {% endblock content %}
