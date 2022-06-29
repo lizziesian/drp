@@ -2,9 +2,16 @@
 <root>
 
 	<Easy warmup ="https://www.youtube.com/embed/L9o56xLPmmk" exercise="https://www.youtube.com/embed/BB1vvvBI1nQ" cooldown="https://www.youtube.com/embed/8aVjf8JUsjQ"
-	      warmupName="Quick Warmup - Miss The Meteor" exerciseName="Quick Exercise - Dodge The Meteors "  cooldownName="Quick CoolDown - Reach The Meteors"
+	      warmupName="Warmup - Dodge The Meteors" exerciseName="Exercise - Dodge The Meteors "  cooldownName="CoolDown - Dodge The Meteors"
 		  warmupContent="Sets of marching, jumping, touching the floor and spinning around."  exerciseContent="Sets of martching, circling running and hopping" cooldownContent="Sets of stretching and recovering breath"
 		  warmupLength="2:28" exerciseLength="1:37" cooldownLength="1:42"/>
+
+	<Easy warmup ="https://www.youtube.com/embed/82-JO8TUpEg" exercise="https://www.youtube.com/embed/DiIax4HRtJ4" cooldown="https://www.youtube.com/embed/F1j62fLfF9o"
+	      warmupName="Warmup - Catch the Bogglings" exerciseName="Exercise - Catch the Bogglings "  cooldownName="CoolDown - Catch the Bogglings"
+		  warmupContent="Sets of marching, jumping, touching the floor and spinning around."  exerciseContent="Sets of martching, circling running and hopping" cooldownContent="Sets of stretching and recovering breath"
+		  warmupLength="4:36" exerciseLength="2:33" cooldownLength="2:20"/>
+
+
 	<Medium warmup="https://www.youtube.com/embed/0chBROaweas" exercise="https://www.youtube.com/embed/y7eBR9c_iXk" cooldown="https://www.youtube.com/embed/yQ4rZa404Y0"
 	      warmupName="WarmUp Mission" exerciseName="Exercise Mission"  cooldownName="CoolDown Mission"
 		  warmupContent="Sets of stretching,jogging,jumping,releasing muscle"   exerciseContent="Sets of martching,star jumps,running,hopping"  cooldownContent="Sets of walking on the spot,stretching, relaxing muscles, martching,recovering breaths" 
