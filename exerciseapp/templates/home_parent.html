@@ -32,7 +32,7 @@
 
             <div style="border-style: solid; border-color: white; border-width: medium; width: 80%; margin: auto;">
 
-                <div style="margin-left: 5%; text-align: left;"> 
+                <div style="margin-left: 5%; margin-right: 5%; text-align: left;"> 
                     <h2 style="text-align: center">
                         {{ child.name }}
                     </h2>
@@ -53,7 +53,7 @@
 
                     <!-- Edit daily mission -->
                     {% if child.mission_status < 3 %}
-                    <form action="{{ url_for('parent.choose_level', missionId=child.mission,child_id=child['id']) }}" style="margin:5%">
+                    <form action="{{ url_for('parent.choose_level', missionId=child.mission,child_id=child['id']) }}" style="margin:2%">
                         <button class="glow-button" type="submit" style="font-size: 14px; padding: 0.5rem">
                             Edit Daily Mission
                         </button>
@@ -62,7 +62,7 @@
 
                     <!-- Confirm mission stage -->
                     {% if child.mission_status == 3 %}
-                    <form action="{{ url_for('parent.confirm_mission', child_id=child['id']) }}" style="margin:5%">
+                    <form action="{{ url_for('parent.confirm_mission', child_id=child['id']) }}" style="margin:2%">
                         <button class="glow-button" type="submit" style="font-size: 14px; padding: 0.5rem">
                             Confirm Mission Completion
                         </button>
@@ -70,8 +70,8 @@
                     {% endif %}
                 
                 </div>
-
             </div>
+            <br>
         
         {% endfor %}
 
