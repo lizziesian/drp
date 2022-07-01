@@ -1,4 +1,3 @@
-from distutils.log import debug
 from exerciseapp import app, socketio
 from exerciseapp.database import database
 
