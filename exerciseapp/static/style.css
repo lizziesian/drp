@@ -26,7 +26,7 @@ audio {
     width: 120px;
 }
 
-/* https://stackoverflow.com/questions/7638754/html-5-audio-tag-custom-controls */
+/* Removes the progress bar*/
 audio::-webkit-media-controls-timeline {
     display: none !important;
 }
