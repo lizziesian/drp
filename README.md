@@ -1,4 +1,4 @@
-The web app is currently deployed at https://exercisingapp.herokuapp.com/.
+
 
 To run locally on virtual enviroment (linux):
 * python3 -m venv venv
